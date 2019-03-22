@@ -1,2 +1,2 @@
 # Field-Service-Manager
-Aplikacja do zarządzania serwisem aparatury.
+App to manage field service jobs.
