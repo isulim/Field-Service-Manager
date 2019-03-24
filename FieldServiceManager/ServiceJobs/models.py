@@ -40,7 +40,7 @@ class Hospital(models.Model):
     name = models.CharField(max_length=128, verbose_name='Name')
     city = models.CharField(max_length=64, verbose_name='City')
     address = models.CharField(max_length=128, verbose_name='Address')
-    phone = models.CharField(max_length=9, verbose_name='Phone')
+    phone = models.CharField(max_length=16, verbose_name='Phone')
     email = models.EmailField(null=True, verbose_name='E-mail')
 
     def __str__(self):
@@ -48,7 +48,7 @@ class Hospital(models.Model):
 
 
 class Device(models.Model):
-    sn = models.CharField(primary_key=True, max_length=12, verbose_name='Serial number')
+    sn = models.CharField(primary_key=True, max_length=13, verbose_name='Serial number')
     hospital = models.ForeignKey('Hospital', on_delete=models.CASCADE, verbose_name='Hospital')
     deviceType = models.SmallIntegerField(choices=DEVICE_TYPE, verbose_name='Device type')
     manufacturer = models.SmallIntegerField(choices=MANUFACTURERS, verbose_name='Manufacturer')
@@ -91,7 +91,7 @@ class Caretaker(models.Model):
     firstName = models.CharField(max_length=32, verbose_name='First name')
     lastName = models.CharField(max_length=64, verbose_name='Last name')
     hospital = models.ForeignKey('Hospital', verbose_name='Hospital', on_delete=models.CASCADE)
-    phone = models.CharField(max_length=9, verbose_name='Phone')
+    phone = models.CharField(max_length=16, verbose_name='Phone')
     email = models.EmailField(verbose_name='E-mail')
 
     def __str__(self):
