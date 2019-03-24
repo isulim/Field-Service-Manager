@@ -60,7 +60,7 @@ class Device(models.Model):
     caretaker = models.ForeignKey('Caretaker', verbose_name='Caretaker', on_delete=models.PROTECT)
 
     def __str__(self):
-        return "{}, {}, S/N: {}".format(self.manufacturer, self.modelName, self.sn)
+        return "{}, model: {}, S/N: {}".format(self.get_manufacturer_display(), self.modelName, self.sn)
 
 
 class Job(models.Model):
