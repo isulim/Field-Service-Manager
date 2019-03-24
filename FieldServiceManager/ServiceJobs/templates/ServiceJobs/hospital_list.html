@@ -1,0 +1,13 @@
+{% extends 'ServiceJobs/base.html' %}
+{% load bootstrap3 %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+
+{% block content %}
+    <h2>Hospitals</h2>
+    <ol>
+        {% for hospital in hospitals %}
+            <li><a href="{% url 'hospital-detail' hospital.id %}">{{ hospital }}</a></li>
+        {% endfor %}
+    </ol>
+{% endblock %}

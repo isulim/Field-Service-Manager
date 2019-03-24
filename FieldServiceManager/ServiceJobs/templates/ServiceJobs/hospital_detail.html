@@ -1,0 +1,22 @@
+{% extends 'ServiceJobs/base.html' %}
+
+{% load bootstrap3 %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+
+{% block content %}
+    <h2>Hospital: {{ hospital.name }}</h2>
+    <ul>
+        <li>Name: {{ hospital.name }}</li>
+        <li>City: {{ hospital.city }}</li>
+        <li>Address: {{ hospital.address }}</li>
+        <li>Phone: {{ hospital.phone }}</li>
+        <li>E-mail: {{ hospital.email }}</li>
+        <ol>
+            Devices:
+            {% for device in hospital.device_set.all %}
+                <li>{{ device.get_manufacturer_display }} {{ device.modelName }}: {{ device.get_deviceType_display }}</li>
+            {% endfor %}
+        </ol>
+    </ul>
+{% endblock %}
