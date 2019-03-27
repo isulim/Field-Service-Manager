@@ -1,40 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
 
-MANUFACTURERS = (
-    (1, 'SHIMADZU'),
-    (2, "HITACHI"),
-    (3, 'SIEMENS'),
-    (4, 'PHILIPS'),
-    (5, 'GENERAL ELECTRIC'),
-    (6, 'CANON'),
-    (7, 'FUJI'),
-    (8, 'CARESTREAM'),
-    (9, 'OTHER'),
-)
-
-DEVICE_TYPE = (
-    (1, 'Radiography X-Ray'),
-    (2, 'Fluoroscope X-Ray'),
-    (3, 'Angiography X-Ray'),
-    (4, 'Mobile X-Ray'),
-    (5, 'CT'),
-    (6, 'MRI'),
-    (7, 'USG'),
-    (8, 'PET'),
-    (9, 'SPECT'),
-    (10, 'PET-CT'),
-    (11, 'PET-MR'),
-    (12, 'SPECT-CT'),
-)
-
-JOB_TYPE = (
-    (1, 'Maintenance'),
-    (2, 'Repair'),
-    (3, 'Installation'),
-    (4, 'Expertise'),
-)
-
 
 class Hospital(models.Model):
     name = models.CharField(max_length=128, verbose_name='Name')
@@ -50,8 +16,8 @@ class Hospital(models.Model):
 class Device(models.Model):
     sn = models.CharField(primary_key=True, max_length=13, verbose_name='Serial number')
     hospital = models.ForeignKey('Hospital', on_delete=models.CASCADE, verbose_name='Hospital')
-    deviceType = models.SmallIntegerField(choices=DEVICE_TYPE, verbose_name='Device type')
-    manufacturer = models.SmallIntegerField(choices=MANUFACTURERS, verbose_name='Manufacturer')
+    deviceType = models.ForeignKey('DeviceType', verbose_name='Device type', on_delete=models.PROTECT)
+    manufacturer = models.ForeignKey('Manufacturer', verbose_name='Manufacturer', on_delete=models.PROTECT)
     modelName = models.CharField(max_length=64, verbose_name='Model')
     installation = models.DateField(verbose_name='Installation date')
     guaranteeDate = models.DateField(verbose_name='Guarantee date')
@@ -60,13 +26,13 @@ class Device(models.Model):
     caretaker = models.ForeignKey('Caretaker', verbose_name='Caretaker', on_delete=models.PROTECT)
 
     def __str__(self):
-        return "{}, model: {}, S/N: {}".format(self.get_manufacturer_display(), self.modelName, self.sn)
+        return "{}, model: {}, S/N: {}".format(self.manufacturer, self.modelName, self.sn)
 
 
 class Job(models.Model):
     device = models.ForeignKey('Device', on_delete=models.CASCADE, verbose_name='Device')
     hospital = models.ForeignKey('Hospital', on_delete=models.CASCADE, verbose_name='Hospital')
-    jobType = models.SmallIntegerField(choices=JOB_TYPE, verbose_name='Job type')
+    jobType = models.ForeignKey('JobType', verbose_name='Job type', on_delete=models.PROTECT)
     registered = models.DateField(verbose_name='Registered date', auto_now_add=True)
     scheduled = models.DateField(verbose_name='Scheduled date')
     isCompleted = models.BooleanField(default=False, verbose_name='Completed')
@@ -96,3 +62,24 @@ class Caretaker(models.Model):
 
     def __str__(self):
         return "{} {}, {}".format(self.firstName, self.lastName, self.hospital)
+
+
+class Manufacturer(models.Model):
+    name = models.CharField(max_length=32)
+
+    def __str__(self):
+        return self.name
+
+
+class DeviceType(models.Model):
+    name = models.CharField(max_length=32)
+
+    def __str__(self):
+        return self.name
+
+
+class JobType(models.Model):
+    name = models.CharField(max_length=32)
+
+    def __str__(self):
+        return self.name

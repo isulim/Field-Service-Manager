@@ -1,8 +1,8 @@
 from datetime import timedelta, datetime
 
 from faker import Faker
-from random import randint
-from ServiceJobs.models import Hospital, Device, Job, Report, Caretaker
+from random import randint, choice
+from ServiceJobs.models import Hospital, Device, Job, Report, Caretaker, DeviceType, Manufacturer
 
 
 class FakeHospital:
@@ -43,6 +43,17 @@ class FakeCaretaker:
 class FakeDevice:
     faker = Faker('en_US')
 
+    models = {
+        1: ['Reflect', 'Evening', 'Edge'],
+        2: ['Senior', 'Manage', 'System'],
+        3: ['Major', 'Hit', 'Head'],
+        4: ['Hope', 'Place', 'Expert'],
+        5: ['Artist', 'Total', 'Best'],
+        6: ['Hand', 'Follow', 'Focus'],
+        7: ['Change', 'Move', 'Key'],
+        8: ['Style', 'Life', 'Coach'],
+    }
+
     def populate(self):
         """Create fake device in database related to random hospital and an caretaker."""
 
@@ -50,9 +61,10 @@ class FakeDevice:
 
         device = Device()
         device.sn = self.faker.ean(13)
-        device.deviceType = randint(1, 12)
-        device.manufacturer = randint(1, 9)
-        device.modelName = self.faker.word()
+        device.deviceType = DeviceType.objects.get(pk=(randint(1, 11)))
+        manufacturer = Manufacturer.objects.get(pk=(randint(1, 8)))
+        device.manufacturer = manufacturer
+        device.modelName = choice(self.models[manufacturer.id])
         installation = self.faker.date_object()
         device.installation = installation
         device.guaranteeDate = installation + timedelta(days=730)

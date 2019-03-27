@@ -7,10 +7,10 @@
 {% block content %}
     <h2>Device: {{ device }}</h2>
     <ul>
-        <li>Manufacturer: {{ device.get_manufacturer_display }}</li>
+        <li>Manufacturer: <a href="{% url 'device-by-manufacturer-list' device.manufacturer %}">{{ device.get_manufacturer_display }}</a></li>
         <li>Model: {{ device.modelName }}</li>
         <li>S/N: {{ device.sn }}</li>
-        <li>Type: {{ device.get_deviceType_display }}</li>
+        <li>Type: <a href="{% url 'device-by-type-list' device.deviceType %}">{{ device.get_deviceType_display }}</a></li>
         <li>Hospital: <a href="{% url 'hospital-detail' device.hospital.id %}">{{ device.hospital }}</a></li>
         <li>Caretaker: {{ device.caretaker.firstName }} {{ device.caretaker.lastName }} {{ device.caretaker.phone }}</li>
         <li>Installed: {{ device.installation }}</li>

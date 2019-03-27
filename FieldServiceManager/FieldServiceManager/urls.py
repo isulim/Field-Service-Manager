@@ -15,12 +15,18 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from ServiceJobs.views import HospitalListView, HospitalDetailView, DeviceDetailView, DeviceListView
+from ServiceJobs.views import HospitalListView, HospitalDetailView, DeviceDetailView, \
+    DeviceListView, DeviceManufacturerListView, DeviceByTypeListView, DeviceTypesList, \
+    DeviceManufacturersList
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('hospital/', HospitalListView.as_view(), name='hospital-list'),
     path('hospital/<int:pk>/', HospitalDetailView.as_view(), name='hospital-detail'),
     path('device/', DeviceListView.as_view(), name='device-list'),
-    path('device/<pk>/', DeviceDetailView.as_view(), name='device-detail')
+    path('device/<int:pk>/', DeviceDetailView.as_view(), name='device-detail'),
+    path('device/type/', DeviceTypesList.as_view(), name='device-types'),
+    path('device/type/<int:devtype>', DeviceByTypeListView.as_view(), name='device-by-type-list'),
+    path('device/manufacturer/', DeviceManufacturersList.as_view(), name='device-manufacturers'),
+    path('device/manufacturer/<int:manufacturer>', DeviceManufacturerListView.as_view(), name='device-by-manufacturer-list'),
 ]
