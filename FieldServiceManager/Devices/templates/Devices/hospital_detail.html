@@ -11,7 +11,7 @@
         <ol>
             Devices:
             {% for device in hospital.device_set.all %}
-                <li><a href="{% url 'device-detail' device.sn %}">{{ device.get_manufacturer_display }} {{ device.modelName }}: {{ device.get_deviceType_display }}</a></li>
+                <li><a href="{% url 'device-detail' device.sn %}">{{ device.manufacturer }} {{ device.modelName }}: {{ device.deviceType }}</a></li>
             {% endfor %}
         </ol>
     </ul>
