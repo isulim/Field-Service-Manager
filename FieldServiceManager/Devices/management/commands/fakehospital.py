@@ -1,11 +1,11 @@
 from django.core.management.base import BaseCommand
-from ServiceJobs.fake_data import FakeHospital
+from Devices.devices_faker import FakeHospital
 
 
 class Command(BaseCommand):
-    help = 'Create 5 fake hospitals.'
+    help = 'Create 10 fake hospitals.'
 
     def handle(self, *args, **options):
-        for _ in range(5):
+        for _ in range(10):
             hospital = FakeHospital()
             hospital.populate()
