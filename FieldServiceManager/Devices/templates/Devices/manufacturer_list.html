@@ -1,0 +1,10 @@
+{% extends 'Devices/base.html' %}
+
+{% block content %}
+    <h2>List of device manufacturers</h2>
+    <ol>
+        {% for manufacturer in manufacturers %}
+            <li><a href="{% url 'manufacturer-detail' manufacturer.id %}">{{ manufacturer }}</a></li>
+        {% endfor %}
+    </ol>
+{% endblock %}
