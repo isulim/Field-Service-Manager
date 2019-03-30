@@ -1,0 +1,10 @@
+{% extends 'ServiceJobs/base.html' %}
+
+{% block content %}
+    <h2>Job types</h2>
+    <ol>
+        {% for jobtype in jobtypes%}
+            <li><a href="{% url 'jobtype-detail' jobtype.id %}">{{ jobtype }}</a></li>
+        {% endfor %}
+    </ol>
+{% endblock %}

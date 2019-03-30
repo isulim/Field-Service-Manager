@@ -7,8 +7,8 @@ from ServiceJobs.views import JobListView, JobDetailView, \
 urlpatterns = [
     path('job/', JobListView.as_view(), name='job-list'),
     path('job/<int:pk>/', JobDetailView.as_view(), name='job-detail'),
-    path('jobtype/', JobTypeListView, name='jobtype-list'),
-    path('jobtype/<int:pk>/', JobTypeDetailView, name='jobtype-detail'),
+    path('jobtype/', JobTypeListView.as_view(), name='jobtype-list'),
+    path('jobtype/<int:pk>/', JobTypeDetailView.as_view(), name='jobtype-detail'),
     path('report/', ReportListView.as_view(), name='report-list'),
-    path('report/<int:pk>', ReportDetailView.as_view(), name='report-detail'),
+    path('report/<int:pk>/', ReportDetailView.as_view(), name='report-detail'),
 ]

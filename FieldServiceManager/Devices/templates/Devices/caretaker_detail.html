@@ -1,8 +1,13 @@
 {% extends 'Devices/base.html' %}
 
 {% block content %}
-    <h2>Devices under responsibility of {{ caretaker.firstName }} {{ caretaker.lastName }}</h2>
-    <ol>
+    <h2>Caretaker: {{ caretaker.firstName }} {{ caretaker.lastName }}</h2>
+    <ul>
+        <li>Hospital:  <a href="{% url 'hospital-detail' caretaker.hospital.id %}">{{ caretaker.hospital }}</a></li>
+        <li>Phone: {{ caretaker.phone }}</li>
+        <li>Email: {{ caretaker.email }}</li>
+    </ul>
+    <ol>Devices under care:
         {% for device in devices %}
             <li><a href="{% url 'device-detail' device.sn %}">{{ device.manufacturer }} {{ device.modelName }}</a></li>
         {% endfor %}

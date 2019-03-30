@@ -1,9 +1,5 @@
 {% extends 'Devices/base.html' %}
 
-{% load bootstrap3 %}
-{% bootstrap_css %}
-{% bootstrap_javascript %}
-
 {% block content %}
     <h2>Device: {{ device }}</h2>
     <ul>
@@ -22,12 +18,19 @@
         </li>
         <li>Caretaker:
             <a href="{% url 'caretaker-detail' device.caretaker.id %}">
-                {{ device.caretaker.firstName }} {{ device.caretaker.lastName }}, phone: {{ device.caretaker.phone }}
+                {{ device.caretaker.firstName }} {{ device.caretaker.lastName }}
             </a>
         </li>
         <li>Installed: {{ device.installation }}</li>
         <li>Guarantee: {{ device.guaranteeDate }}</li>
         <li>Last maintenance: {{ device.lastMaintenance }}</li>
         <li>Next maintenance: {{ device.nextMaintenance }}</li>
+        <li>
+            <ol>Recent jobs:
+                    {% for job in jobs %}
+                        <li><a href="{% url 'job-detail' job.id %}">{{ job.registeredDate }} {{ job.jobType }}</a></li>
+                    {% endfor %}
+            </ol>
+        </li>
     </ul>
 {% endblock %}

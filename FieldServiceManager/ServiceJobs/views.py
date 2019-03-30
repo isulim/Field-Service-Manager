@@ -11,7 +11,7 @@ class JobListView(ListView):
 
 class JobDetailView(DetailView):
     model = Job
-    context_object_name = 'jobs'
+    context_object_name = 'job'
 
 
 class ReportListView(ListView):
@@ -32,4 +32,9 @@ class JobTypeListView(ListView):
 class JobTypeDetailView(DetailView):
     model = JobType
     context_object_name = 'jobtype'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data()
+        context['jobs'] = Job.objects.filter(jobType__id=self.kwargs['pk'])
+        return context
 

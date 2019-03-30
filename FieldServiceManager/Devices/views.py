@@ -3,6 +3,7 @@ from django.views.generic import ListView, DetailView
 from django.views.generic.base import View
 
 from Devices.models import Hospital, Device, Caretaker, Manufacturer, DeviceType
+from ServiceJobs.models import Job
 
 
 class HospitalListView(ListView):
@@ -23,6 +24,11 @@ class DeviceListView(ListView):
 class DeviceDetailView(DetailView):
     model = Device
     context_object_name = 'device'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data()
+        context['jobs'] = Job.objects.filter(device=self.kwargs['pk'])
+        return context
 
 
 class DeviceTypeListView(ListView):

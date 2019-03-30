@@ -1,0 +1,17 @@
+{% extends 'Devices/base.html' %}
+
+{% block content %}
+    <h2>Job for {{ job.device }}</h2>
+    <ul>
+        <li>Device: <a href="{% url 'device-detail' job.device.sn %}">{{ job.device }}</a></li>
+        <li>Hospital: <a href="{% url 'hospital-detail' job.device.hospital.id %}">{{ job.device.hospital }}</a></li>
+        <li>Job type: <a href="{% url 'jobtype-detail' job.jobType.id %}">{{ job.jobType }}</a></li>
+        <li>Registered: {{ job.registeredDate }}</li>
+        <li>Added by: {{ job.addedBy }}</li>
+        <li>Completed: {{ job.isCompleted }}</li>
+        {% if job.isCompleted %}
+            <li>Completion date: <a href="{% url 'report-detail' job.id %}">{{ job.report.finished }}</a></li>
+            <li>Engineer: {{ job.report.engineer }}</li>
+        {% endif %}
+    </ul>
+{% endblock %}

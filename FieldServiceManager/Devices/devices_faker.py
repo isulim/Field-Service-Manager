@@ -13,7 +13,7 @@ class FakeHospital:
         hospital = Hospital()
         hospital.name = self.faker.company()
         hospital.city = self.faker.city()
-        hospital.address = self.faker.address()
+        hospital.address = self.faker.street_address()
         hospital.phone = self.faker.phone_number()
         hospital.email = self.faker.email()
         hospital.save()

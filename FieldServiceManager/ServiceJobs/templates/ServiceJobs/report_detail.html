@@ -1,0 +1,16 @@
+{% extends 'Devices/base.html' %}
+
+{% block content %}
+    <h2>Report for {{ report.job }}</h2>
+    <ul>
+        <li>Engineer: {{ report.engineer.first_name }} {{ report.engineer.last_name }}</li>
+        <li>Device: <a href="{% url 'device-detail' report.job.device.sn %}">{{ report.job.device }}</a></li>
+        <li>Hospital: <a href="{% url 'hospital-detail' report.job.device.hospital.id %}">{{ report.job.device.hospital }}</a></li>
+        <li>Job type: <a href="{% url 'jobtype-detail' report.job.jobType.id %}">{{ report.job.jobType }}</a></li>
+        <li>Registered: {{ report.job.registeredDate }}</li>
+        <li>Started: {{ report.started }}</li>
+        <li>Finished: {{ report.finished }}</li>
+        <li>Total hours: {{ report.workHours }}</li>
+        <li>Description: {{ report.description }}</li>
+    </ul>
+{% endblock %}

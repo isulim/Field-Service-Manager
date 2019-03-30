@@ -27,7 +27,7 @@ class FakeReport:
 
     def populate(self):
         """Create fake report related to a job."""
-        jobs = Job.objects.all()
+        jobs = Job.objects.filter(isCompleted=True)
         enginners = User.objects.filter(groups__name='Engineers')
         report = Report()
         report.job = choice(jobs)
