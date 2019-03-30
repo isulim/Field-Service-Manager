@@ -8,18 +8,16 @@ from Devices.models import Hospital, Device, Caretaker, DeviceType, Manufacturer
 class FakeHospital:
     faker = Faker('pl_PL')
 
-    def populate(self, n=1):
-        """Create fake n hospitals in database.
-            n default = 1"""
-        for _ in range(n):
-            hospital = Hospital()
-            hospital.name = self.faker.company()
-            hospital.city = self.faker.city()
-            hospital.address = self.faker.address()
-            hospital.phone = self.faker.phone_number()
-            hospital.email = self.faker.email()
-            hospital.save()
-            print(hospital)
+    def populate(self):
+        """Create fake hospital in database"""
+        hospital = Hospital()
+        hospital.name = self.faker.company()
+        hospital.city = self.faker.city()
+        hospital.address = self.faker.address()
+        hospital.phone = self.faker.phone_number()
+        hospital.email = self.faker.email()
+        hospital.save()
+        print(hospital)
 
 
 class FakeCaretaker:
@@ -60,7 +58,6 @@ class FakeDevice:
         caretaker_count = Caretaker.objects.all().count()
         device_type_count = DeviceType.objects.all().count()
         manufacturer_count = Manufacturer.objects.all().count()
-
         device = Device()
         device.sn = self.faker.ean(13)
         device.deviceType = DeviceType.objects.get(pk=(randint(1, device_type_count)))

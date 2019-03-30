@@ -1,9 +1,12 @@
 from django.db import migrations
+from Devices.devices_faker import FakeHospital, FakeCaretaker, FakeDevice
 
-def feed_basic_data(apps, schema_editor):
+
+def basic_data(apps, schema_editor):
     Manufacturer = apps.get_model('Devices', 'Manufacturer')
     JobType = apps.get_model('Devices', 'JobType')
     DeviceType = apps.get_model('Devices', 'DeviceType')
+
     Manufacturer.objects.create(name='Shimadzu')
     Manufacturer.objects.create(name='Hitachi')
     Manufacturer.objects.create(name='Siemens')
@@ -28,6 +31,18 @@ def feed_basic_data(apps, schema_editor):
     DeviceType.objects.create(name='MRI')
 
 
+def populate(apps, schema_editor):
+    hospital = FakeHospital()
+    caretaker = FakeCaretaker()
+    device = FakeDevice()
+    for i in range(10):
+        hospital.populate()
+    for i in range(15):
+        caretaker.populate()
+    for i in range(30):
+        device.populate()
+
+
 class Migration(migrations.Migration):
 
     dependencies = [
@@ -35,5 +50,6 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.RunPython(feed_basic_data),
+        migrations.RunPython(basic_data),
+        migrations.RunPython(populate),
     ]
