@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.views.generic import ListView, DetailView
 from django.views.generic.base import View
 
-from Devices.models import Hospital, Device, Caretaker, Manufacturer, DeviceType, JobType
+from Devices.models import Hospital, Device, Caretaker, Manufacturer, DeviceType
 
 
 class HospitalListView(ListView):

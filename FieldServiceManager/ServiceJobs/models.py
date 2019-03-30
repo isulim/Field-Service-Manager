@@ -1,18 +1,24 @@
 from django.db import models
 from django.contrib.auth.models import User
-from Devices.models import Device, Hospital, JobType
+from Devices.models import Device, Hospital
+
+
+class JobType(models.Model):
+    name = models.CharField(max_length=32)
+
+    def __str__(self):
+        return self.name
 
 
 class Job(models.Model):
     device = models.ForeignKey(Device, on_delete=models.CASCADE, verbose_name='Device')
-    hospital = models.ForeignKey(Hospital, on_delete=models.CASCADE, verbose_name='Hospital')
     jobType = models.ForeignKey(JobType, verbose_name='Job type', on_delete=models.PROTECT)
     registeredDate = models.DateField(verbose_name='Registered date', auto_now_add=True)
     addedBy = models.ForeignKey(User, on_delete=models.PROTECT, verbose_name='Added by')
     isCompleted = models.BooleanField(default=False, verbose_name='Completed')
 
     def __str__(self):
-        return "{} - {}, {}".format(self.jobType, self.device, self.hospital)
+        return "{} - {}, {}".format(self.jobType, self.device, self.device.hospital)
 
 
 class Report(models.Model):
@@ -25,4 +31,3 @@ class Report(models.Model):
 
     def __str__(self):
         return "{}: {} - {}".format(self.job, self.engineer, self.finished)
-

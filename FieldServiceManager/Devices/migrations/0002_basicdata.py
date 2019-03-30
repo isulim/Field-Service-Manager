@@ -4,7 +4,6 @@ from Devices.devices_faker import FakeHospital, FakeCaretaker, FakeDevice
 
 def basic_data(apps, schema_editor):
     Manufacturer = apps.get_model('Devices', 'Manufacturer')
-    JobType = apps.get_model('Devices', 'JobType')
     DeviceType = apps.get_model('Devices', 'DeviceType')
 
     Manufacturer.objects.create(name='Shimadzu')
@@ -15,11 +14,6 @@ def basic_data(apps, schema_editor):
     Manufacturer.objects.create(name='Fuji')
     Manufacturer.objects.create(name='Carestream')
     Manufacturer.objects.create(name='Canon')
-
-    JobType.objects.create(name='Maintenance')
-    JobType.objects.create(name='Repair')
-    JobType.objects.create(name='Installation')
-    JobType.objects.create(name='Expertise')
 
     DeviceType.objects.create(name='Radiography X-ray')
     DeviceType.objects.create(name='Fluoroscopy X-ray')

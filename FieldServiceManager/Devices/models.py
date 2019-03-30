@@ -51,10 +51,3 @@ class DeviceType(models.Model):
 
     def __str__(self):
         return self.name
-
-
-class JobType(models.Model):
-    name = models.CharField(max_length=32)
-
-    def __str__(self):
-        return self.name

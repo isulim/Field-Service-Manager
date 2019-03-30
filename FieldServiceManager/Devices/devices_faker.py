@@ -64,11 +64,11 @@ class FakeDevice:
         manufacturer = Manufacturer.objects.get(pk=(randint(1, manufacturer_count)))
         device.manufacturer = manufacturer
         device.modelName = choice(self.models[manufacturer.id])
-        installation = self.faker.date_object()
+        installation = self.faker.date_this_decade(before_today=True, after_today=False)
         device.installation = installation
         device.guaranteeDate = installation + timedelta(days=730)
         maintenance = self.faker.date_between_dates(date_start=(installation + timedelta(days=183)),
-                                                    date_end=datetime.now())
+                                                    date_end=(installation + timedelta(days=3650)))
         device.lastMaintenance = maintenance
         device.nextMaintenance = maintenance + timedelta(days=180)
         caretaker = Caretaker.objects.get(pk=randint(1, caretaker_count))
