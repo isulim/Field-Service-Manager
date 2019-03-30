@@ -1,0 +1,15 @@
+{% extends 'Devices/base.html' %}
+
+{% block content %}
+    <h2>List of device caretakers</h2>
+    <ol>
+        {% for caretaker in caretakers %}
+            <li>
+                <a href="{% url 'caretaker-detail' caretaker.id %}">
+                    {{ caretaker.firstName }} {{ caretaker.lastName }}<br>
+                    {{ caretaker.hospital }}
+                </a>
+            </li>
+        {% endfor %}
+    </ol>
+{% endblock %}

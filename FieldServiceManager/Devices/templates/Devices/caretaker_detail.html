@@ -1,0 +1,10 @@
+{% extends 'Devices/base.html' %}
+
+{% block content %}
+    <h2>Devices under responsibility of {{ caretaker.firstName }} {{ caretaker.lastName }}</h2>
+    <ol>
+        {% for device in devices %}
+            <li><a href="{% url 'device-detail' device.sn %}">{{ device.manufacturer }} {{ device.modelName }}</a></li>
+        {% endfor %}
+    </ol>
+{% endblock %}

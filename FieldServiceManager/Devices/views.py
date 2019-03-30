@@ -53,3 +53,18 @@ class ManufacturerDetailView(DetailView):
         context = super().get_context_data()
         context['devices'] = Device.objects.filter(manufacturer=self.kwargs['pk'])
         return context
+
+
+class CaretakerListView(ListView):
+    model = Caretaker
+    context_object_name = 'caretakers'
+
+
+class CaretakerDetailView(DetailView):
+    model = Caretaker
+    context_object_name = 'caretaker'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data()
+        context['devices'] = Device.objects.filter(caretaker__id=self.kwargs['pk'])
+        return context

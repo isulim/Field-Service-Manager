@@ -36,7 +36,7 @@ class Caretaker(models.Model):
     email = models.EmailField(verbose_name='E-mail')
 
     def __str__(self):
-        return "{} {}, {}".format(self.firstName, self.lastName, self.hospital)
+        return "{} {}, szpital: {}".format(self.firstName, self.lastName, self.hospital)
 
 
 class Manufacturer(models.Model):
