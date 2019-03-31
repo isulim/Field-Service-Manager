@@ -6,6 +6,7 @@ from django.views.generic.base import View
 
 from Devices.models import Hospital, Device, Caretaker, Manufacturer, DeviceType
 from ServiceJobs.models import Job
+from Devices.forms import DeviceCreateForm
 
 
 class HospitalListView(ListView):
@@ -41,9 +42,10 @@ class DeviceDetailView(DetailView):
 
 class DeviceCreateView(CreateView):
     model = Device
-    fields = ['sn', 'manufacturer', 'modelName', 'deviceType', 'hospital',
-              'installationDate', 'guaranteeDate']
+    # fields = ['sn', 'manufacturer', 'modelName', 'deviceType', 'hospital',
+    #           'installationDate', 'guaranteeDate']
     success_url = '/device/'
+    form_class = DeviceCreateForm
 
     def form_valid(self, form):
         self.object = form.save(commit=False)
@@ -97,3 +99,9 @@ class CaretakerDetailView(DetailView):
         context = super().get_context_data()
         context['devices'] = Device.objects.filter(caretaker__id=self.kwargs['pk'])
         return context
+
+
+class CaretakerCreateView(CreateView):
+    model = Caretaker
+    fields = '__all__'
+    success_url = '/caretaker/'
