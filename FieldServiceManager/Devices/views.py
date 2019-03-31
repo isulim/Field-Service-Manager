@@ -1,7 +1,8 @@
 from datetime import timedelta
 
-from django.shortcuts import render
-from django.views.generic import ListView, DetailView, CreateView
+from django.shortcuts import render, reverse
+from django.urls import reverse_lazy
+from django.views.generic import ListView, DetailView, CreateView, UpdateView
 from django.views.generic.base import View
 
 from Devices.models import Hospital, Device, Caretaker, Manufacturer, DeviceType
@@ -23,6 +24,14 @@ class HospitalCreateView(CreateView):
     model = Hospital
     fields = '__all__'
     success_url = '/hospital/'
+
+
+class HospitalUpdateView(UpdateView):
+    model = Hospital
+    fields = '__all__'
+
+    def get_success_url(self):
+        return reverse_lazy('hospital-detail', kwargs={'pk': self.object.id})
 
 
 class DeviceListView(ListView):
@@ -105,3 +114,12 @@ class CaretakerCreateView(CreateView):
     model = Caretaker
     fields = '__all__'
     success_url = '/caretaker/'
+
+
+class CaretakerUpdateView(UpdateView):
+    model = Caretaker
+    fields = '__all__'
+
+    def get_success_url(self):
+        return reverse_lazy('caretaker-detail', kwargs={'pk': self.object.id})
+
