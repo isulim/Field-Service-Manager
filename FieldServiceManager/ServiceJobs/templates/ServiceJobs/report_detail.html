@@ -4,7 +4,7 @@
     <h2>Report for {{ report.job }}</h2>
     <ul>
         <li>Engineer: {{ report.engineer.first_name }} {{ report.engineer.last_name }}</li>
-        <li>Device: <a href="{% url 'device-detail' report.job.device.sn %}">{{ report.job.device }}</a></li>
+        <li>Device: <a href="{% url 'device-detail' report.job.device.id %}">{{ report.job.device }}</a></li>
         <li>Hospital: <a href="{% url 'hospital-detail' report.job.device.hospital.id %}">{{ report.job.device.hospital }}</a></li>
         <li>Job type: <a href="{% url 'jobtype-detail' report.job.jobType.id %}">{{ report.job.jobType }}</a></li>
         <li>Registered: {{ report.job.registeredDate }}</li>

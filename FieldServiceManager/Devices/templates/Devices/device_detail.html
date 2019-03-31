@@ -17,11 +17,15 @@
             </a>
         </li>
         <li>Caretaker:
+            {% if device.caretaker.id %}
             <a href="{% url 'caretaker-detail' device.caretaker.id %}">
                 {{ device.caretaker.firstName }} {{ device.caretaker.lastName }}
             </a>
+            {% else %}
+                No one at the moment
+            {% endif %}
         </li>
-        <li>Installed: {{ device.installation }}</li>
+        <li>Installed: {{ device.installationDate }}</li>
         <li>Guarantee: {{ device.guaranteeDate }}</li>
         <li>Last maintenance: {{ device.lastMaintenance }}</li>
         <li>Next maintenance: {{ device.nextMaintenance }}</li>

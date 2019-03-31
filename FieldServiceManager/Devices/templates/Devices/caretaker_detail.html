@@ -9,7 +9,7 @@
     </ul>
     <ol>Devices under care:
         {% for device in devices %}
-            <li><a href="{% url 'device-detail' device.sn %}">{{ device.manufacturer }} {{ device.modelName }}</a></li>
+            <li><a href="{% url 'device-detail' device.id %}">{{ device.manufacturer }} {{ device.modelName }}</a></li>
         {% endfor %}
     </ol>
 {% endblock %}

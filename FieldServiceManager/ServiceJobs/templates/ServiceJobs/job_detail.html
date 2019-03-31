@@ -3,7 +3,7 @@
 {% block content %}
     <h2>Job for {{ job.device }}</h2>
     <ul>
-        <li>Device: <a href="{% url 'device-detail' job.device.sn %}">{{ job.device }}</a></li>
+        <li>Device: <a href="{% url 'device-detail' job.device.id %}">{{ job.device }}</a></li>
         <li>Hospital: <a href="{% url 'hospital-detail' job.device.hospital.id %}">{{ job.device.hospital }}</a></li>
         <li>Job type: <a href="{% url 'jobtype-detail' job.jobType.id %}">{{ job.jobType }}</a></li>
         <li>Registered: {{ job.registeredDate }}</li>

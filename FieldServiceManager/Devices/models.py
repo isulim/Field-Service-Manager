@@ -13,16 +13,16 @@ class Hospital(models.Model):
 
 
 class Device(models.Model):
-    sn = models.CharField(primary_key=True, max_length=13, verbose_name='Serial number')
-    hospital = models.ForeignKey('Hospital', on_delete=models.CASCADE, verbose_name='Hospital')
-    deviceType = models.ForeignKey('DeviceType', verbose_name='Device type', on_delete=models.PROTECT)
+    sn = models.CharField(max_length=13, verbose_name='Serial number')
     manufacturer = models.ForeignKey('Manufacturer', verbose_name='Manufacturer', on_delete=models.PROTECT)
     modelName = models.CharField(max_length=64, verbose_name='Model')
-    installation = models.DateField(verbose_name='Installation date')
+    deviceType = models.ForeignKey('DeviceType', verbose_name='Device type', on_delete=models.PROTECT)
+    hospital = models.ForeignKey('Hospital', on_delete=models.CASCADE, verbose_name='Hospital')
+    installationDate = models.DateField(verbose_name='Installation date')
     guaranteeDate = models.DateField(verbose_name='Guarantee date')
     lastMaintenance = models.DateField(verbose_name='Last maintenance')
     nextMaintenance = models.DateField(verbose_name='Next maintenance')
-    caretaker = models.ForeignKey('Caretaker', verbose_name='Caretaker', on_delete=models.PROTECT)
+    caretaker = models.ForeignKey('Caretaker', null=True, verbose_name='Caretaker', on_delete=models.PROTECT)
 
     def __str__(self):
         return "{}, model: {}, S/N: {}".format(self.manufacturer, self.modelName, self.sn)

@@ -4,7 +4,7 @@
     <h2>All devices of type: {{ deviceType }}</h2>
     <ol>
         {% for device in devices %}
-            <li><a href="{% url 'device-detail' device.sn %}">{{ device.manufacturer }} {{ device.modelName }}</a></li>
+            <li><a href="{% url 'device-detail' device.id %}">{{ device.manufacturer }} {{ device.modelName }}</a></li>
         {% endfor %}
     </ol>
 {% endblock %}
