@@ -2,7 +2,7 @@ from django.urls import path
 from Devices.views import HospitalListView, HospitalDetailView, DeviceListView, DeviceDetailView, \
     DeviceTypeListView, DeviceTypeDetailView, ManufacturerListView, ManufacturerDetailView, \
     CaretakerListView, CaretakerDetailView, HospitalCreateView, DeviceCreateView, \
-    CaretakerCreateView, CaretakerUpdateView, HospitalUpdateView
+    CaretakerCreateView, CaretakerUpdateView, HospitalUpdateView, DeviceUpdateView
 
 urlpatterns = [
     path('hospital/', HospitalListView.as_view(), name='hospital-list'),
@@ -12,6 +12,7 @@ urlpatterns = [
     path('device/', DeviceListView.as_view(), name='device-list'),
     path('device/<int:pk>/', DeviceDetailView.as_view(), name='device-detail'),
     path('device/create/', DeviceCreateView.as_view(), name='device-create'),
+    path('device/update/<int:pk>', DeviceUpdateView.as_view(), name='device-update'),
     path('type/', DeviceTypeListView.as_view(), name='type-list'),
     path('type/<int:pk>/', DeviceTypeDetailView.as_view(), name='type-detail'),
     path('manufacturer/', ManufacturerListView.as_view(), name='manufacturer-list'),

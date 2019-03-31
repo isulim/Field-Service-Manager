@@ -7,7 +7,7 @@ from django.views.generic.base import View
 
 from Devices.models import Hospital, Device, Caretaker, Manufacturer, DeviceType
 from ServiceJobs.models import Job
-from Devices.forms import DeviceCreateForm
+from Devices.forms import DeviceCreateForm, DeviceUpdateForm
 
 
 class HospitalListView(ListView):
@@ -51,8 +51,6 @@ class DeviceDetailView(DetailView):
 
 class DeviceCreateView(CreateView):
     model = Device
-    # fields = ['sn', 'manufacturer', 'modelName', 'deviceType', 'hospital',
-    #           'installationDate', 'guaranteeDate']
     success_url = '/device/'
     form_class = DeviceCreateForm
 
@@ -63,6 +61,12 @@ class DeviceCreateView(CreateView):
         self.object.nextMaintenance = lastMaint + timedelta(days=182)
         self.object.save()
         return super().form_valid(form)
+
+
+class DeviceUpdateView(UpdateView):
+    model = Device
+    success_url = '/device/'
+    form_class = DeviceUpdateForm
 
 
 class DeviceTypeListView(ListView):
