@@ -29,11 +29,11 @@ def populate(apps, schema_editor):
     hospital = FakeHospital()
     caretaker = FakeCaretaker()
     device = FakeDevice()
-    for i in range(10):
+    for i in range(5):
         hospital.populate()
-    for i in range(15):
+    for i in range(10):
         caretaker.populate()
-    for i in range(30):
+    for i in range(20):
         device.populate()
 
 

@@ -10,7 +10,7 @@
         <li>Added by: {{ job.addedBy }}</li>
         <li>Completed: {{ job.isCompleted }}</li>
         {% if job.isCompleted %}
-            <li>Completion date: <a href="{% url 'report-detail' job.id %}">{{ job.report.finished }}</a></li>
+            <li>Completion date: <a href="{% url 'report-detail' job.id %}">{{ job.report.finishedDate }}</a></li>
             <li>Engineer: {{ job.report.engineer }}</li>
         {% endif %}
     </ul>

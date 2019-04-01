@@ -35,8 +35,8 @@ class FakeReport:
         start_date = self.faker.date_object()
         delta = timedelta(days=randint(0, 28))
         finish_date = start_date + delta
-        report.started = start_date
-        report.finished = finish_date
+        report.startedDate = start_date
+        report.finishedDate = finish_date
         report.workHours = (delta.days + 1) * 8
         report.description = self.faker.paragraphs(nb=6)
         report.save()

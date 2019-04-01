@@ -34,8 +34,8 @@ class Migration(migrations.Migration):
             name='Report',
             fields=[
                 ('job', models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, primary_key=True, serialize=False, to='ServiceJobs.Job', verbose_name='Job')),
-                ('started', models.DateField(verbose_name='Started date')),
-                ('finished', models.DateField(verbose_name='Finished date')),
+                ('startedDate', models.DateField(verbose_name='Started date')),
+                ('finishedDate', models.DateField(verbose_name='Finished date')),
                 ('workHours', models.PositiveSmallIntegerField()),
                 ('description', models.TextField()),
                 ('engineer', models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, to=settings.AUTH_USER_MODEL, verbose_name='Engineer')),

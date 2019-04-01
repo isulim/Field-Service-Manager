@@ -8,8 +8,8 @@
         <li>Hospital: <a href="{% url 'hospital-detail' report.job.device.hospital.id %}">{{ report.job.device.hospital }}</a></li>
         <li>Job type: <a href="{% url 'jobtype-detail' report.job.jobType.id %}">{{ report.job.jobType }}</a></li>
         <li>Registered: {{ report.job.registeredDate }}</li>
-        <li>Started: {{ report.started }}</li>
-        <li>Finished: {{ report.finished }}</li>
+        <li>Started: {{ report.startedDate }}</li>
+        <li>Finished: {{ report.finishedDate }}</li>
         <li>Total hours: {{ report.workHours }}</li>
         <li>Description: {{ report.description }}</li>
     </ul>

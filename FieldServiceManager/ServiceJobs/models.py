@@ -24,10 +24,10 @@ class Job(models.Model):
 class Report(models.Model):
     job = models.OneToOneField(Job, on_delete=models.CASCADE, verbose_name='Job', primary_key=True)
     engineer = models.ForeignKey(User, on_delete=models.PROTECT, verbose_name='Engineer')
-    started = models.DateField(verbose_name='Started date')
-    finished = models.DateField(verbose_name='Finished date')
+    startedDate = models.DateField(verbose_name='Started date')
+    finishedDate = models.DateField(verbose_name='Finished date')
     workHours = models.PositiveSmallIntegerField()
     description = models.TextField()
 
     def __str__(self):
-        return "{}: {} - {}".format(self.job, self.engineer, self.finished)
+        return "{}: {} - {}".format(self.job, self.engineer, self.finishedDate)

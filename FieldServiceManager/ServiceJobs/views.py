@@ -1,17 +1,30 @@
 from django.shortcuts import render
-from django.views.generic import ListView, DetailView
+from django.urls import reverse_lazy
+from django.views.generic import ListView, DetailView, CreateView
 from django.views.generic.base import View
+
+from ServiceJobs.forms import ReportCreateForm
 from ServiceJobs.models import Job, JobType, Report
 
 
 class JobListView(ListView):
     model = Job
     context_object_name = 'jobs'
+    # Prioritize non completed jobs
 
 
 class JobDetailView(DetailView):
     model = Job
     context_object_name = 'job'
+
+
+class JobCreateView(CreateView):
+    model = Job
+    fields = ['device', 'jobType', 'addedBy']
+    # Field 'addedBy' to be replaced by currently logged user
+
+    def get_success_url(self):
+        return reverse_lazy('job-detail', kwargs={'pk': self.object.id})
 
 
 class ReportListView(ListView):
@@ -22,6 +35,21 @@ class ReportListView(ListView):
 class ReportDetailView(DetailView):
     model = Report
     context_object_name = 'report'
+
+
+class ReportCreateView(CreateView):
+    model = Report
+    form_class = ReportCreateForm
+
+    def get_success_url(self):
+        return reverse_lazy('report-detail', kwargs={'pk': self.object.job_id})
+
+    def form_valid(self, form):
+        self.object = form.save(commit=False)
+        job = Job.objects.get(pk=self.object.job.id)
+        job.isCompleted = True
+        job.save()
+        return super().form_valid(form)
 
 
 class JobTypeListView(ListView):

@@ -15,10 +15,10 @@ def populate(apps, schema_editor):
     job = FakeJob()
     report = FakeReport()
 
-    for i in range(100):
+    for i in range(20):
         job.populate()
 
-    for i in range(50):
+    for i in range(10):
         report.populate()
 
 

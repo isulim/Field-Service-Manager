@@ -51,7 +51,6 @@ class DeviceDetailView(DetailView):
 
 class DeviceCreateView(CreateView):
     model = Device
-    success_url = '/device/'
     form_class = DeviceCreateForm
 
     def form_valid(self, form):
@@ -62,11 +61,16 @@ class DeviceCreateView(CreateView):
         self.object.save()
         return super().form_valid(form)
 
+    def get_success_url(self):
+        return reverse_lazy('device-detail', kwargs={'pk': self.object.id})
 
+# One update for office, other for full permissions?
 class DeviceUpdateView(UpdateView):
     model = Device
-    success_url = '/device/'
     form_class = DeviceUpdateForm
+
+    def get_success_url(self):
+        return reverse_lazy('device-detail', kwargs={'pk': self.object.id})
 
 
 class DeviceTypeListView(ListView):
@@ -118,6 +122,9 @@ class CaretakerCreateView(CreateView):
     model = Caretaker
     fields = '__all__'
     success_url = '/caretaker/'
+
+    def get_success_url(self):
+        return reverse_lazy('caretaker-detail', kwargs={'pk': self.object.id})
 
 
 class CaretakerUpdateView(UpdateView):
