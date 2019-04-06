@@ -2,8 +2,11 @@
 {% load bootstrap4 %}
 {% block content %}
 
-    <h1>Kalendarz</h1>
-       <div id='calendar'></div>
+
+    <div class="row">
+       <h1>Kalendarz</h1>
+        <div id='calendar' style="float: left; margin-outside: 10px" class="col-10">
+
    <script>
 
        $(document).ready(function() {
@@ -58,7 +61,20 @@
 
        });
 
-</script>
+    </script>
+    </div>
 
+    <div id="openjobs" style="float: left" class="col">
+    <h2>5 oldest jobs</h2>
+        <div class="row">
+            <ol>
+                {% for openJob in openJobs %}
+                    <li><a href="{% url 'job-detail' openJob.pk %}">{{ openJob }}</a></li>
+                {% endfor %}
+
+            </ol>
+        </div>
+    </div>
+</div>
 
 {% endblock %}

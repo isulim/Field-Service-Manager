@@ -70,7 +70,7 @@ class JobTypeDetailView(DetailView):
 
 class CalendarView(View):
     def get(self, request):
-        openJobs = Job.objects.filter(isCompleted=False)
+        openJobs = Job.objects.filter(isCompleted=False).order_by('registeredDate')[:5]
         openEvents = Event.objects.filter(job__isCompleted=False)
         closedEvents = Event.objects.filter(job__isCompleted=True)
         ctx = {
