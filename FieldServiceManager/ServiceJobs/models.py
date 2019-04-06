@@ -18,7 +18,7 @@ class Job(models.Model):
     isCompleted = models.BooleanField(default=False, verbose_name='Completed')
 
     def __str__(self):
-        return "{} - {}, {}".format(self.jobType, self.device, self.device.hospital)
+        return "{}: {} - {}, {}".format(self.registeredDate, self.jobType, self.device.hospital, self.device)
 
 
 class Report(models.Model):
@@ -30,4 +30,4 @@ class Report(models.Model):
     description = models.TextField()
 
     def __str__(self):
-        return "{}: {} - {}".format(self.job, self.engineer, self.finishedDate)
+        return "{}: {} - {}".format(self.finishedDate, self.job, self.engineer)

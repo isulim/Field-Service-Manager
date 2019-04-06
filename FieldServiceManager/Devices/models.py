@@ -9,7 +9,7 @@ class Hospital(models.Model):
     email = models.EmailField(null=True, verbose_name='E-mail')
 
     def __str__(self):
-        return "{}, {}".format(self.name, self.city)
+        return "{}, {}".format(self.city, self.name)
 
 
 class Device(models.Model):
@@ -25,7 +25,7 @@ class Device(models.Model):
     caretaker = models.ForeignKey('Caretaker', null=True, verbose_name='Caretaker', on_delete=models.PROTECT)
 
     def __str__(self):
-        return "{}, model: {}, S/N: {}".format(self.manufacturer, self.modelName, self.sn)
+        return "{} {}, S/N: {}".format(self.manufacturer, self.modelName, self.sn)
 
 
 class Caretaker(models.Model):

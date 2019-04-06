@@ -35,6 +35,7 @@ class ReportListView(ListView):
 class ReportDetailView(DetailView):
     model = Report
     context_object_name = 'report'
+    # Generating PDF of report
 
 
 class ReportCreateView(CreateView):

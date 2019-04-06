@@ -2,9 +2,20 @@
 
 {% block content %}
     <h2>All jobs</h2>
+    <h3>Open jobs</h3>
     <ol>
-        {% for job in jobs%}
-            <li><a href="{% url 'job-detail' job.id %}">{{ job }}</a></li>
+        {% for job in jobs %}
+            {% if not job.isCompleted %}
+                <li><a href="{% url 'job-detail' job.id %}">{{ job }}</a></li>
+            {% endif %}
+        {% endfor %}
+    </ol>
+    <h3>Finished jobs</h3>
+    <ol>
+        {% for job in jobs %}
+            {% if job.isCompleted %}
+                <li><a href="{% url 'job-detail' job.id %}">{{ job }}</a></li>
+            {% endif %}
         {% endfor %}
     </ol>
 {% endblock %}

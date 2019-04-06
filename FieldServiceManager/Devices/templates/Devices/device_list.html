@@ -1,10 +1,53 @@
-{% extends 'Devices/base.html' %}
+{% extends 'ServiceJobs/base.html' %}
 
 {% block content %}
     <h2>All devices</h2>
-    <ol>
-        {% for device in devices %}
-            <li><a href="{% url 'device-detail' device.id %}">{{ device.manufacturer }} {{ device.modelName }}</a></li>
-        {% endfor %}
-    </ol>
+    <h3>Shimadzu</h3>
+        <ol>
+            {% for device in shimadzu %}
+                <li><a href="{% url 'device-detail' device.id %}">{{ device.modelName }}: {{ device.hospital }}</a></li>
+            {% endfor %}
+        </ol>
+    <h3>Hitachi</h3>
+        <ol>
+            {% for device in hitachi %}
+                <li><a href="{% url 'device-detail' device.id %}">{{ device.modelName }}: {{ device.hospital }}</a></li>
+            {% endfor %}
+        </ol>
+    <h3>Fuji</h3>
+        <ol>
+            {% for device in fuji %}
+                <li><a href="{% url 'device-detail' device.id %}">{{ device.modelName }}: {{ device.hospital }}</a></li>
+            {% endfor %}
+        </ol>
+    <h3>Canon</h3>
+        <ol>
+            {% for device in canon %}
+                <li><a href="{% url 'device-detail' device.id %}">{{ device.modelName }}: {{ device.hospital }}</a></li>
+            {% endfor %}
+        </ol>
+    <h3>Carestream</h3>
+        <ol>
+            {% for device in carestream %}
+                <li><a href="{% url 'device-detail' device.id %}">{{ device.modelName }}: {{ device.hospital }}</a></li>
+            {% endfor %}
+        </ol>
+    <h3>Siemens</h3>
+        <ol>
+            {% for device in siemens %}
+                <li><a href="{% url 'device-detail' device.id %}">{{ device.modelName }}: {{ device.hospital }}</a></li>
+            {% endfor %}
+        </ol>
+    <h3>GE</h3>
+        <ol>
+            {% for device in ge %}
+                <li><a href="{% url 'device-detail' device.id %}">{{ device.modelName }}: {{ device.hospital }}</a></li>
+            {% endfor %}
+        </ol>
+    <h3>Philips</h3>
+        <ol>
+            {% for device in philips %}
+                <li><a href="{% url 'device-detail' device.id %}">{{ device.modelName }}: {{ device.hospital }}</a></li>
+            {% endfor %}
+        </ol>
 {% endblock %}
