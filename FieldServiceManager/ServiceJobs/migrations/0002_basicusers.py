@@ -104,10 +104,6 @@ class Migration(migrations.Migration):
 
     dependencies = [
         ('ServiceJobs', '0001_initial'),
-        # ('sessions', '0001_initial'),
-        # ('admin', '0003_logentry_add_action_flag_choices'),
-        # ('contenttypes', '0002_remove_content_type_name'),
-        # ('auth', '0009_alter_user_last_name_max_length'),
     ]
 
     operations = [

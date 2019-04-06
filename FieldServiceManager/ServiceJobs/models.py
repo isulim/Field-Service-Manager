@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from Devices.models import Device, Hospital
-from datetime import date
+from django.utils.timezone import now
 
 
 class JobType(models.Model):
@@ -25,10 +25,20 @@ class Job(models.Model):
 class Report(models.Model):
     job = models.OneToOneField(Job, on_delete=models.CASCADE, verbose_name='Job', primary_key=True)
     engineer = models.ForeignKey(User, on_delete=models.PROTECT, verbose_name='Engineer')
-    startedDate = models.DateField(verbose_name='Started date', default=date.today())
-    finishedDate = models.DateField(verbose_name='Finished date')
+    startedDate = models.DateField(verbose_name='Started date', default=now)
+    finishedDate = models.DateField(verbose_name='Finished date', default=now)
     workHours = models.PositiveSmallIntegerField()
     description = models.TextField()
 
     def __str__(self):
         return "{}: {} - {}".format(self.finishedDate, self.job, self.engineer)
+
+
+class Event(models.Model):
+    job = models.OneToOneField(Job, on_delete=models.CASCADE, verbose_name='Job', primary_key=True)
+    engineer = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='Engineer')
+    startDateTime = models.DateTimeField(verbose_name='Start')
+    endDateTime = models.DateTimeField(verbose_name='End')
+
+    def __str__(self):
+        return "{}, {}, {}".format(self.startDateTime, self.engineer, self.job)

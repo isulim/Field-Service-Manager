@@ -1,0 +1,16 @@
+{% extends 'ServiceJobs/base.html' %}
+
+{% block content %}
+    <h2>{{ event }}</h2>
+    <ul>
+        <li>Job: <a href="{% url 'job-detail' event.job.id %}">{{ event.job }}</a></li>
+        <li>Engineer: {{ event.engineer }}</li>
+        <li>Start: {{ event.startDateTime }}</li>
+        <li>End: {{ event.endDateTime }}</li>
+        <li>Added by: {{ event.job.addedBy }}</li>
+        <li>Completed: {{ event.job.isCompleted }}</li>
+        {% if event.job.isCompleted %}
+            <li>Completion date: <a href="{% url 'report-detail' job.id %}">{{ job.report.finishedDate }}</a></li>
+        {% endif %}
+    </ul>
+{% endblock %}

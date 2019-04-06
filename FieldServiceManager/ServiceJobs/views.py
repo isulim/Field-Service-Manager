@@ -3,8 +3,8 @@ from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView
 from django.views.generic.base import View
 
-from ServiceJobs.forms import ReportCreateForm
-from ServiceJobs.models import Job, JobType, Report
+from ServiceJobs.forms import ReportCreateForm, EventCreateForm
+from ServiceJobs.models import Job, JobType, Report, Event
 
 
 class JobListView(ListView):
@@ -75,3 +75,21 @@ class CalendarView(View):
             'openJobs': openJobs
         }
         return render(request, 'ServiceJobs/main.html', ctx)
+
+
+class EventListView(ListView):
+    model = Event
+    context_object_name = 'events'
+
+
+class EventDetailView(DetailView):
+    model = Event
+    context_object_name = 'event'
+
+
+class EventCreateView(CreateView):
+    model = Event
+    form_class = EventCreateForm
+
+    def get_success_url(self):
+        return reverse_lazy('event-detail', kwargs={'pk': self.object.job_id})

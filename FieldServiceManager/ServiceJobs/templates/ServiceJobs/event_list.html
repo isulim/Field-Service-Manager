@@ -1,0 +1,21 @@
+{% extends 'ServiceJobs/base.html' %}
+
+{% block content %}
+    <h2>All events</h2>
+    <h3>Open events</h3>
+    <ol>
+        {% for event in events %}
+            {% if not event.job.isCompleted %}
+                <li><a href="{% url 'event-detail' event.id %}">{{ event }}</a></li>
+            {% endif %}
+        {% endfor %}
+    </ol>
+    <h3>Closed events</h3>
+    <ol>
+        {% for event in events %}
+            {% if event.job.isCompleted %}
+                <li><a href="{% url 'event-detail' event.id %}">{{ event }}</a></li>
+            {% endif %}
+        {% endfor %}
+    </ol>
+{% endblock %}

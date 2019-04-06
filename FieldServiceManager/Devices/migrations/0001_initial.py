@@ -27,7 +27,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False,
                                         verbose_name='ID')),
-                ('sn', models.CharField(max_length=13, serialize=False, verbose_name='Serial number')),
+                ('sn', models.CharField(max_length=13, verbose_name='Serial number')),
                 ('modelName', models.CharField(max_length=64, verbose_name='Model')),
                 ('installationDate', models.DateField(verbose_name='Installation date')),
                 ('guaranteeDate', models.DateField(verbose_name='Guarantee date')),
