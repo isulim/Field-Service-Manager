@@ -1,9 +1,8 @@
 {% extends 'ServiceJobs/base.html' %}
-
+{% load bootstrap4 %}
 {% block content %}
 
     <h1>Kalendarz</h1>
-
        <div id='calendar'></div>
    <script>
 
@@ -17,7 +16,7 @@
                },
                locale: 'pl',
                //defaultDate: '2017-05-12',
-               buttonIcons: false, // show the prev/next text
+               buttonIcons: true, // show the prev/next text
                weekNumbers: true,
                navLinks: true, // can click day/week names to navigate views
                editable: true,
@@ -27,32 +26,32 @@
                // editable: true,
                // eventLimit: true, // allow "more" link when too many events
                events: [
-                   {% for job in openJobs %}
-                       {
-                           title: "{{ job.jobType }} {{ job.device }}",
-                           start: '{{ job.registeredDate|date:"Y-m-d" }}',
-                           url: '{% url 'job-detail' job.pk %}',
-                           color: '#3b9ad8'
-                       },
-                   {% endfor %}
                    {% for event in openEvents %}
                        {
                            title: "{{ event.job.jobType }} {{ event.job.device }}",
                            start: '{{ event.startDateTime|date:"Y-m-d H:i" }}',
                            end: "{{ event.endDateTime|date:"Y-m-d H:i" }}",
                            url: '{% url 'event-detail' event.job_id %}',
-                           color: '#3b9ad8'
+                           color: {% if event.job.jobType_id == 1 %} '#e34e42'
+                                    {% elif event.job.jobType_id == 2 %} '#f09b2c'
+                                    {% elif event.job.jobType_id == 3 %} '#2940b8'
+                                    {% elif event.job.jobType_id == 4 %} '#49914d'
+                                    {% endif %}
                        },
                    {% endfor %}
-{#                   {% for event in closedEvents %}#}
-{#                       {#}
-{#                           title: "{{ event.job.jobType }} {{ event.job.device }}",#}
-{#                           start: '{{ event.startDateTime|date:"Y-m-d h:i" }}',#}
-{#                           end: '{{ event.endDateTime|date: "Y-m-d h:i" }}',#}
-{#                           url: '{% url 'event-detail' event.job_id %}',#}
-{#                           color: '#3b9ad8'#}
-{#                       },#}
-{#                   {% endfor %}#}
+                   {% for event in closedEvents %}
+                       {
+                           title: "{{ event.job.jobType }} {{ event.job.device }}",
+                           start: '{{ event.startDateTime|date:"Y-m-d H:i" }}',
+                           end: "{{ event.endDateTime|date:"Y-m-d H:i" }}",
+                           url: '{% url 'event-detail' event.job_id %}',
+                           color: {% if event.job.jobType_id == 1 %} '#e34e42'
+                                    {% elif event.job.jobType_id == 2 %} '#f09b2c'
+                                    {% elif event.job.jobType_id == 3 %} '#B8A89A'
+                                    {% elif event.job.jobType_id == 4 %} '#49914d'
+                                    {% endif %}
+                       },
+                   {% endfor %}
 
                ]
            });

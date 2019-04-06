@@ -4,9 +4,15 @@ from django.contrib.auth.models import User
 from django.utils.timezone import now
 from bootstrap_datepicker_plus import DatePickerInput, DateTimePickerInput
 
+
+class UserModelChoiceField(forms.ModelChoiceField):
+    def label_from_instance(self, obj):
+        return obj.get_full_name()
+
+
 class ReportCreateForm(forms.ModelForm):
     job = forms.ModelChoiceField(queryset=Job.objects.filter(isCompleted=False))
-    engineer = forms.ModelChoiceField(queryset=User.objects.filter(groups__name='Engineers'))
+    engineer = UserModelChoiceField(queryset=User.objects.filter(groups__name='Engineers'))
 
     class Meta:
         model = Report
@@ -16,20 +22,22 @@ class ReportCreateForm(forms.ModelForm):
                 options={
                     'format': 'YYYY/MM/DD',
                     'maxDate': now().strftime("%Y-%m-%d %H:%M:%S"),
+                    'locale': 'pl',
                 }
             ),
             'finishedDate': DatePickerInput(
                 options={
                     'format': 'YYYY/MM/DD',
                     'minDate': now().strftime("%Y-%m-%d %H:%M:%S"),
+                    'locale': 'pl',
                 }
             ),
         }
 
 
 class EventCreateForm(forms.ModelForm):
-    job = forms.ModelChoiceField(queryset=Job.objects.filter(isCompleted=False))
-    engineer = forms.ModelChoiceField(queryset=User.objects.filter(groups__name='Engineers'))
+    job = forms.ModelChoiceField(queryset=Job.objects.filter(isCompleted=False).filter(event__isnull=True))
+    engineer = UserModelChoiceField(queryset=User.objects.filter(groups__name='Engineers'))
 
     class Meta:
         model = Event
@@ -39,12 +47,16 @@ class EventCreateForm(forms.ModelForm):
                 options={
                     'format': 'YYYY-MM-DD HH:mm',
                     'minDate': now().strftime("%Y-%m-%d %H:%M"),
+                    'showTodayButton': True,
+                    'locale': 'pl',
                 }
             ),
             'endDateTime': DateTimePickerInput(
                 options={
                     'format': 'YYYY-MM-DD HH:mm',
                     'minDate': now().strftime("%Y-%m-%d %H:%M"),
+                    'showTodayButton': True,
+                    'locale': 'pl',
                 }
             ),
         }
