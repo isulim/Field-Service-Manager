@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from Devices.models import Device, Hospital
+from datetime import date
 
 
 class JobType(models.Model):
@@ -24,7 +25,7 @@ class Job(models.Model):
 class Report(models.Model):
     job = models.OneToOneField(Job, on_delete=models.CASCADE, verbose_name='Job', primary_key=True)
     engineer = models.ForeignKey(User, on_delete=models.PROTECT, verbose_name='Engineer')
-    startedDate = models.DateField(verbose_name='Started date')
+    startedDate = models.DateField(verbose_name='Started date', default=date.today())
     finishedDate = models.DateField(verbose_name='Finished date')
     workHours = models.PositiveSmallIntegerField()
     description = models.TextField()

@@ -12,6 +12,6 @@ class ReportCreateForm(forms.ModelForm):
         model = Report
         fields = '__all__'
         widgets = {
-            'startedDate': forms.SelectDateWidget,
-            'finishedDate': forms.SelectDateWidget,
+            'startedDate': forms.SelectDateWidget(),
+            'finishedDate': forms.SelectDateWidget(),
         }

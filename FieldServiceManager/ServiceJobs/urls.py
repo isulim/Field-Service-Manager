@@ -1,7 +1,7 @@
 from django.urls import path
 from ServiceJobs.views import JobListView, JobDetailView, \
     JobTypeListView, JobTypeDetailView, \
-    ReportListView, ReportDetailView, JobCreateView, ReportCreateView
+    ReportListView, ReportDetailView, JobCreateView, ReportCreateView, CalendarView
 
 urlpatterns = [
     path('job/', JobListView.as_view(), name='job-list'),
@@ -12,4 +12,5 @@ urlpatterns = [
     path('report/', ReportListView.as_view(), name='report-list'),
     path('report/<int:pk>/', ReportDetailView.as_view(), name='report-detail'),
     path('report/create/', ReportCreateView.as_view(), name='report-create'),
+    path('', CalendarView.as_view(), name='main'),
 ]

@@ -67,3 +67,11 @@ class JobTypeDetailView(DetailView):
         context['jobs'] = Job.objects.filter(jobType__id=self.kwargs['pk'])
         return context
 
+
+class CalendarView(View):
+    def get(self, request):
+        openJobs = Job.objects.filter(isCompleted=False)
+        ctx = {
+            'openJobs': openJobs
+        }
+        return render(request, 'ServiceJobs/main.html', ctx)
