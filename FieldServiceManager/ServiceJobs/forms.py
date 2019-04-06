@@ -1,8 +1,8 @@
 from django import forms
 from ServiceJobs.models import Job, Report, Event
 from django.contrib.auth.models import User
+from django.utils.timezone import now
 from bootstrap_datepicker_plus import DatePickerInput, DateTimePickerInput
-
 
 class ReportCreateForm(forms.ModelForm):
     job = forms.ModelChoiceField(queryset=Job.objects.filter(isCompleted=False))
@@ -12,8 +12,18 @@ class ReportCreateForm(forms.ModelForm):
         model = Report
         fields = '__all__'
         widgets = {
-            'startedDate': DatePickerInput(format='%Y-%m-%d'),
-            'finishedDate': DatePickerInput(format='%Y-%m-%d'),
+            'startedDate': DatePickerInput(
+                options={
+                    'format': 'YYYY/MM/DD',
+                    'maxDate': now().strftime("%Y-%m-%d %H:%M:%S"),
+                }
+            ),
+            'finishedDate': DatePickerInput(
+                options={
+                    'format': 'YYYY/MM/DD',
+                    'minDate': now().strftime("%Y-%m-%d %H:%M:%S"),
+                }
+            ),
         }
 
 
@@ -25,6 +35,16 @@ class EventCreateForm(forms.ModelForm):
         model = Event
         fields = '__all__'
         widgets = {
-            'startDateTime': DateTimePickerInput(format='%Y-%m-%d hh:mm'),
-            'endDateTime': DateTimePickerInput(format='%Y-%m-%d hh:mm'),
+            'startDateTime': DateTimePickerInput(
+                options={
+                    'format': 'YYYY-MM-DD HH:mm',
+                    'minDate': now().strftime("%Y-%m-%d %H:%M"),
+                }
+            ),
+            'endDateTime': DateTimePickerInput(
+                options={
+                    'format': 'YYYY-MM-DD HH:mm',
+                    'minDate': now().strftime("%Y-%m-%d %H:%M"),
+                }
+            ),
         }

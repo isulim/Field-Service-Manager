@@ -13,6 +13,7 @@ from Devices.forms import DeviceCreateForm, DeviceUpdateForm
 class HospitalListView(ListView):
     model = Hospital
     context_object_name = 'hospitals'
+    queryset = Hospital.objects.all().order_by('city')
 
 
 class HospitalDetailView(DetailView):

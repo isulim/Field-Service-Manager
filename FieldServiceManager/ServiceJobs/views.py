@@ -71,8 +71,12 @@ class JobTypeDetailView(DetailView):
 class CalendarView(View):
     def get(self, request):
         openJobs = Job.objects.filter(isCompleted=False)
+        openEvents = Event.objects.filter(job__isCompleted=False)
+        closedEvents = Event.objects.filter(job__isCompleted=True)
         ctx = {
-            'openJobs': openJobs
+            'openJobs': openJobs,
+            'openEvents': openEvents,
+            'closedEvents': closedEvents
         }
         return render(request, 'ServiceJobs/main.html', ctx)
 
