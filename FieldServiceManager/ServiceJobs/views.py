@@ -70,7 +70,7 @@ class JobTypeDetailView(DetailView):
 
 class CalendarView(View):
     def get(self, request):
-        openJobs = Job.objects.filter(isCompleted=False).order_by('registeredDate')[:5]
+        openJobs = Job.objects.filter(isCompleted=False, event__isnull=True).order_by('registeredDate')[:5]
         openEvents = Event.objects.filter(job__isCompleted=False)
         closedEvents = Event.objects.filter(job__isCompleted=True)
         ctx = {
@@ -94,6 +94,11 @@ class EventDetailView(DetailView):
 class EventCreateView(CreateView):
     model = Event
     form_class = EventCreateForm
+
+    def get_initial(self):
+        initial_data = super(EventCreateView, self).get_initial()
+        initial_data['job'] = Job.objects.get(pk=self.kwargs['pk'])
+        return initial_data
 
     def get_success_url(self):
         return reverse_lazy('event-detail', kwargs={'pk': self.object.job_id})

@@ -17,4 +17,5 @@ urlpatterns = [
     path('event/', EventListView.as_view(), name='event-list'),
     path('event/<int:pk>/', EventDetailView.as_view(), name='event-detail'),
     path('event/create/', EventCreateView.as_view(), name='event-create'),
+    path('event/create/<int:pk>', EventCreateView.as_view(), name='event-create-id'),
 ]

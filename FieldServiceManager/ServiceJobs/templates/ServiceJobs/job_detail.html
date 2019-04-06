@@ -1,5 +1,5 @@
 {% extends 'ServiceJobs/base.html' %}
-
+{% load bootstrap4 %}
 {% block content %}
     <h2>Job for {{ job.device }}</h2>
     <ul>
@@ -14,4 +14,7 @@
             <li>Engineer: {{ job.report.engineer }}</li>
         {% endif %}
     </ul>
+    {% if not job.isCompleted %}
+        <p><a href="{% url 'event-create-id' job.id %}"><button class="btn btn-outline-primary">Dodaj zlecenie</button></a></p>
+    {% endif %}
 {% endblock %}
