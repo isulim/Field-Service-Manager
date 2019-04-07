@@ -25,7 +25,7 @@ class Device(models.Model):
     caretaker = models.ForeignKey('Caretaker', null=True, verbose_name='Opiekun', on_delete=models.PROTECT)
 
     def __str__(self):
-        return "{} {}, S/N: {}".format(self.manufacturer, self.modelName, self.sn)
+        return "{} - {} {}, S/N: {}".format(self.hospital.city, self.manufacturer, self.modelName, self.sn)
 
 
 class Caretaker(models.Model):

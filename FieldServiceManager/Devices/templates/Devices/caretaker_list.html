@@ -2,14 +2,25 @@
 
 {% block content %}
     <h2>Lista opiekunów urządzeń</h2>
-    <ol>
-        {% for caretaker in caretakers %}
-            <li>
-                <a href="{% url 'caretaker-detail' caretaker.id %}">
-                    {{ caretaker.firstName }} {{ caretaker.lastName }}<br>
-                    {{ caretaker.hospital }}
-                </a>
-            </li>
-        {% endfor %}
-    </ol>
+    <div class="row">
+        <div class="col-xl">
+            <ol>
+            {% for caretaker in caretakers %}
+                <li>
+                    <a href="{% url 'caretaker-detail' caretaker.id %}">
+                        {{ caretaker.firstName }} {{ caretaker.lastName }}<br>
+                        {{ caretaker.hospital }}
+                    </a>
+                </li>
+            {% endfor %}
+            </ol>
+        </div>
+        <div class="col-xl">
+            {% if perms.Devices.add_caretaker %}
+                <a href="{% url 'caretaker-create' %}"><button class="btn btn-outline-success">Dodaj nowego opiekuna</button></a>
+            {% endif %}
+        </div>
+    </div>
+
+
 {% endblock %}

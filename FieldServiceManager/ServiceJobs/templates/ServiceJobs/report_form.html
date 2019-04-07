@@ -4,13 +4,13 @@
 {% block content %}
 
 {{ form.media }}
-
+    <div class="jumbotron">
     <h3>Formularz raportu</h3>
     <form method="post">
         {% csrf_token %}
         {% bootstrap_form form %}
-        <input type="submit" value="Dodaj">
+        <input type="submit" class="btn btn-outline-success" value="Dodaj">
     </form>
-
+    </div>
 
 {% endblock %}

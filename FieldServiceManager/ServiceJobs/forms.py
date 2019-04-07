@@ -1,6 +1,8 @@
 from datetime import timedelta
 
 from django import forms
+
+from Devices.models import Device
 from ServiceJobs.models import Job, Report, Event
 from django.contrib.auth.models import User
 from django.utils.timezone import now
@@ -39,8 +41,8 @@ class ReportCreateForm(forms.ModelForm):
 
 
 class EventCreateForm(forms.ModelForm):
-    job = forms.ModelChoiceField(queryset=Job.objects.filter(isCompleted=False).filter(event__isnull=True))
-    engineer = UserModelChoiceField(queryset=User.objects.filter(groups__name='Engineers'))
+    job = forms.ModelChoiceField(queryset=Job.objects.filter(isCompleted=False).filter(event__isnull=True), label='Zlecenie')
+    engineer = UserModelChoiceField(queryset=User.objects.filter(groups__name='Engineers'), label='Inżynier')
 
     class Meta:
         model = Event
@@ -50,6 +52,7 @@ class EventCreateForm(forms.ModelForm):
                 options={
                     'format': 'YYYY-MM-DD HH:mm',
                     'minDate': now().strftime("%Y-%m-%d %H:%M"),
+                    'enabledHours': [8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18],
                     'showTodayButton': True,
                     'locale': 'pl',
                 }
@@ -58,8 +61,17 @@ class EventCreateForm(forms.ModelForm):
                 options={
                     'format': 'YYYY-MM-DD HH:mm',
                     'minDate': now().strftime("%Y-%m-%d %H:%M"),
+                    'enabledHours': [8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18],
                     'showTodayButton': True,
                     'locale': 'pl',
                 }
             ),
         }
+
+
+class JobCreateForm(forms.ModelForm):
+    device = forms.ModelChoiceField(queryset=Device.objects.all().order_by('hospital__city'), label='Urządzenie')
+
+    class Meta:
+        model = Job
+        fields = ['device', 'jobType']

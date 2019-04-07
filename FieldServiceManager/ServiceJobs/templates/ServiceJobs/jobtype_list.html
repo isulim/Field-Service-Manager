@@ -1,10 +1,12 @@
 {% extends 'ServiceJobs/base.html' %}
 
 {% block content %}
+    <div class="jumbotron">
     <h2>Typy zleceń</h2>
     <ol>
         {% for jobtype in jobtypes%}
             <li><a href="{% url 'jobtype-detail' jobtype.id %}">{{ jobtype }}</a></li>
         {% endfor %}
     </ol>
+    </div>
 {% endblock %}

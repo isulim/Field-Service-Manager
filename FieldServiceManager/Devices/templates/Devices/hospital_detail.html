@@ -2,17 +2,27 @@
 
 {% block content %}
     <h2>Szpital: {{ hospital.name }}</h2>
-    <ul>
-        <li>Nazwa: {{ hospital.name }}</li>
-        <li>Miasto: {{ hospital.city }}</li>
-        <li>Adres: {{ hospital.address }}</li>
-        <li>Telefon: {{ hospital.phone }}</li>
-        <li>E-mail: {{ hospital.email }}</li>
-        <ol>
-            Urządzenia:
-            {% for device in hospital.device_set.all %}
-                <li><a href="{% url 'device-detail' device.id %}">{{ device.manufacturer }} {{ device.modelName }} ({{ device.deviceType }})</a></li>
-            {% endfor %}
-        </ol>
-    </ul>
+    <div class="row">
+        <div class="col-xl">
+            <ul>
+                <li>Nazwa: {{ hospital.name }}</li>
+                <li>Miasto: {{ hospital.city }}</li>
+                <li>Adres: {{ hospital.address }}</li>
+                <li>Telefon: {{ hospital.phone }}</li>
+                <li>E-mail: {{ hospital.email }}</li>
+                <ol>
+                    Urządzenia:
+                    {% for device in hospital.device_set.all %}
+                        <li><a href="{% url 'device-detail' device.id %}">{{ device.manufacturer }} {{ device.modelName }} ({{ device.deviceType }})</a></li>
+                    {% endfor %}
+                </ol>
+            </ul>
+        </div>
+        <div class="col-xl">
+            {% if perms.Devices.change_hospital %}
+                <a href="{% url 'hospital-update' hospital.pk %}"><button class="btn btn-outline-success">Edytuj szpital</button></a>
+            {% endif %}
+        </div>
+    </div>
+
 {% endblock %}

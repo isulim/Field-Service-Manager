@@ -1,11 +1,11 @@
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
-from django.contrib.auth.models import User
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView
 from django.views.generic.base import View
 
-from ServiceJobs.forms import ReportCreateForm, EventCreateForm
+from Devices.models import Device
+from ServiceJobs.forms import ReportCreateForm, EventCreateForm, JobCreateForm
 from ServiceJobs.models import Job, JobType, Report, Event
 
 
@@ -25,9 +25,12 @@ class JobDetailView(LoginRequiredMixin, PermissionRequiredMixin, DetailView):
 
 class JobCreateView(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
     model = Job
-    fields = ['device', 'jobType']
+    form_class = JobCreateForm
     permission_required = 'ServiceJobs.add_job'
     permission_denied_message = 'Nie masz uprawnień do wyświetlania tej strony.'
+
+    def handle_no_permission(self):
+        return render(self.request, 'ServiceJobs/403.html')
 
     def form_valid(self, form):
         job = form.save(commit=False)
@@ -59,6 +62,9 @@ class ReportCreateView(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
     form_class = ReportCreateForm
     permission_required = 'ServiceJobs.add_report'
     permission_denied_message = 'Nie masz uprawnień do wyświetlania tej strony.'
+
+    def handle_no_permission(self):
+        return render(self.request, 'ServiceJobs/403.html')
 
     def get_initial(self):
         initial_data = super(ReportCreateView, self).get_initial()
@@ -137,11 +143,12 @@ class EventCreateView(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
     form_class = EventCreateForm
     permission_required = 'ServiceJobs.add_event'
     permission_denied_message = 'Nie masz uprawnień do wyświetlania tej strony.'
+    success_url = '/'
+
+    def handle_no_permission(self):
+        return render(self.request, 'ServiceJobs/403.html')
 
     def get_initial(self):
         initial_data = super(EventCreateView, self).get_initial()
         initial_data['job'] = Job.objects.get(pk=self.kwargs['pk'])
         return initial_data
-
-    def get_success_url(self):
-        return reverse_lazy('event-detail', kwargs={'pk': self.object.job_id})

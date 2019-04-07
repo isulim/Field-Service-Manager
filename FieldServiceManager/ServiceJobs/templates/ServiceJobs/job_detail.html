@@ -1,21 +1,24 @@
 {% extends 'ServiceJobs/base.html' %}
 {% load bootstrap4 %}
+{% load my_filters %}
 {% block content %}
+    <div class="jumbotron">
     <h2>Zlecenie na {{ job.device }}</h2>
     <ul>
         <li>Urządzenie: <a href="{% url 'device-detail' job.device.id %}">{{ job.device }}</a></li>
         <li>Szpital: <a href="{% url 'hospital-detail' job.device.hospital.id %}">{{ job.device.hospital }}</a></li>
-        <li>Typ urządzenia: <a href="{% url 'jobtype-detail' job.jobType.id %}">{{ job.jobType }}</a></li>
+        <li>Rodzaj zlecenia: <a href="{% url 'jobtype-detail' job.jobType.id %}">{{ job.jobType }}</a></li>
         <li>Rejestracja zlecenia: {{ job.registeredDate }}</li>
         <li>Dodane przez: {{ job.addedBy }}</li>
-        <li>Ukończone: {{ job.isCompleted }}</li>
+        <li>Ukończone: {{ job.isCompleted|taknie }}</li>
         {% if job.isCompleted %}
             <li>Data ukończenia: {{ job.report.finishedDate }}</li>
             <li>Inżynier: {{ job.report.engineer }}</li>
-            <a href="{% url 'report-detail' job.id %}"><button class="btn">Wyświetl raport</button></a>
+            <a href="{% url 'report-detail' job.id %}"><button class="btn btn-outline-info">Wyświetl raport</button></a>
         {% endif %}
     </ul>
     {% if not job.isCompleted %}
-        <p><a href="{% url 'event-create-id' job.id %}"><button class="btn btn-outline-primary">Dodaj wydarzenie</button></a></p>
+        <p><a href="{% url 'event-create-id' job.id %}"><button class="btn btn-outline-info">Zaplanuj</button></a></p>
     {% endif %}
+    </div>
 {% endblock %}

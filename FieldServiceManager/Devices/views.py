@@ -1,9 +1,10 @@
 from datetime import timedelta
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
-from django.shortcuts import render, reverse
+from django.contrib import messages
+from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, UpdateView
-from django.views.generic.base import View
+
 from Devices.models import Hospital, Device, Caretaker, Manufacturer, DeviceType
 from ServiceJobs.models import Job
 from Devices.forms import DeviceCreateForm, DeviceUpdateForm
@@ -30,6 +31,9 @@ class HospitalCreateView(LoginRequiredMixin, PermissionRequiredMixin, CreateView
     success_url = '/hospital/'
     permission_required = 'Devices.add_hospital'
     permission_denied_message = 'Nie masz uprawnień do wyświetlenia tej strony.'
+
+    def handle_no_permission(self):
+        return render(self.request, 'ServiceJobs/403.html')
 
 
 class HospitalUpdateView(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
@@ -79,6 +83,9 @@ class DeviceCreateView(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
     permission_required = 'Devices.add_device'
     permission_denied_message = 'Nie masz uprawnień do wyświetlenia tej strony.'
 
+    def handle_no_permission(self):
+        return render(self.request, 'ServiceJobs/403.html')
+
     def form_valid(self, form):
         self.object = form.save(commit=False)
         lastMaint = form.cleaned_data.get('installationDate')
@@ -96,6 +103,9 @@ class DeviceUpdateView(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
     form_class = DeviceUpdateForm
     permission_required = 'Devices.change_device'
     permission_denied_message = 'Nie masz uprawnień do wyświetlenia tej strony.'
+
+    def handle_no_permission(self):
+        return render(self.request, 'ServiceJobs/403.html')
 
     def get_success_url(self):
         return reverse_lazy('device-detail', kwargs={'pk': self.object.id})
@@ -165,6 +175,9 @@ class CaretakerCreateView(LoginRequiredMixin, PermissionRequiredMixin, CreateVie
     permission_required = 'Devices.add_caretaker'
     permission_denied_message = 'Nie masz uprawnień do wyświetlenia tej strony.'
 
+    def handle_no_permission(self):
+        return render(self.request, 'ServiceJobs/403.html')
+
     def get_success_url(self):
         return reverse_lazy('caretaker-detail', kwargs={'pk': self.object.id})
 
@@ -174,6 +187,9 @@ class CaretakerUpdateView(LoginRequiredMixin, PermissionRequiredMixin, UpdateVie
     fields = '__all__'
     permission_required = 'Devices.change_caretaker'
     permission_denied_message = 'Nie masz uprawnień do wyświetlenia tej strony.'
+
+    def handle_no_permission(self):
+        return render(self.request, 'ServiceJobs/403.html')
 
     def get_success_url(self):
         return reverse_lazy('caretaker-detail', kwargs={'pk': self.object.id})

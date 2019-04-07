@@ -2,12 +2,14 @@
 {% load crispy_forms_tags %}
 {% load bootstrap4 %}
 {% block content %}
-<h3>Formularz wydarzenia</h3>
 {{ form.media }}
+    <div class="jumbotron">
+    <h3>Formularz wydarzenia</h3>
     <form method="post">
         {% csrf_token %}
         {% bootstrap_form form %}
-        <input type="submit" value="Dodaj">
+        <input type="submit" class="btn btn-outline-success" value="Zapisz">
     </form>
+    </div>
 
 {% endblock %}

@@ -1,11 +1,12 @@
 {% extends 'ServiceJobs/base.html' %}
 {% load crispy_forms_tags %}
+{% load bootstrap4 %}
 {% block content %}
-
+{{ form.media }}
     <h3>Formularz opiekuna urządzeń</h3>
     <form method="post">
         {% csrf_token %}
-        {{ form|crispy }}
-        <input type="submit" value="Dodaj">
+        {% bootstrap_form form %}
+        <input type="submit" class="btn btn-outline-success" value="Zapisz">
     </form>
 {% endblock %}

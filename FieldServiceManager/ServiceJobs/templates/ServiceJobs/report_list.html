@@ -1,10 +1,12 @@
 {% extends 'ServiceJobs/base.html' %}
 
 {% block content %}
+    <div class="jumbotron">
     <h2>Lista raportów</h2>
     <ol>
         {% for report in reports %}
             <li><a href="{% url 'report-detail' report.job_id %}">{{ report }}</a></li>
         {% endfor %}
     </ol>
+    </div>
 {% endblock %}

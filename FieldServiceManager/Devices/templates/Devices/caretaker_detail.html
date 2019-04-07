@@ -2,14 +2,28 @@
 
 {% block content %}
     <h2>Opiekun: {{ caretaker.firstName }} {{ caretaker.lastName }}</h2>
-    <ul>
-        <li>Szpital:  <a href="{% url 'hospital-detail' caretaker.hospital.id %}">{{ caretaker.hospital }}</a></li>
-        <li>Telefon: {{ caretaker.phone }}</li>
-        <li>Email: {{ caretaker.email }}</li>
-    </ul>
-    <ol>Urządzenia pod opieką:
-        {% for device in devices %}
-            <li><a href="{% url 'device-detail' device.id %}">{{ device.manufacturer }} {{ device.modelName }}</a></li>
-        {% endfor %}
-    </ol>
+    <div class="row">
+        <div class="col-xl">
+            <ul>
+                <li>Szpital:  <a href="{% url 'hospital-detail' caretaker.hospital.id %}">{{ caretaker.hospital }}</a></li>
+                <li>Telefon: {{ caretaker.phone }}</li>
+                <li>Email: {{ caretaker.email }}</li>
+            </ul>
+            <ol>Urządzenia pod opieką:
+            {% if devices %}
+                {% for device in devices %}
+                    <li><a href="{% url 'device-detail' device.id %}">{{ device.manufacturer }} {{ device.modelName }}</a></li>
+                {% endfor %}
+            {% else %}
+                <li>Obecnie brak.</li>
+            {% endif %}
+            </ol>
+        </div>
+        <div class="col-xl">
+            {% if perms.Devices.change_caretaker %}
+                <a href="{% url 'caretaker-update' caretaker.pk %}"><button class="btn btn-outline-success">Edytuj opiekuna</button></a>
+            {% endif %}
+        </div>
+    </div>
+
 {% endblock %}

@@ -1,11 +1,11 @@
 {% extends 'ServiceJobs/base.html' %}
-{% load crispy_forms_tags %}
+{% load bootstrap4 %}
 {% block content %}
 
     <h3>Fomularz szpitala</h3>
     <form method="post">
         {% csrf_token %}
-        {{ form|crispy }}
-        <input type="submit" value="Save">
+        {% bootstrap_form form %}
+        <input class="btn btn-outline-success" type="submit" value="Zapisz">
     </form>
 {% endblock %}

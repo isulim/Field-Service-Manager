@@ -1,6 +1,6 @@
 from django import forms
 from Devices.models import Device, Caretaker, DeviceType, Hospital
-from datetime import date
+from bootstrap_datepicker_plus import DatePickerInput, DateTimePickerInput
 
 
 class DeviceCreateForm(forms.ModelForm):
@@ -11,13 +11,23 @@ class DeviceCreateForm(forms.ModelForm):
         model = Device
         exclude = ['lastMaintenance', 'nextMaintenance']
         widgets = {
-            'installationDate': forms.SelectDateWidget(),
-            'guaranteeDate': forms.SelectDateWidget(),
+            'installationDate': DatePickerInput(
+                options={
+                    'format': 'YYYY-MM-DD',
+                    'locale': 'pl'
+                }
+            ),
+            'guaranteeDate': DatePickerInput(
+                options={
+                    'format': 'YYYY-MM-DD',
+                    'locale': 'pl'
+                }
+            ),
         }
 
 
 class DeviceUpdateForm(forms.ModelForm):
-    caretaker = forms.ModelChoiceField(required=False, queryset=Caretaker.objects.all())
+    caretaker = forms.CharField(required=False)
     manufacturer = forms.CharField(disabled=True)
     sn = forms.CharField(disabled=True)
     modelName = forms.CharField(disabled=True)
@@ -27,8 +37,28 @@ class DeviceUpdateForm(forms.ModelForm):
         model = Device
         fields = '__all__'
         widgets = {
-            'installationDate': forms.SelectDateWidget(),
-            'guaranteeDate': forms.SelectDateWidget(),
-            'lastMaintenance': forms.SelectDateWidget(),
-            'nextMaintenance': forms.SelectDateWidget(),
+            'installationDate': DatePickerInput(
+                options={
+                    'format': 'YYYY-MM-DD',
+                    'locale': 'pl'
+                }
+            ),
+            'guaranteeDate': DatePickerInput(
+                options={
+                    'format': 'YYYY-MM-DD',
+                    'locale': 'pl'
+                }
+            ),
+            'lastMaintenance': DatePickerInput(
+                options={
+                    'format': 'YYYY-MM-DD',
+                    'locale': 'pl'
+                }
+            ),
+            'nextMaintenance': DatePickerInput(
+                options={
+                    'format': 'YYYY-MM-DD',
+                    'locale': 'pl'
+                }
+            ),
         }

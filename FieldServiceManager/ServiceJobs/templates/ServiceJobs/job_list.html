@@ -2,20 +2,33 @@
 
 {% block content %}
     <h2>Lista zleceń</h2>
-    <h3>Otwarte zlecenia</h3>
-    <ol>
-        {% for job in jobs %}
-            {% if not job.isCompleted %}
-                <li><a href="{% url 'job-detail' job.id %}">{{ job }}</a></li>
+    <div class="row">
+        <div class="col-xl">
+            <h3>Otwarte zlecenia</h3>
+            <ol>
+                {% for job in jobs %}
+                    {% if not job.isCompleted %}
+                        <li><a href="{% url 'job-detail' job.id %}">{{ job }}</a></li>
+                    {% endif %}
+                {% endfor %}
+            </ol>
+        </div>
+        <div class="col">
+            {% if perms.ServiceJobs.add_job %}
+                <a href="{% url 'job-create' %}"><button class="btn btn-outline-success">Zarejestruj nowe zlecenie</button></a>
             {% endif %}
-        {% endfor %}
-    </ol>
-    <h3>Zamknięte zlecenia</h3>
-    <ol>
-        {% for job in jobs %}
-            {% if job.isCompleted %}
-                <li><a href="{% url 'job-detail' job.id %}">{{ job }}</a></li>
-            {% endif %}
-        {% endfor %}
-    </ol>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+        <h3>Zamknięte zlecenia</h3>
+        <ol>
+            {% for job in jobs %}
+                {% if job.isCompleted %}
+                    <li><a href="{% url 'job-detail' job.id %}">{{ job }}</a></li>
+                {% endif %}
+            {% endfor %}
+        </ol>
+        </div>
+    </div>
 {% endblock %}

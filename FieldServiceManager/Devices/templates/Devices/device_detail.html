@@ -2,39 +2,49 @@
 
 {% block content %}
     <h2>Urządzenie: {{ device.manufacturer }} {{ device.modelName }}</h2>
-    <ul>
-        <li>Producent: <a href="{% url 'manufacturer-detail' device.manufacturer.id %}">{{ device.manufacturer }}</a></li>
-        <li>Model: {{ device.modelName }}</li>
-        <li>Numer seryjny: {{ device.sn }}</li>
-        <li>Typ:
-            <a href="{% url 'type-detail' device.deviceType.id %}">
-                {{ device.deviceType }}
-            </a>
-        </li>
-        <li>Szpital:
-            <a href="{% url 'hospital-detail' device.hospital.id %}">
-                {{ device.hospital }}
-            </a>
-        </li>
-        <li>Opiekun:
-            {% if device.caretaker.id %}
-            <a href="{% url 'caretaker-detail' device.caretaker.id %}">
-                {{ device.caretaker.firstName }} {{ device.caretaker.lastName }}
-            </a>
-            {% else %}
-                Brak wybranego opiekuna
+    <div class="row">
+        <div class="col-xl">
+            <ul>
+                <li>Producent: <a href="{% url 'manufacturer-detail' device.manufacturer.id %}">{{ device.manufacturer }}</a></li>
+                <li>Model: {{ device.modelName }}</li>
+                <li>Numer seryjny: {{ device.sn }}</li>
+                <li>Typ:
+                    <a href="{% url 'type-detail' device.deviceType.id %}">
+                        {{ device.deviceType }}
+                    </a>
+                </li>
+                <li>Szpital:
+                    <a href="{% url 'hospital-detail' device.hospital.id %}">
+                        {{ device.hospital }}
+                    </a>
+                </li>
+                <li>Opiekun:
+                    {% if device.caretaker.id %}
+                    <a href="{% url 'caretaker-detail' device.caretaker.id %}">
+                        {{ device.caretaker.firstName }} {{ device.caretaker.lastName }}
+                    </a>
+                    {% else %}
+                        Brak wybranego opiekuna
+                    {% endif %}
+                </li>
+                <li>Zainstalowany: {{ device.installationDate }}</li>
+                <li>Gwarancja do: {{ device.guaranteeDate }}</li>
+                <li>Ostatni przegląd: {{ device.lastMaintenance }}</li>
+                <li>Następny przegląd: {{ device.nextMaintenance }}</li>
+                <li>
+                    <ol>Ostatnie zlecenia:
+                            {% for job in jobs %}
+                                <li><a href="{% url 'job-detail' job.id %}">{{ job.registeredDate }} {{ job.jobType }}</a></li>
+                            {% endfor %}
+                    </ol>
+                </li>
+            </ul>
+        </div>
+        <div class="col-xl">
+             {% if perms.Devices.change_device %}
+                <a href="{% url 'device-update' device.pk %}"><button class="btn btn-outline-success">Edytuj urządzenie</button></a>
             {% endif %}
-        </li>
-        <li>Zainstalowany: {{ device.installationDate }}</li>
-        <li>Gwarancja do: {{ device.guaranteeDate }}</li>
-        <li>Ostatni przegląd: {{ device.lastMaintenance }}</li>
-        <li>Następny przegląd: {{ device.nextMaintenance }}</li>
-        <li>
-            <ol>Ostatnie zlecenia:
-                    {% for job in jobs %}
-                        <li><a href="{% url 'job-detail' job.id %}">{{ job.registeredDate }} {{ job.jobType }}</a></li>
-                    {% endfor %}
-            </ol>
-        </li>
-    </ul>
+        </div>
+    </div>
+
 {% endblock %}

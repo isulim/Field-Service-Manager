@@ -41,6 +41,10 @@ def basicusers(apps, schema_editor):
     change_caretaker = Permission.objects.get(codename='change_caretaker')
     view_caretaker = Permission.objects.get(codename='view_caretaker')
 
+    add_event = Permission.objects.get(codename='add_event')
+    change_event = Permission.objects.get(codename='change_event')
+    view_event = Permission.objects.get(codename='view_event')
+
     view_manufacturer = Permission.objects.get(codename='view_manufacturer')
     view_devicetype = Permission.objects.get(codename='view_devicetype')
     view_jobtype = Permission.objects.get(codename='view_jobtype')
@@ -48,9 +52,10 @@ def basicusers(apps, schema_editor):
     office.permissions.add(view_job, add_job, change_job, view_device, view_caretaker,
                            view_manufacturer, view_hospital, add_hospital, change_hospital,
                            add_report, view_report, change_report, view_devicetype, view_jobtype,
-                           add_device, change_device, add_caretaker, change_caretaker)
+                           add_device, change_device, add_caretaker, change_caretaker,
+                           add_event, change_event, view_event)
     engineers.permissions.add(view_jobtype, view_job, view_devicetype, view_device, view_report,
-                              view_hospital, view_manufacturer, view_caretaker, add_report)
+                              view_hospital, view_manufacturer, view_caretaker, add_report, view_event)
 
     igor = User.objects.create_user(username='igor', email='igor@fsm.pl', password='igor', last_login=datetime.now())
     igor.first_name = 'Igor'
