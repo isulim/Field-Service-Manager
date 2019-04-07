@@ -1,10 +1,12 @@
 {% extends 'ServiceJobs/base.html' %}
 
 {% block content %}
+    <div class="jumbotron">
     <h2>Lista typów urządzeń</h2>
     <ol>
         {% for devicetype in deviceTypes %}
             <li><a href="{% url 'type-detail' devicetype.id %}">{{ devicetype }}</a></li>
         {% endfor %}
     </ol>
+    </div>
 {% endblock %}

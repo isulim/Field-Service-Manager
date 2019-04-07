@@ -1,6 +1,7 @@
 {% extends 'ServiceJobs/base.html' %}
 
 {% block content %}
+    <div class="jumbotron">
     <h2>Opiekun: {{ caretaker.firstName }} {{ caretaker.lastName }}</h2>
     <div class="row">
         <div class="col-xl">
@@ -24,6 +25,7 @@
                 <a href="{% url 'caretaker-update' caretaker.pk %}"><button class="btn btn-outline-success">Edytuj opiekuna</button></a>
             {% endif %}
         </div>
+    </div>
     </div>
 
 {% endblock %}

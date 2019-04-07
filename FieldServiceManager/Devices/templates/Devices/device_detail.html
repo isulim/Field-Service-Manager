@@ -1,6 +1,7 @@
 {% extends 'ServiceJobs/base.html' %}
 
 {% block content %}
+    <div class="jumbotron">
     <h2>Urządzenie: {{ device.manufacturer }} {{ device.modelName }}</h2>
     <div class="row">
         <div class="col-xl">
@@ -45,6 +46,7 @@
                 <a href="{% url 'device-update' device.pk %}"><button class="btn btn-outline-success">Edytuj urządzenie</button></a>
             {% endif %}
         </div>
+    </div>
     </div>
 
 {% endblock %}

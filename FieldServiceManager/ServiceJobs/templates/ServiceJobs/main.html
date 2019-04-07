@@ -6,68 +6,68 @@
     <div class="row">
         <div id='calendar' style="float: left; margin-outside: 10px" class="col-9">
 
-   <script>
+        <script>
 
-       $(document).ready(function() {
+           $(document).ready(function() {
 
-           $('#calendar').fullCalendar({
-                   header: {
-                   left: 'prev,next today',
-                   center: 'title',
-                   right: 'month,agendaWeek,agendaDay,listMonth'
-               },
-               locale: 'pl',
-               //defaultDate: '2017-05-12',
-               buttonIcons: true, // show the prev/next text
-               weekNumbers: true,
-               navLinks: true, // can click day/week names to navigate views
-               editable: true,
-               eventLimit: true,
+               $('#calendar').fullCalendar({
+                       header: {
+                       left: 'prev,next today',
+                       center: 'title',
+                       right: 'month,agendaWeek,agendaDay,listMonth'
+                   },
+                   locale: 'pl',
+                   //defaultDate: '2017-05-12',
+                   buttonIcons: true, // show the prev/next text
+                   weekNumbers: true,
+                   navLinks: true, // can click day/week names to navigate views
+                   editable: true,
+                   eventLimit: true,
 
-               // defaultDate: '2016-07-19',
-               // editable: true,
-               // eventLimit: true, // allow "more" link when too many events
-               events: [
+                   // defaultDate: '2016-07-19',
+                   // editable: true,
+                   // eventLimit: true, // allow "more" link when too many events
+                   events: [
 
-                       {% for event in openEvents %}
-                           {
-                               title: "{{ event.job.jobType }} {{ event.job.device }}",
-                               start: '{{ event.startDateTime|date:"Y-m-d H:i" }}',
-                               end: "{{ event.endDateTime|date:"Y-m-d H:i" }}",
-                               url: '{% url 'event-detail' event.job_id %}',
-                               color: {% if event.engineer_id == 2 %} '#e34e42'
-                                        {% elif event.engineer_id == 3 %} '#f09b2c'
-                                        {% elif event.engineer_id == 4 %} '#2940b8'
-                                        {% elif event.engineer_id == 5 %} '#49914d'
-                                        {% elif event.engineer_id == 6 %} '#b80ca3'
-                                        {% elif event.engineer_id == 7 %} '#cccc00'
-                                        {% endif %}
-                           },
-                       {% endfor %}
-                       {% for event in closedEvents %}
-                           {
-                               title: "{{ event.job.jobType }} {{ event.job.device }}",
-                               start: '{{ event.startDateTime|date:"Y-m-d H:i" }}',
-                               end: "{{ event.endDateTime|date:"Y-m-d H:i" }}",
-                               url: '{% url 'job-detail' event.job_id %}',
-                               color: {% if event.engineer_id == 2 %} '#c0b8b8'
-                                        {% elif event.engineer_id == 3 %} '#c0b8b8'
-                                        {% elif event.engineer_id == 4 %} '#c0b8b8'
-                                        {% elif event.engineer_id == 5 %} '#c0b8b8'
-                                        {% elif event.engineer_id == 6 %} '#b80ca3'
-                                        {% elif event.engineer_id == 7 %} '#b8b200'
-                                        {% endif %}
-                           },
-                       {% endfor %}
+                           {% for event in openEvents %}
+                               {
+                                   title: "{{ event.job.jobType }} {{ event.job.device }}",
+                                   start: '{{ event.startDateTime|date:"Y-m-d H:i" }}',
+                                   end: "{{ event.endDateTime|date:"Y-m-d H:i" }}",
+                                   url: '{% url 'event-detail' event.job_id %}',
+                                   color: {% if event.engineer_id == 2 %} '#e34e42'
+                                            {% elif event.engineer_id == 3 %} '#f09b2c'
+                                            {% elif event.engineer_id == 4 %} '#2940b8'
+                                            {% elif event.engineer_id == 5 %} '#49914d'
+                                            {% elif event.engineer_id == 6 %} '#b80ca3'
+                                            {% elif event.engineer_id == 7 %} '#cccc00'
+                                            {% endif %}
+                               },
+                           {% endfor %}
+                           {% for event in closedEvents %}
+                               {
+                                   title: "{{ event.job.jobType }} {{ event.job.device }}",
+                                   start: '{{ event.startDateTime|date:"Y-m-d H:i" }}',
+                                   end: "{{ event.endDateTime|date:"Y-m-d H:i" }}",
+                                   url: '{% url 'job-detail' event.job_id %}',
+                                   color: {% if event.engineer_id == 2 %} '#c0b8b8'
+                                            {% elif event.engineer_id == 3 %} '#c0b8b8'
+                                            {% elif event.engineer_id == 4 %} '#c0b8b8'
+                                            {% elif event.engineer_id == 5 %} '#c0b8b8'
+                                            {% elif event.engineer_id == 6 %} '#b80ca3'
+                                            {% elif event.engineer_id == 7 %} '#b8b200'
+                                            {% endif %}
+                               },
+                           {% endfor %}
 
 
-               ]
+                   ]
+               });
+
            });
 
-       });
-
-    </script>
-    </div>
+        </script>
+        </div>
     <div id="openjobs" style="float: right" class="col">
 
         <h3>5 najstarszych zleceń</h3>

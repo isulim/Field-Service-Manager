@@ -1,6 +1,7 @@
 {% extends 'ServiceJobs/base.html' %}
 
 {% block content %}
+    <div class="jumbotron">
     <h2>Szpital: {{ hospital.name }}</h2>
     <div class="row">
         <div class="col-xl">
@@ -23,6 +24,7 @@
                 <a href="{% url 'hospital-update' hospital.pk %}"><button class="btn btn-outline-success">Edytuj szpital</button></a>
             {% endif %}
         </div>
+    </div>
     </div>
 
 {% endblock %}

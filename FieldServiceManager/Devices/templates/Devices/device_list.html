@@ -1,6 +1,7 @@
 {% extends 'ServiceJobs/base.html' %}
 
 {% block content %}
+    <div class="jumbotron">
     <h2>Wszystkie urządzenia</h2>
     <div class="row">
         <div class="col-xl">
@@ -58,5 +59,6 @@
                 <a href="{% url 'device-create' %}"><button class="btn btn-outline-success">Dodaj nowe urządzenie</button></a>
             {% endif %}
         </div>
+    </div>
     </div>
 {% endblock %}

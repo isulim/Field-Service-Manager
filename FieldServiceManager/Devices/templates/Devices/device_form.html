@@ -2,7 +2,7 @@
 {% load crispy_forms_tags %}
 {% load bootstrap4 %}
 {% block content %}
-
+    <div class="jumbotron">
     <h3>Formularz urządzenia</h3>
     {{ form.media }}
     <form method="post">
@@ -10,4 +10,5 @@
         {% bootstrap_form form %}
         <input class="btn btn-outline-success" type="submit" value="Zapisz">
     </form>
+    </div>
 {% endblock %}

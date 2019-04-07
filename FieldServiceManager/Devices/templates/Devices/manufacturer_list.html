@@ -1,10 +1,12 @@
 {% extends 'ServiceJobs/base.html' %}
 
 {% block content %}
+    <div class="jumbotron">
     <h2>Lista producentów</h2>
     <ol>
         {% for manufacturer in manufacturers %}
             <li><a href="{% url 'manufacturer-detail' manufacturer.id %}">{{ manufacturer }}</a></li>
         {% endfor %}
     </ol>
+    </div>
 {% endblock %}
