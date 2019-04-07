@@ -41,4 +41,4 @@ class Event(models.Model):
     endDateTime = models.DateTimeField(verbose_name='End')
 
     def __str__(self):
-        return "{}, {}, {}".format(self.startDateTime, self.engineer, self.job)
+        return "{}, {}".format(self.job, self.startDateTime.date())

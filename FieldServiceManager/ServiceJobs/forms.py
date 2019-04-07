@@ -22,15 +22,16 @@ class ReportCreateForm(forms.ModelForm):
         widgets = {
             'startedDate': DatePickerInput(
                 options={
-                    'format': 'YYYY/MM/DD',
+                    'format': 'YYYY-MM-DD',
                     'maxDate': now().strftime("%Y-%m-%d"),
                     'locale': 'pl',
                 }
             ),
             'finishedDate': DatePickerInput(
                 options={
-                    'format': 'YYYY/MM/DD',
-                    'minDate': (now()-timedelta(days=1)).strftime("%Y-%m-%d"),
+                    'format': 'YYYY-MM-DD',
+                    'minDate': (now()-timedelta(days=2)).strftime("%Y-%m-%d"),
+                    'maxDate': (now()).strftime("%Y-%m-%d"),
                     'locale': 'pl',
                 }
             ),

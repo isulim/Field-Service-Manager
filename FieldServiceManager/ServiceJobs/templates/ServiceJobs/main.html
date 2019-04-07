@@ -4,7 +4,7 @@
 
 
     <div class="row">
-       <h1>Kalendarz</h1>
+       <h1>Terminarz</h1>
         <div id='calendar' style="float: left; margin-outside: 10px" class="col-10">
 
    <script>
@@ -47,11 +47,11 @@
                            title: "{{ event.job.jobType }} {{ event.job.device }}",
                            start: '{{ event.startDateTime|date:"Y-m-d H:i" }}',
                            end: "{{ event.endDateTime|date:"Y-m-d H:i" }}",
-                           url: '{% url 'event-detail' event.job_id %}',
-                           color: {% if event.job.jobType_id == 1 %} '#e34e42'
-                                    {% elif event.job.jobType_id == 2 %} '#f09b2c'
-                                    {% elif event.job.jobType_id == 3 %} '#B8A89A'
-                                    {% elif event.job.jobType_id == 4 %} '#49914d'
+                           url: '{% url 'job-detail' event.job_id %}',
+                           color: {% if event.job.jobType_id == 1 %} '#c0b8b8'
+                                    {% elif event.job.jobType_id == 2 %} '#c0b8b8'
+                                    {% elif event.job.jobType_id == 3 %} '#c0b8b8'
+                                    {% elif event.job.jobType_id == 4 %} '#c0b8b8'
                                     {% endif %}
                        },
                    {% endfor %}
