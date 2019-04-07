@@ -8,10 +8,9 @@
 
 <head>
     <link rel="stylesheet" href="{% static 'bootstrap.min.css' %}">
-    <link rel='stylesheet' href="{% static 'fullcalendar.min.css' %}"/>
-    <script src="{% static 'moment-with-locales.min.js' %}"></script>
-    <script src="{% static 'fullcalendar.min.js' %}"></script>
-    <script src="{% static 'pl.js' %}s"></script>
+    <link rel='stylesheet' href="{% static 'fullcalendar.min.css' %}">
+    {% block extrahead %}
+    {% endblock %}
     <meta charset="UTF-8">
     <title>FSE - Field Service Manager</title>
 </head>
