@@ -1,64 +1,153 @@
 {% extends 'ServiceJobs/base.html' %}
 {% load bootstrap4 %}
 {% block content %}
-    <div class="jumbotron">
-    <h2>Wszystkie urządzenia</h2>
+<div class="jumbotron">
+    <h1>Wszystkie urządzenia</h1>
+    <div class="row" style="margin-bottom: 20px">
+        {% if perms.Devices.add_device %}
+            <a href="{% url 'device-create' %}"><button class="btn btn-outline-success btn-lg">Dodaj nowe urządzenie</button></a>
+        {% endif %}
+    </div>
     <div class="row">
         <div class="col-xl">
-        <h3>Shimadzu</h3>
-            <ol>
-                {% for device in shimadzu %}
-                    <li><a href="{% url 'device-detail' device.id %}">{{ device.modelName }}: {{ device.hospital }}</a></li>
-                {% endfor %}
-            </ol>
-        <h3>Hitachi</h3>
-            <ol>
-                {% for device in hitachi %}
-                    <li><a href="{% url 'device-detail' device.id %}">{{ device.modelName }}: {{ device.hospital }}</a></li>
-                {% endfor %}
-            </ol>
-        <h3>Fuji</h3>
-            <ol>
-                {% for device in fuji %}
-                    <li><a href="{% url 'device-detail' device.id %}">{{ device.modelName }}: {{ device.hospital }}</a></li>
-                {% endfor %}
-            </ol>
-        <h3>Canon</h3>
-            <ol>
-                {% for device in canon %}
-                    <li><a href="{% url 'device-detail' device.id %}">{{ device.modelName }}: {{ device.hospital }}</a></li>
-                {% endfor %}
-            </ol>
-        <h3>Carestream</h3>
-            <ol>
-                {% for device in carestream %}
-                    <li><a href="{% url 'device-detail' device.id %}">{{ device.modelName }}: {{ device.hospital }}</a></li>
-                {% endfor %}
-            </ol>
-        <h3>Siemens</h3>
-            <ol>
-                {% for device in siemens %}
-                    <li><a href="{% url 'device-detail' device.id %}">{{ device.modelName }}: {{ device.hospital }}</a></li>
-                {% endfor %}
-            </ol>
-        <h3>GE</h3>
-            <ol>
-                {% for device in ge %}
-                    <li><a href="{% url 'device-detail' device.id %}">{{ device.modelName }}: {{ device.hospital }}</a></li>
-                {% endfor %}
-            </ol>
-        <h3>Philips</h3>
-            <ol>
-                {% for device in philips %}
-                    <li><a href="{% url 'device-detail' device.id %}">{{ device.modelName }}: {{ device.hospital }}</a></li>
-                {% endfor %}
-            </ol>
-        </div>
-        <div class="col-xl">
-            {% if perms.Devices.add_device %}
-                <a href="{% url 'device-create' %}"><button class="btn btn-outline-success">Dodaj nowe urządzenie</button></a>
-            {% endif %}
-        </div>
+            <h3>Shimadzu</h3>
+            <table class="table table-bordered" title="Shimadzu">
+                <tbody>
+                    <tr>
+                        <th>Model</th>
+                        <th>Szpital</th>
+                        <th>Szczegóły</th>
+                    </tr>
+                    {% for device in shimadzu %}
+                        <tr>
+                            <td width="15%">{{ device.modelName }}</td>
+                            <td width="65%"><a href="{% url 'hospital-detail' device.hospital_id %}">{{ device.hospital }}</a></td>
+                            <td width="20%"><a href="{% url 'device-detail' device.id %}"><button class="btn btn-outline-info">Szczegóły urządzenia</button></a></td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+            <h3>Hitachi</h3>
+                <table class="table table-bordered" title="Hitachi">
+                        <tbody>
+                            <tr>
+                                <th>Model</th>
+                                <th>Szpital</th>
+                                <th>Szczegóły</th>
+                            </tr>
+                            {% for device in hitachi %}
+                                <tr>
+                                    <td width="15%">{{ device.modelName }}</td>
+                                    <td width="65%"><a href="{% url 'hospital-detail' device.hospital_id %}">{{ device.hospital }}</a></td>
+                                    <td width="20%"><a href="{% url 'device-detail' device.id %}"><button class="btn btn-outline-info">Szczegóły urządzenia</button></a></td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+            <h3>Fuji</h3>
+                <table class="table table-bordered" title="Fuji">
+                        <tbody>
+                            <tr>
+                                <th>Model</th>
+                                <th>Szpital</th>
+                                <th>Szczegóły</th>
+                            </tr>
+                            {% for device in fuji %}
+                                <tr>
+                                    <td width="15%">{{ device.modelName }}</td>
+                                    <td width="65%"><a href="{% url 'hospital-detail' device.hospital_id %}">{{ device.hospital }}</a></td>
+                                    <td width="20%"><a href="{% url 'device-detail' device.id %}"><button class="btn btn-outline-info">Szczegóły urządzenia</button></a></td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+            <h3>Canon</h3>
+                <table class="table table-bordered" title="Canon">
+                        <tbody>
+                            <tr>
+                                <th>Model</th>
+                                <th>Szpital</th>
+                                <th>Szczegóły</th>
+                            </tr>
+                            {% for device in canon %}
+                                <tr>
+                                    <td width="15%">{{ device.modelName }}</td>
+                                    <td width="65%"><a href="{% url 'hospital-detail' device.hospital_id %}">{{ device.hospital }}</a></td>
+                                    <td width="20%"><a href="{% url 'device-detail' device.id %}"><button class="btn btn-outline-info">Szczegóły urządzenia</button></a></td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+    <h3>Carestream</h3>
+        <table class="table table-bordered" title="Carestream">
+                <tbody>
+                    <tr>
+                        <th>Model</th>
+                        <th>Szpital</th>
+                        <th>Szczegóły</th>
+                    </tr>
+                    {% for device in carestream %}
+                        <tr>
+                            <td width="15%">{{ device.modelName }}</td>
+                            <td width="65%"><a href="{% url 'hospital-detail' device.hospital_id %}">{{ device.hospital }}</a></td>
+                            <td width="20%"><a href="{% url 'device-detail' device.id %}"><button class="btn btn-outline-info">Szczegóły urządzenia</button></a></td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+    <h3>Siemens</h3>
+        <table class="table table-bordered" title="Siemens">
+                <tbody>
+                    <tr>
+                        <th>Model</th>
+                        <th>Szpital</th>
+                        <th>Szczegóły</th>
+                    </tr>
+                    {% for device in siemens %}
+                        <tr>
+                            <td width="15%">{{ device.modelName }}</td>
+                            <td width="65%"><a href="{% url 'hospital-detail' device.hospital_id %}">{{ device.hospital }}</a></td>
+                            <td width="20%"><a href="{% url 'device-detail' device.id %}"><button class="btn btn-outline-info">Szczegóły urządzenia</button></a></td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+    <h3>GE</h3>
+        <table class="table table-bordered" title="GE">
+                <tbody>
+                    <tr>
+                        <th>Model</th>
+                        <th>Szpital</th>
+                        <th>Szczegóły</th>
+                    </tr>
+                    {% for device in ge %}
+                        <tr>
+                            <td width="15%">{{ device.modelName }}</td>
+                            <td width="65%"><a href="{% url 'hospital-detail' device.hospital_id %}">{{ device.hospital }}</a></td>
+                            <td width="20%"><a href="{% url 'device-detail' device.id %}"><button class="btn btn-outline-info">Szczegóły urządzenia</button></a></td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+    <h3>Philips</h3>
+        <table class="table table-bordered" title="Philips">
+                <tbody>
+                    <tr>
+                        <th>Model</th>
+                        <th>Szpital</th>
+                        <th>Szczegóły</th>
+                    </tr>
+                    {% for device in philips %}
+                        <tr>
+                            <td width="15%">{{ device.modelName }}</td>
+                            <td width="65%"><a href="{% url 'hospital-detail' device.hospital_id %}">{{ device.hospital }}</a></td>
+                            <td width="20%"><a href="{% url 'device-detail' device.id %}"><button class="btn btn-outline-info">Szczegóły urządzenia</button></a></td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
     </div>
     </div>
+</div>
 {% endblock %}

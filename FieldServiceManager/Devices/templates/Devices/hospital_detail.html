@@ -2,7 +2,12 @@
 {% load bootstrap4 %}
 {% block content %}
     <div class="jumbotron">
-    <h2>Szpital: {{ hospital.name }}</h2>
+    <h1>Szpital: {{ hospital.name }}</h1>
+    <div class="row" style="margin-bottom: 20px">
+        {% if perms.Devices.change_hospital %}
+            <a href="{% url 'hospital-update' hospital.pk %}"><button class="btn btn-outline-success btn-lg">Edytuj szpital</button></a>
+        {% endif %}
+    </div>
     <div class="row">
         <div class="col-xl">
             <ul>
@@ -11,18 +16,26 @@
                 <li>Adres: {{ hospital.address }}</li>
                 <li>Telefon: {{ hospital.phone }}</li>
                 <li>E-mail: {{ hospital.email }}</li>
-                <ol>
-                    Urządzenia:
-                    {% for device in hospital.device_set.all %}
-                        <li><a href="{% url 'device-detail' device.id %}">{{ device.manufacturer }} {{ device.modelName }} ({{ device.deviceType }})</a></li>
-                    {% endfor %}
-                </ol>
             </ul>
-        </div>
-        <div class="col-xl">
-            {% if perms.Devices.change_hospital %}
-                <a href="{% url 'hospital-update' hospital.pk %}"><button class="btn btn-outline-success">Edytuj szpital</button></a>
-            {% endif %}
+            Urządzenia:
+            <table class="table table-bordered">
+                <tbody>
+                <tr>
+                    <th>Producent</th>
+                    <th>Model</th>
+                    <th>Typ</th>
+                    <th>Szczegóły</th>
+                </tr>
+                {% for device in hospital.device_set.all %}
+                    <tr>
+                        <td><a href="{% url 'manufacturer-detail' device.manufacturer_id %}"><button class="btn btn-outline-info">{{ device.manufacturer }}</button></a></td>
+                        <td>{{ device.modelName }}</td>
+                        <td><a href="{% url 'type-detail' device.deviceType_id %}"><button class="btn btn-outline-info">{{ device.deviceType }}</button></a></td>
+                        <td><a href="{% url 'device-detail' device.id %}"><button class="btn btn-outline-info">Szczegóły urządzenia</button></a></td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+                </table>
         </div>
     </div>
     </div>

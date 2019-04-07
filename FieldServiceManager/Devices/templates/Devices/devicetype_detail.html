@@ -2,11 +2,22 @@
 {% load bootstrap4 %}
 {% block content %}
     <div class="jumbotron">
-    <h2>Urządzenia typu: {{ deviceType }}</h2>
-    <ol>
+    <h1>Urządzenia typu: {{ deviceType }}</h1>
+    <table class="table table-bordered">
+    <tbody>
+        <tr>
+            <th>Producent</th>
+            <th>Model</th>
+            <th>Szpital</th>
+        </tr>
         {% for device in devices %}
-            <li><a href="{% url 'device-detail' device.id %}">{{ device.manufacturer }} {{ device.modelName }} ({{ device.hospital.name }})</a></li>
+            <tr>
+                <td><a href="{% url 'manufacturer-detail' device.manufacturer_id %}"><button class="btn btn-outline-info">{{ device.manufacturer }}</button></a></td>
+                <td>{{ device.modelName }}</td>
+                <td><a href="{% url 'hospital-detail' device.hospital_id%}">{{ device.hospital.name }}</a></td>
+            </tr>
         {% endfor %}
-    </ol>
+    </tbody>
+    </table>
     </div>
 {% endblock %}

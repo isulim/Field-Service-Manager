@@ -2,7 +2,12 @@
 {% load bootstrap4 %}
 {% block content %}
     <div class="jumbotron">
-    <h2>Opiekun: {{ caretaker.firstName }} {{ caretaker.lastName }}</h2>
+    <h1>Opiekun: {{ caretaker.firstName }} {{ caretaker.lastName }}</h1>
+    <div class="row" style="margin-bottom: 20px">
+         {% if perms.Devices.change_caretaker %}
+                <a href="{% url 'caretaker-update' caretaker.pk %}"><button class="btn btn-outline-success btn-lg">Edytuj opiekuna</button></a>
+            {% endif %}
+    </div>
     <div class="row">
         <div class="col-xl">
             <ul>
@@ -19,11 +24,6 @@
                 <li>Obecnie brak.</li>
             {% endif %}
             </ol>
-        </div>
-        <div class="col-xl">
-            {% if perms.Devices.change_caretaker %}
-                <a href="{% url 'caretaker-update' caretaker.pk %}"><button class="btn btn-outline-success">Edytuj opiekuna</button></a>
-            {% endif %}
         </div>
     </div>
     </div>

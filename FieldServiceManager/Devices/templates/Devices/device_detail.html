@@ -2,7 +2,12 @@
 {% load bootstrap4 %}
 {% block content %}
     <div class="jumbotron">
-    <h2>Urządzenie: {{ device.manufacturer }} {{ device.modelName }}</h2>
+    <h1>Urządzenie: {{ device.manufacturer }} {{ device.modelName }}</h1>
+    <div class="row" style="margin-bottom: 20px">
+         {% if perms.Devices.change_device %}
+                <a href="{% url 'device-update' device.pk %}"><button class="btn btn-outline-success btn-lg">Edytuj urządzenie</button></a>
+        {% endif %}
+    </div>
     <div class="row">
         <div class="col-xl">
             <ul>
@@ -22,7 +27,7 @@
                 <li>Opiekun:
                     {% if device.caretaker.id %}
                     <a href="{% url 'caretaker-detail' device.caretaker.id %}">
-                        {{ device.caretaker.firstName }} {{ device.caretaker.lastName }}
+                        {{ device.caretaker.firstName }} {{ device.caretaker.lastName }}Szpital
                     </a>
                     {% else %}
                         Brak wybranego opiekuna
@@ -32,19 +37,32 @@
                 <li>Gwarancja do: {{ device.guaranteeDate }}</li>
                 <li>Ostatni przegląd: {{ device.lastMaintenance }}</li>
                 <li>Następny przegląd: {{ device.nextMaintenance }}</li>
-                <li>
-                    <ol>Ostatnie zlecenia:
-                            {% for job in jobs %}
-                                <li><a href="{% url 'job-detail' job.id %}">{{ job.registeredDate }} {{ job.jobType }}</a></li>
-                            {% endfor %}
-                    </ol>
-                </li>
             </ul>
-        </div>
-        <div class="col-xl">
-             {% if perms.Devices.change_device %}
-                <a href="{% url 'device-update' device.pk %}"><button class="btn btn-outline-success">Edytuj urządzenie</button></a>
-            {% endif %}
+            Ostatnie zlecenia:
+            <table class="table table-bordered">
+                <tbody>
+                    <tr>
+                        <th>Data rejestracji</th>
+                        <th>Rodaj zlecenia</th>
+                        <th>Raport</th>
+                    </tr>
+                    {% if jobs %}
+                    {% for job in jobs %}
+                        <tr>
+                            <td>{{ job.registeredDate }}</td>
+                            <td><a href="{% url 'jobtype-detail' job.jobType_id %}">{{ job.jobType }}</a></td>
+                            <td><a href="{% url 'job-detail' job.id %}"><button class="btn btn-info">Szczegóły</button></a></td>
+                        </tr>
+                    {% endfor %}
+                    {% else %}
+                        <tr>
+                        <td>Brak ostatnich zleceń</td>
+                        <td>Brak ostatnich zleceń</td>
+                        <td>Brak ostatnich zleceń</td>
+                        </tr>
+                    {% endif %}
+                </tbody>
+            </table>
         </div>
     </div>
     </div>

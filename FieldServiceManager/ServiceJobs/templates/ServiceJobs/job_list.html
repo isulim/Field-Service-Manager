@@ -2,34 +2,96 @@
 {% load bootstrap4 %}
 {% block content %}
     <div class="jumbotron">
-    <h2>Lista zleceń</h2>
+    <h1>Lista zleceń</h1>
+    <div class="row" style="margin-bottom: 20px">
+        {% if perms.ServiceJobs.add_job %}
+                <a href="{% url 'job-create' %}"><button class="btn btn-outline-success btn-lg">Zarejestruj nowe zlecenie</button></a>
+        {% endif %}
+    </div>
     <div class="row">
         <div class="col-xl">
             <h3>Otwarte zlecenia</h3>
-            <ol>
+            <table class="table table-bordered">
+            <tbody>
+            <tr>
+                <th>Rodzaj zlecenia</th>
+                <th>Miasto</th>
+                <th>Nazwa szpitala</th>
+                <th>Aparat</th>
+                <th>Wizyta</th>
+            </tr>
                 {% for job in jobs %}
                     {% if not job.isCompleted %}
-                        <li><a href="{% url 'job-detail' job.id %}">{{ job }}</a></li>
+                    <tr>
+                        <td>{{ job.jobType }}</td>
+                        <td>{{ job.device.hospital.city }}</td>
+                        <td><a href="{% url 'hospital-detail' job.device.hospital_id %}">{{ job.device.hospital.name }}</a></td>
+                        <td>
+                            <a href="{% url 'device-detail' job.device_id %}">
+                                <button class="btn  btn-outline-info">
+                                    {{ job.device.manufacturer }} {{ job.device.modelName }}
+                                </button>
+                            </a>
+                        </td>
+                        <td>
+                            {% if not job.event%}
+                                {% if perms.ServiceJobs.add_event %}
+                                <a href="{% url 'event-create-id' job.id %}">
+                                    <button class="btn btn-outline-warning">Umów zlecenie</button>
+                                </a>
+                                {% else %}
+                                    <button class="btn btn-warning">Nieumówione</button>
+                                {% endif %}
+                            {% else %}
+                                <a href="{% url 'event-detail' job.id %}">
+                                    <button class="btn btn-info">Szczegóły</button>
+                                </a>
+
+                            {% endif %}
+
+                        </td>
+                    </tr>
                     {% endif %}
                 {% endfor %}
-            </ol>
-        </div>
-        <div class="col">
-            {% if perms.ServiceJobs.add_job %}
-                <a href="{% url 'job-create' %}"><button class="btn btn-outline-success">Zarejestruj nowe zlecenie</button></a>
-            {% endif %}
+            </tbody>
+            </table>
         </div>
     </div>
     <div class="row">
         <div class="col">
         <h3>Zamknięte zlecenia</h3>
-        <ol>
-            {% for job in jobs %}
-                {% if job.isCompleted %}
-                    <li><a href="{% url 'job-detail' job.id %}">{{ job }}</a></li>
-                {% endif %}
-            {% endfor %}
-        </ol>
+        <table class="table table-bordered">
+            <tbody>
+            <tr>
+                <th>Rodzaj zlecenia</th>
+                <th>Miasto</th>
+                <th>Nazwa szpitala</th>
+                <th>Aparat</th>
+                <th>Raport</th>
+            </tr>
+                {% for job in jobs %}
+                    {% if job.isCompleted %}
+                    <tr>
+                        <td>{{ job.jobType }}</td>
+                        <td>{{ job.device.hospital.city }}</td>
+                        <td><a href="{% url 'hospital-detail' job.device.hospital_id %}">{{ job.device.hospital.name }}</a></td>
+                        <td>
+                            <a href="{% url 'device-detail' job.device_id %}">
+                                <button class="btn  btn-outline-info">
+                                    {{ job.device.manufacturer }} {{ job.device.modelName }}
+                                </button>
+                            </a>
+                        </td>
+                        <td>
+                            <a href="{% url 'report-detail' job.id %}">
+                                <button class="btn btn-success">Zobacz raport</button>
+                            </a>
+                        </td>
+                    </tr>
+                    {% endif %}
+                {% endfor %}
+            </tbody>
+            </table>
         </div>
     </div>
     </div>

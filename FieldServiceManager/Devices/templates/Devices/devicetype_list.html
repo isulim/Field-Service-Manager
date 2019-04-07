@@ -3,10 +3,13 @@
 {% block content %}
     <div class="jumbotron">
     <h2>Lista typów urządzeń</h2>
-    <ol>
+    <div class="col">
         {% for devicetype in deviceTypes %}
-            <li><a href="{% url 'type-detail' devicetype.id %}">{{ devicetype }}</a></li>
+            <div class="row">
+            <a href="{% url 'type-detail' devicetype.id %}"><button class="btn btn-outline-info btn-lg">{{ devicetype }}</button></a>
+            </div>
         {% endfor %}
-    </ol>
+    </div>
+
     </div>
 {% endblock %}

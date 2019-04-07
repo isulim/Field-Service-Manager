@@ -2,24 +2,36 @@
 {% load bootstrap4 %}
 {% block content %}
     <div class="jumbotron">
-    <h2>Lista opiekunów urządzeń</h2>
+    <h1>Lista opiekunów urządzeń</h1>
+    <div class="row" style="margin-bottom: 20px">
+        {% if perms.Devices.add_caretaker %}
+                <a href="{% url 'caretaker-create' %}"><button class="btn btn-outline-success btn-lg">Dodaj nowego opiekuna</button></a>
+        {% endif %}
+    </div>
     <div class="row">
         <div class="col-xl">
-            <ol>
+            <table class="table table-bordered">
+            <tbody>
+            <tr>
+                <th>Imię</th>
+                <th>Nazwisko</th>
+                <th>Szpital</th>
+                <th>Szczegóły</th>
+            </tr>
             {% for caretaker in caretakers %}
-                <li>
-                    <a href="{% url 'caretaker-detail' caretaker.id %}">
-                        {{ caretaker.firstName }} {{ caretaker.lastName }}<br>
-                        {{ caretaker.hospital }}
-                    </a>
-                </li>
+                <tr>
+                    <td>{{ caretaker.firstName }}</td>
+                    <td>{{ caretaker.lastName }}</td>
+                    <td><a href="{% url 'hospital-detail' caretaker.hospital_id %}">{{ caretaker.hospital }}</a></td>
+                    <td>
+                        <a href="{% url 'caretaker-detail' caretaker.id %}">
+                            <button class="btn btn-outline-info">Szczegóły</button>
+                        </a>
+                    </td>
+                </tr>
             {% endfor %}
-            </ol>
-        </div>
-        <div class="col-xl">
-            {% if perms.Devices.add_caretaker %}
-                <a href="{% url 'caretaker-create' %}"><button class="btn btn-outline-success">Dodaj nowego opiekuna</button></a>
-            {% endif %}
+            </tbody>
+            </table>
         </div>
     </div>
     </div>

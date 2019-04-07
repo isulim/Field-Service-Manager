@@ -2,11 +2,15 @@
 {% load bootstrap4 %}
 {% block content %}
     <div class="jumbotron">
-    <h2>Lista producentów</h2>
-    <ol>
+    <h1>Lista producentów</h1>
+    <div class="col">
         {% for manufacturer in manufacturers %}
-            <li><a href="{% url 'manufacturer-detail' manufacturer.id %}">{{ manufacturer }}</a></li>
+            <div class="row">
+                <a href="{% url 'manufacturer-detail' manufacturer.id %}">
+                    <button class="btn btn-outline-info btn-lg">{{ manufacturer }}</button>
+                </a>
+            </div>
         {% endfor %}
-    </ol>
+    </div>
     </div>
 {% endblock %}

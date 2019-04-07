@@ -2,19 +2,32 @@
 {% load bootstrap4 %}
 {% block content %}
     <div class="jumbotron">
-    <h2>Szpitale</h2>
+    <h1>Szpitale</h1>
+    <div class="row" style="margin-bottom: 20px">
+        {% if perms.Devices.add_hospital %}
+                <a href="{% url 'hospital-create' %}"><button class="btn btn-outline-success btn-lg">Dodaj nowy szpital</button></a>
+        {% endif %}
+    </div>
     <div class="row">
         <div class="col-xl">
-            <ol>
+            <table class="table table-bordered">
+                <tbody>
+                <tr>
+                    <th>Miasto</th>
+                    <th>Nazwa</th>
+                    <th>Telefon</th>
+                    <th>Szczegóły</th>
+                </tr>
                 {% for hospital in hospitals %}
-                    <li><a href="{% url 'hospital-detail' hospital.id %}">{{ hospital }}</a></li>
+                <tr>
+                    <td>{{ hospital.city }}</td>
+                    <td>{{ hospital.name }}</td>
+                    <td>{{ hospital.phone }}</td>
+                    <td><a href="{% url 'hospital-detail' hospital.id %}"><button class="btn btn-outline-info">Szczegóły</button></a></td>
+                </tr>
                 {% endfor %}
-            </ol>
-        </div>
-        <div class="col-xl">
-            {% if perms.Devices.add_hospital %}
-                <a href="{% url 'hospital-create' %}"><button class="btn btn-outline-success">Dodaj nowy szpital</button></a>
-            {% endif %}
+                </tbody>
+            </table>
         </div>
     </div>
     </div>
