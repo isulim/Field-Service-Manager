@@ -28,7 +28,7 @@
                // editable: true,
                // eventLimit: true, // allow "more" link when too many events
                events: [
-                   {% if perms.ServiceJobs.view_event %}
+
                        {% for event in openEvents %}
                            {
                                title: "{{ event.job.jobType }} {{ event.job.device }}",
@@ -55,7 +55,7 @@
                                         {% endif %}
                            },
                        {% endfor %}
-                   {% endif %}
+
 
                ]
            });
@@ -65,7 +65,7 @@
     </script>
     </div>
     <div id="openjobs" style="float: right" class="col">
-    {% if perms.ServiceJobs.view_event %}
+
         <h3>5 najstarszych zleceń</h3>
         <div class="row">
             <ol>
@@ -75,7 +75,6 @@
 
             </ol>
         </div>
-    {% endif %}
     </div>
 </div>
 

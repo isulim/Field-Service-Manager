@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.contrib.auth.models import User
 from django.shortcuts import render
 from django.urls import reverse_lazy
@@ -8,39 +9,56 @@ from ServiceJobs.forms import ReportCreateForm, EventCreateForm
 from ServiceJobs.models import Job, JobType, Report, Event
 
 
-class JobListView(ListView):
+class JobListView(LoginRequiredMixin, PermissionRequiredMixin, ListView):
     model = Job
     context_object_name = 'jobs'
+    permission_required = 'ServiceJobs.view_job'
+    permission_denied_message = 'Nie masz uprawnień do wyświetlania tej strony.'
 
 
-class JobDetailView(DetailView):
+class JobDetailView(LoginRequiredMixin, PermissionRequiredMixin, DetailView):
     model = Job
     context_object_name = 'job'
+    permission_required = 'ServiceJobs.view_job'
+    permission_denied_message = 'Nie masz uprawnień do wyświetlania tej strony.'
 
 
-class JobCreateView(CreateView):
+class JobCreateView(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
     model = Job
-    fields = ['device', 'jobType', 'addedBy']
-    # Field 'addedBy' to be replaced by currently logged user
+    fields = ['device', 'jobType']
+    permission_required = 'ServiceJobs.add_job'
+    permission_denied_message = 'Nie masz uprawnień do wyświetlania tej strony.'
+
+    def form_valid(self, form):
+        job = form.save(commit=False)
+        job.addedBy = self.request.user
+        job.save()
+        return super().form_valid(form)
 
     def get_success_url(self):
         return reverse_lazy('job-detail', kwargs={'pk': self.object.id})
 
 
-class ReportListView(ListView):
+class ReportListView(LoginRequiredMixin, PermissionRequiredMixin, ListView):
     model = Report
     context_object_name = 'reports'
+    permission_required = 'ServiceJobs.view_report'
+    permission_denied_message = 'Nie masz uprawnień do wyświetlania tej strony.'
 
 
-class ReportDetailView(DetailView):
+class ReportDetailView(LoginRequiredMixin, PermissionRequiredMixin, DetailView):
     model = Report
     context_object_name = 'report'
+    permission_required = 'ServiceJobs.view_report'
+    permission_denied_message = 'Nie masz uprawnień do wyświetlania tej strony.'
     # Generating PDF of report
 
 
-class ReportCreateView(CreateView):
+class ReportCreateView(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
     model = Report
     form_class = ReportCreateForm
+    permission_required = 'ServiceJobs.add_report'
+    permission_denied_message = 'Nie masz uprawnień do wyświetlania tej strony.'
 
     def get_initial(self):
         initial_data = super(ReportCreateView, self).get_initial()
@@ -58,14 +76,18 @@ class ReportCreateView(CreateView):
         return super().form_valid(form)
 
 
-class JobTypeListView(ListView):
+class JobTypeListView(LoginRequiredMixin, PermissionRequiredMixin, ListView):
     model = JobType
     context_object_name = 'jobtypes'
+    permission_required = 'ServiceJobs.view_jobtype'
+    permission_denied_message = 'Nie masz uprawnień do wyświetlania tej strony.'
 
 
-class JobTypeDetailView(DetailView):
+class JobTypeDetailView(LoginRequiredMixin, PermissionRequiredMixin, DetailView):
     model = JobType
     context_object_name = 'jobtype'
+    permission_required = 'ServiceJobs.view_jobtype'
+    permission_denied_message = 'Nie masz uprawnień do wyświetlania tej strony.'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data()
@@ -73,7 +95,11 @@ class JobTypeDetailView(DetailView):
         return context
 
 
-class CalendarView(View):
+class CalendarView(LoginRequiredMixin, PermissionRequiredMixin, View):
+
+    permission_required = 'ServiceJobs.view_event'
+    permission_denied_message = 'Nie masz uprawnień do wyświetlania tej strony.'
+
     def get(self, request):
         openJobs = Job.objects.filter(isCompleted=False, event__isnull=True).order_by('registeredDate')[:5]
         openEvents = Event.objects.filter(job__isCompleted=False)
@@ -86,19 +112,31 @@ class CalendarView(View):
         return render(request, 'ServiceJobs/main.html', ctx)
 
 
-class EventListView(ListView):
+class PersonalCalendarView(LoginRequiredMixin, PermissionRequiredMixin, View):
+    permission_required = 'ServiceJobs.view_event'
+    permission_denied_message = 'Nie masz uprawnień do wyświetlania tej strony.'
+    pass
+
+
+class EventListView(LoginRequiredMixin, PermissionRequiredMixin, ListView):
     model = Event
     context_object_name = 'events'
+    permission_required = 'ServiceJobs.view_event'
+    permission_denied_message = 'Nie masz uprawnień do wyświetlania tej strony.'
 
 
-class EventDetailView(DetailView):
+class EventDetailView(LoginRequiredMixin, PermissionRequiredMixin, DetailView):
     model = Event
     context_object_name = 'event'
+    permission_required = 'ServiceJobs.view_event'
+    permission_denied_message = 'Nie masz uprawnień do wyświetlania tej strony.'
 
 
-class EventCreateView(CreateView):
+class EventCreateView(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
     model = Event
     form_class = EventCreateForm
+    permission_required = 'ServiceJobs.add_event'
+    permission_denied_message = 'Nie masz uprawnień do wyświetlania tej strony.'
 
     def get_initial(self):
         initial_data = super(EventCreateView, self).get_initial()
