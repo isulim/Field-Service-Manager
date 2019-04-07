@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView
@@ -10,7 +11,6 @@ from ServiceJobs.models import Job, JobType, Report, Event
 class JobListView(ListView):
     model = Job
     context_object_name = 'jobs'
-    # Prioritize non completed jobs
 
 
 class JobDetailView(DetailView):
@@ -41,6 +41,11 @@ class ReportDetailView(DetailView):
 class ReportCreateView(CreateView):
     model = Report
     form_class = ReportCreateForm
+
+    def get_initial(self):
+        initial_data = super(ReportCreateView, self).get_initial()
+        initial_data['job'] = Job.objects.get(pk=self.kwargs['pk'])
+        return initial_data
 
     def get_success_url(self):
         return reverse_lazy('report-detail', kwargs={'pk': self.object.job_id})

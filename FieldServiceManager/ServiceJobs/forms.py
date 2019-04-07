@@ -1,3 +1,5 @@
+from datetime import timedelta
+
 from django import forms
 from ServiceJobs.models import Job, Report, Event
 from django.contrib.auth.models import User
@@ -21,14 +23,14 @@ class ReportCreateForm(forms.ModelForm):
             'startedDate': DatePickerInput(
                 options={
                     'format': 'YYYY/MM/DD',
-                    'maxDate': now().strftime("%Y-%m-%d %H:%M:%S"),
+                    'maxDate': now().strftime("%Y-%m-%d"),
                     'locale': 'pl',
                 }
             ),
             'finishedDate': DatePickerInput(
                 options={
                     'format': 'YYYY/MM/DD',
-                    'minDate': now().strftime("%Y-%m-%d %H:%M:%S"),
+                    'minDate': (now()-timedelta(days=1)).strftime("%Y-%m-%d"),
                     'locale': 'pl',
                 }
             ),
