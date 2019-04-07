@@ -1,8 +1,8 @@
 {% extends 'ServiceJobs/base.html' %}
 
 {% block content %}
-    <h2>All events</h2>
-    <h3>Open events</h3>
+    <h2>Wszystkie prace</h2>
+    <h3>Nieukończone</h3>
     <ol>
         {% for event in events %}
             {% if not event.job.isCompleted %}
@@ -10,7 +10,7 @@
             {% endif %}
         {% endfor %}
     </ol>
-    <h3>Closed events</h3>
+    <h3>Ukończone</h3>
     <ol>
         {% for event in events %}
             {% if event.job.isCompleted %}

@@ -1,16 +1,16 @@
 {% extends 'ServiceJobs/base.html' %}
 
 {% block content %}
-    <h2>Report for {{ report.job }}</h2>
+    <h2>Raport dla {{ report.job }}</h2>
     <ul>
-        <li>Engineer: {{ report.engineer.first_name }} {{ report.engineer.last_name }}</li>
-        <li>Device: <a href="{% url 'device-detail' report.job.device.id %}">{{ report.job.device }}</a></li>
-        <li>Hospital: <a href="{% url 'hospital-detail' report.job.device.hospital.id %}">{{ report.job.device.hospital }}</a></li>
-        <li>Job type: <a href="{% url 'jobtype-detail' report.job.jobType.id %}">{{ report.job.jobType }}</a></li>
-        <li>Registered: {{ report.job.registeredDate }}</li>
-        <li>Started: {{ report.startedDate }}</li>
-        <li>Finished: {{ report.finishedDate }}</li>
-        <li>Total hours: {{ report.workHours }}</li>
-        <li>Description: {{ report.description }}</li>
+        <li>Inżynier: {{ report.engineer.first_name }} {{ report.engineer.last_name }}</li>
+        <li>Urządzenie: <a href="{% url 'device-detail' report.job.device.id %}">{{ report.job.device }}</a></li>
+        <li>Szpital: <a href="{% url 'hospital-detail' report.job.device.hospital.id %}">{{ report.job.device.hospital }}</a></li>
+        <li>Typ zlecenia: <a href="{% url 'jobtype-detail' report.job.jobType.id %}">{{ report.job.jobType }}</a></li>
+        <li>Rejestracja zlecenia: {{ report.job.registeredDate }}</li>
+        <li>Rozpoczęcie: {{ report.startedDate }}</li>
+        <li>Zakończenie: {{ report.finishedDate }}</li>
+        <li>Roboczogodziny: {{ report.workHours }}</li>
+        <li>Opis: {{ report.description }}</li>
     </ul>
 {% endblock %}

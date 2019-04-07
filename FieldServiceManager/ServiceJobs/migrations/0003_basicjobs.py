@@ -5,10 +5,10 @@ def jobtypes(apps, schema_editor):
 
     JobType = apps.get_model('ServiceJobs', 'JobType')
 
-    JobType.objects.create(name='Maintenance')
-    JobType.objects.create(name='Repair')
-    JobType.objects.create(name='Installation')
-    JobType.objects.create(name='Expertise')
+    JobType.objects.create(name='Przegląd')
+    JobType.objects.create(name='Naprawa')
+    JobType.objects.create(name='Instalacja')
+    JobType.objects.create(name='Ekspertyza')
 
 
 def populate(apps, schema_editor):

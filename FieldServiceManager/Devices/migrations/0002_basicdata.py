@@ -15,12 +15,12 @@ def basic_data(apps, schema_editor):
     Manufacturer.objects.create(name='Carestream')
     Manufacturer.objects.create(name='Canon')
 
-    DeviceType.objects.create(name='Radiography X-ray')
-    DeviceType.objects.create(name='Fluoroscopy X-ray')
-    DeviceType.objects.create(name='Mobile X-ray')
-    DeviceType.objects.create(name='Mammography X-ray')
-    DeviceType.objects.create(name='Angiography X-ray')
-    DeviceType.objects.create(name='C-arm X-ray')
+    DeviceType.objects.create(name='RTG radiograficzny')
+    DeviceType.objects.create(name='RTG fluoroskopijny')
+    DeviceType.objects.create(name='RTG mobilny')
+    DeviceType.objects.create(name='Mammograf')
+    DeviceType.objects.create(name='Angiograf')
+    DeviceType.objects.create(name='Ramię-C')
     DeviceType.objects.create(name='CT')
     DeviceType.objects.create(name='MRI')
 

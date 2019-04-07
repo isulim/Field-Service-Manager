@@ -13,10 +13,8 @@ urlpatterns = [
     path('jobtype/<int:pk>/', JobTypeDetailView.as_view(), name='jobtype-detail'),
     path('report/', ReportListView.as_view(), name='report-list'),
     path('report/<int:pk>/', ReportDetailView.as_view(), name='report-detail'),
-    path('report/create/', ReportCreateView.as_view(), name='report-create'),
     path('report/create/<int:pk>', ReportCreateView.as_view(), name='report-create-id'),
     path('event/', EventListView.as_view(), name='event-list'),
     path('event/<int:pk>/', EventDetailView.as_view(), name='event-detail'),
-    path('event/create/', EventCreateView.as_view(), name='event-create'),
     path('event/create/<int:pk>', EventCreateView.as_view(), name='event-create-id'),
 ]

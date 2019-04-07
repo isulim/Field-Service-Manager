@@ -1,8 +1,8 @@
 {% extends 'ServiceJobs/base.html' %}
 
 {% block content %}
-    <h2>All jobs</h2>
-    <h3>Open jobs</h3>
+    <h2>Lista zleceń</h2>
+    <h3>Otwarte zlecenia</h3>
     <ol>
         {% for job in jobs %}
             {% if not job.isCompleted %}
@@ -10,7 +10,7 @@
             {% endif %}
         {% endfor %}
     </ol>
-    <h3>Finished jobs</h3>
+    <h3>Zamknięte zlecenia</h3>
     <ol>
         {% for job in jobs %}
             {% if job.isCompleted %}

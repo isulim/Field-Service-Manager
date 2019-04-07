@@ -1,36 +1,36 @@
 {% extends 'ServiceJobs/base.html' %}
 
 {% block content %}
-    <h2>Device: {{ device }}</h2>
+    <h2>Urządzenie: {{ device.manufacturer }} {{ device.modelName }}</h2>
     <ul>
-        <li>Manufacturer: <a href="{% url 'manufacturer-detail' device.manufacturer.id %}">{{ device.manufacturer }}</a></li>
+        <li>Producent: <a href="{% url 'manufacturer-detail' device.manufacturer.id %}">{{ device.manufacturer }}</a></li>
         <li>Model: {{ device.modelName }}</li>
-        <li>S/N: {{ device.sn }}</li>
-        <li>Type:
+        <li>Numer seryjny: {{ device.sn }}</li>
+        <li>Typ:
             <a href="{% url 'type-detail' device.deviceType.id %}">
                 {{ device.deviceType }}
             </a>
         </li>
-        <li>Hospital:
+        <li>Szpital:
             <a href="{% url 'hospital-detail' device.hospital.id %}">
                 {{ device.hospital }}
             </a>
         </li>
-        <li>Caretaker:
+        <li>Opiekun:
             {% if device.caretaker.id %}
             <a href="{% url 'caretaker-detail' device.caretaker.id %}">
                 {{ device.caretaker.firstName }} {{ device.caretaker.lastName }}
             </a>
             {% else %}
-                No one at the moment
+                Brak wybranego opiekuna
             {% endif %}
         </li>
-        <li>Installed: {{ device.installationDate }}</li>
-        <li>Guarantee: {{ device.guaranteeDate }}</li>
-        <li>Last maintenance: {{ device.lastMaintenance }}</li>
-        <li>Next maintenance: {{ device.nextMaintenance }}</li>
+        <li>Zainstalowany: {{ device.installationDate }}</li>
+        <li>Gwarancja do: {{ device.guaranteeDate }}</li>
+        <li>Ostatni przegląd: {{ device.lastMaintenance }}</li>
+        <li>Następny przegląd: {{ device.nextMaintenance }}</li>
         <li>
-            <ol>Recent jobs:
+            <ol>Ostatnie zlecenia:
                     {% for job in jobs %}
                         <li><a href="{% url 'job-detail' job.id %}">{{ job.registeredDate }} {{ job.jobType }}</a></li>
                     {% endfor %}

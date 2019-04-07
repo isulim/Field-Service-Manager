@@ -1,13 +1,13 @@
 {% extends 'ServiceJobs/base.html' %}
 
 {% block content %}
-    <h2>Caretaker: {{ caretaker.firstName }} {{ caretaker.lastName }}</h2>
+    <h2>Opiekun: {{ caretaker.firstName }} {{ caretaker.lastName }}</h2>
     <ul>
-        <li>Hospital:  <a href="{% url 'hospital-detail' caretaker.hospital.id %}">{{ caretaker.hospital }}</a></li>
-        <li>Phone: {{ caretaker.phone }}</li>
+        <li>Szpital:  <a href="{% url 'hospital-detail' caretaker.hospital.id %}">{{ caretaker.hospital }}</a></li>
+        <li>Telefon: {{ caretaker.phone }}</li>
         <li>Email: {{ caretaker.email }}</li>
     </ul>
-    <ol>Devices under care:
+    <ol>Urządzenia pod opieką:
         {% for device in devices %}
             <li><a href="{% url 'device-detail' device.id %}">{{ device.manufacturer }} {{ device.modelName }}</a></li>
         {% endfor %}

@@ -1,7 +1,7 @@
 {% extends 'ServiceJobs/base.html' %}
 
 {% block content %}
-    <h2>List of device types</h2>
+    <h2>Lista typów urządzeń</h2>
     <ol>
         {% for devicetype in deviceTypes %}
             <li><a href="{% url 'type-detail' devicetype.id %}">{{ devicetype }}</a></li>

@@ -1,7 +1,7 @@
 {% extends 'ServiceJobs/base.html' %}
 
 {% block content %}
-    <h2>List of device manufacturers</h2>
+    <h2>Lista producentów</h2>
     <ol>
         {% for manufacturer in manufacturers %}
             <li><a href="{% url 'manufacturer-detail' manufacturer.id %}">{{ manufacturer }}</a></li>
