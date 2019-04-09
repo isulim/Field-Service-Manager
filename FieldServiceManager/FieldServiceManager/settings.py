@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'wadf()qvs-u%w#9txi9tr+h^v6y1nz$#kad8tf&+b+%02@6@$y'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['127.0.0.1', '185.238.74.102', 'isulim.clevertool.pl']
 
