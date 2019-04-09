@@ -148,8 +148,8 @@ class EventDetailView(LoginRequiredMixin, PermissionRequiredMixin, DetailView):
 class EventCreateView(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
     model = Event
     form_class = EventCreateForm
-    # permission_required = 'ServiceJobs.add_event'
-    # permission_denied_message = 'Nie masz uprawnień do wyświetlania tej strony.'
+    permission_required = 'ServiceJobs.add_event'
+    permission_denied_message = 'Nie masz uprawnień do wyświetlania tej strony.'
     success_url = '/'
 
     def handle_no_permission(self):
