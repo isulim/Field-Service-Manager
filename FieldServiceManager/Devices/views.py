@@ -10,19 +10,21 @@ from ServiceJobs.models import Job
 from Devices.forms import DeviceCreateForm, DeviceUpdateForm
 
 
-class HospitalListView(LoginRequiredMixin, PermissionRequiredMixin, ListView):
+# class HospitalListView(LoginRequiredMixin, PermissionRequiredMixin, ListView):
+class HospitalListView(ListView):
     model = Hospital
     context_object_name = 'hospitals'
-    permission_required = 'Devices.view_hospital'
-    permission_denied_message = 'Nie masz uprawnień do wyświetlenia tej strony.'
+    # permission_required = 'Devices.view_hospital'
+    # permission_denied_message = 'Nie masz uprawnień do wyświetlenia tej strony.'
     queryset = Hospital.objects.all().order_by('city')
 
 
-class HospitalDetailView(LoginRequiredMixin, PermissionRequiredMixin, DetailView):
+# class HospitalDetailView(LoginRequiredMixin, PermissionRequiredMixin, DetailView):
+class HospitalDetailView(DetailView):
     model = Hospital
     context_object_name = 'hospital'
-    permission_required = 'Devices.view_hospital'
-    permission_denied_message = 'Nie masz uprawnień do wyświetlenia tej strony.'
+    # permission_required = 'Devices.view_hospital'
+    # permission_denied_message = 'Nie masz uprawnień do wyświetlenia tej strony.'
 
 
 class HospitalCreateView(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
@@ -46,11 +48,12 @@ class HospitalUpdateView(LoginRequiredMixin, PermissionRequiredMixin, UpdateView
         return reverse_lazy('hospital-detail', kwargs={'pk': self.object.id})
 
 
-class DeviceListView(LoginRequiredMixin, PermissionRequiredMixin, ListView):
+# class DeviceListView(LoginRequiredMixin, PermissionRequiredMixin, ListView):
+class DeviceListView(ListView):
     model = Device
     context_object_name = 'devices'
-    permission_required = 'Devices.view_device'
-    permission_denied_message = 'Nie masz uprawnień do wyświetlenia tej strony.'
+    # permission_required = 'Devices.view_device'
+    # permission_denied_message = 'Nie masz uprawnień do wyświetlenia tej strony.'
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data()
@@ -65,11 +68,12 @@ class DeviceListView(LoginRequiredMixin, PermissionRequiredMixin, ListView):
         return context
 
 
-class DeviceDetailView(LoginRequiredMixin, PermissionRequiredMixin, DetailView):
+# class DeviceDetailView(LoginRequiredMixin, PermissionRequiredMixin, DetailView):
+class DeviceDetailView(DetailView):
     model = Device
     context_object_name = 'device'
-    permission_required = 'Devices.view_device'
-    permission_denied_message = 'Nie masz uprawnień do wyświetlenia tej strony.'
+    # permission_required = 'Devices.view_device'
+    # permission_denied_message = 'Nie masz uprawnień do wyświetlenia tej strony.'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data()
@@ -111,18 +115,20 @@ class DeviceUpdateView(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
         return reverse_lazy('device-detail', kwargs={'pk': self.object.id})
 
 
-class DeviceTypeListView(LoginRequiredMixin, PermissionRequiredMixin, ListView):
+# class DeviceTypeListView(LoginRequiredMixin, PermissionRequiredMixin, ListView):
+class DeviceTypeListView(ListView):
     model = DeviceType
     context_object_name = 'deviceTypes'
-    permission_required = 'Devices.view_devicetype'
-    permission_denied_message = 'Nie masz uprawnień do wyświetlenia tej strony.'
+    # permission_required = 'Devices.view_devicetype'
+    # permission_denied_message = 'Nie masz uprawnień do wyświetlenia tej strony.'
 
 
-class DeviceTypeDetailView(LoginRequiredMixin, PermissionRequiredMixin, DetailView):
+# class DeviceTypeDetailView(LoginRequiredMixin, PermissionRequiredMixin, DetailView):
+class DeviceTypeDetailView(DetailView):
     model = DeviceType
     context_object_name = 'deviceType'
-    permission_required = 'Devices.view_devicetype'
-    permission_denied_message = 'Nie masz uprawnień do wyświetlenia tej strony.'
+    # permission_required = 'Devices.view_devicetype'
+    # permission_denied_message = 'Nie masz uprawnień do wyświetlenia tej strony.'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data()
@@ -130,18 +136,20 @@ class DeviceTypeDetailView(LoginRequiredMixin, PermissionRequiredMixin, DetailVi
         return context
 
 
-class ManufacturerListView(LoginRequiredMixin, PermissionRequiredMixin, ListView):
+# class ManufacturerListView(LoginRequiredMixin, PermissionRequiredMixin, ListView):
+class ManufacturerListView(ListView):
     model = Manufacturer
     context_object_name = 'manufacturers'
-    permission_required = 'Devices.view_manufacturer'
-    permission_denied_message = 'Nie masz uprawnień do wyświetlenia tej strony.'
+    # permission_required = 'Devices.view_manufacturer'
+    # permission_denied_message = 'Nie masz uprawnień do wyświetlenia tej strony.'
 
 
-class ManufacturerDetailView(LoginRequiredMixin, PermissionRequiredMixin, DetailView):
+# class ManufacturerDetailView(LoginRequiredMixin, PermissionRequiredMixin, DetailView):
+class ManufacturerDetailView(DetailView):
     model = Manufacturer
     context_object_name = 'manufacturer'
-    permission_required = 'Devices.view_manufacturer'
-    permission_denied_message = 'Nie masz uprawnień do wyświetlenia tej strony.'
+    # permission_required = 'Devices.view_manufacturer'
+    # permission_denied_message = 'Nie masz uprawnień do wyświetlenia tej strony.'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data()
@@ -149,18 +157,20 @@ class ManufacturerDetailView(LoginRequiredMixin, PermissionRequiredMixin, Detail
         return context
 
 
-class CaretakerListView(LoginRequiredMixin, PermissionRequiredMixin, ListView):
+# class CaretakerListView(LoginRequiredMixin, PermissionRequiredMixin, ListView):
+class CaretakerListView(ListView):
     model = Caretaker
     context_object_name = 'caretakers'
-    permission_required = 'Devices.view_caretaker'
-    permission_denied_message = 'Nie masz uprawnień do wyświetlenia tej strony.'
+    # permission_required = 'Devices.view_caretaker'
+    # permission_denied_message = 'Nie masz uprawnień do wyświetlenia tej strony.'
 
 
-class CaretakerDetailView(LoginRequiredMixin, PermissionRequiredMixin, DetailView):
+# class CaretakerDetailView(LoginRequiredMixin, PermissionRequiredMixin, DetailView):
+class CaretakerDetailView(DetailView):
     model = Caretaker
     context_object_name = 'caretaker'
-    permission_required = 'Devices.view_caretaker'
-    permission_denied_message = 'Nie masz uprawnień do wyświetlenia tej strony.'
+    # permission_required = 'Devices.view_caretaker'
+    # permission_denied_message = 'Nie masz uprawnień do wyświetlenia tej strony.'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data()
