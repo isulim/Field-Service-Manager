@@ -15,8 +15,8 @@ class UserModelChoiceField(forms.ModelChoiceField):
 
 
 class ReportCreateForm(forms.ModelForm):
-    job = forms.ModelChoiceField(queryset=Job.objects.filter(isCompleted=False))
-    engineer = UserModelChoiceField(queryset=User.objects.filter(groups__name='Engineers'))
+    job = forms.ModelChoiceField(queryset=Job.objects.filter(isCompleted=False), label='Zlecenie')
+    engineer = UserModelChoiceField(queryset=User.objects.filter(groups__name='Engineers'), label='Inżynier')
 
     class Meta:
         model = Report

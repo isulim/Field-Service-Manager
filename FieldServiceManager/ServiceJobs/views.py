@@ -44,6 +44,30 @@ class JobCreateView(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
         return reverse_lazy('job-detail', kwargs={'pk': self.object.id})
 
 
+class JobIdCreateView(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
+    model = Job
+    form_class = JobCreateForm
+    permission_required = 'ServiceJobs.add_job'
+    permission_denied_message = 'Nie masz uprawnień do wyświetlania tej strony.'
+
+    def get_initial(self):
+        initial_data = super(JobIdCreateView, self).get_initial()
+        initial_data['device'] = Device.objects.get(pk=self.kwargs['pk'])
+        return initial_data
+
+    def handle_no_permission(self):
+        return render(self.request, 'ServiceJobs/403.html')
+
+    def form_valid(self, form):
+        job = form.save(commit=False)
+        job.addedBy = self.request.user
+        job.save()
+        return super().form_valid(form)
+
+    def get_success_url(self):
+        return reverse_lazy('job-detail', kwargs={'pk': self.object.id})
+
+
 # class ReportListView(LoginRequiredMixin, PermissionRequiredMixin, ListView):
 class ReportListView(ListView):
     model = Report

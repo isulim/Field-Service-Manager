@@ -4,27 +4,59 @@
     <div class="jumbotron">
     <h1>Urządzenie: {{ device.manufacturer }} {{ device.modelName }}</h1>
     <div class="row" style="margin-bottom: 20px">
+            <div class="col">
+                <a href="{% url 'device-list' %}"><button class="btn btn-outline-primary btn-lg">Powrót do urządzeń</button></a>
+            </div>
          {% if perms.Devices.change_device %}
+             <div class="col">
                 <a href="{% url 'device-update' device.pk %}"><button class="btn btn-outline-success btn-lg">Edytuj urządzenie</button></a>
+             </div>
+        {% endif %}
+        {% if perms.Job.add_job %}
+             <div class="col">
+                <a href="{% url 'job-create-id' device.pk %}"><button class="btn btn-outline-info btn-lg">Zarejestruj zlecenie dla urządzenia</button></a>
+             </div>
         {% endif %}
     </div>
     <div class="row">
         <div class="col-xl">
-            <ul>
-                <li>Producent: <a href="{% url 'manufacturer-detail' device.manufacturer.id %}">{{ device.manufacturer }}</a></li>
-                <li>Model: {{ device.modelName }}</li>
-                <li>Numer seryjny: {{ device.sn }}</li>
-                <li>Typ:
-                    <a href="{% url 'type-detail' device.deviceType.id %}">
-                        {{ device.deviceType }}
+            <table class="table-bordered table">
+            <tr>
+                <th>Producent</th>
+                <td>
+                    <a href="{% url 'manufacturer-detail' device.manufacturer.id %}">
+                        <button class="btn btn-outline-info">{{ device.manufacturer }}
+                        </button>
                     </a>
-                </li>
-                <li>Szpital:
+                </td>
+            </tr>
+            <tr>
+                <th>Model</th>
+                <td>{{ device.modelName }}</td>
+            </tr>
+            <tr>
+                <th>Numer seryjny</th>
+                <td>{{ device.sn }}</td>
+            </tr>
+            <tr>
+                <th>Typ</th>
+                <td>
+                    <a href="{% url 'type-detail' device.deviceType.id %}">
+                        <button class="btn btn-outline-info">{{ device.deviceType }}</button>
+                    </a>
+                </td>
+            </tr>
+            <tr>
+                <th>Szpital</th>
+                <td>
                     <a href="{% url 'hospital-detail' device.hospital.id %}">
                         {{ device.hospital }}
                     </a>
-                </li>
-                <li>Opiekun:
+                </td>
+            </tr>
+            <tr>
+                <th>Opiekun</th>
+                <td>
                     {% if device.caretaker.id %}
                     <a href="{% url 'caretaker-detail' device.caretaker.id %}">
                         {{ device.caretaker.firstName }} {{ device.caretaker.lastName }}
@@ -32,19 +64,32 @@
                     {% else %}
                         Brak wybranego opiekuna
                     {% endif %}
-                </li>
-                <li>Zainstalowany: {{ device.installationDate }}</li>
-                <li>Gwarancja do: {{ device.guaranteeDate }}</li>
-                <li>Ostatni przegląd: {{ device.lastMaintenance }}</li>
-                <li>Następny przegląd: {{ device.nextMaintenance }}</li>
-            </ul>
-            Ostatnie zlecenia:
+                </td>
+            </tr>
+            <tr>
+                <th>Data instalacji</th>
+                <td>{{ device.installationDate }}</td>
+            </tr>
+            <tr>
+                <th>Data gwarancji</th>
+                <td>{{ device.guaranteeDate }}</td>
+            </tr>
+            <tr>
+                <th>Ostatni przegląd</th>
+                <td>{{ device.lastMaintenance }}</td>
+            </tr>
+            <tr>
+                <th>Następny przegląd</th>
+                <td>{{ device.nextMaintenance }}</td>
+            </tr>
+            </table>
+            <h3>Ostatnie zlecenia:</h3>
             <table class="table table-bordered">
                 <tbody>
                     <tr>
                         <th>Data rejestracji</th>
                         <th>Rodaj zlecenia</th>
-                        <th>Raport</th>
+                        <th>Szczegóły zlecenia</th>
                     </tr>
                     {% if jobs %}
                     {% for job in jobs %}

@@ -2,11 +2,20 @@
 {% load bootstrap4 %}
 {% block content %}
     <div class="jumbotron">
-    <h2>Zlecenia typu: {{ jobtype }}</h2>
-    <ol>
+    <h1>Zlecenia typu {{ jobtype }}</h1>
+    <div class="row">
+        <a href="{% url 'jobtype-list' %}">
+            <button class="btn btn-outline-primary btn-lg">Powrót do typów</button>
+        </a>
+    </div>
+    <div class="row" style="margin-top: 20px">
+    <table>
         {% for job in jobs %}
-            <li><a href="{% url 'job-detail' job.id %}">{{ job }}</a></li>
+            <tr><td><a href="{% url 'job-detail' job.id %}"><button class="btn btn-outline-info">
+                {{ job.device.hospital }} {{ job.device.manufacturer }} {{ job.device.modelName }}
+            </button></a></td></tr>
         {% endfor %}
-    </ol>
+    </table>
+    </div>
     </div>
 {% endblock %}

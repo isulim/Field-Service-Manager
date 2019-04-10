@@ -2,17 +2,42 @@
 {% load bootstrap4 %}
 {% block content %}
     <div class="jumbotron">
-    <h2>Raport dla {{ report.job }}</h2>
-    <ul>
-        <li>Inżynier: {{ report.engineer.first_name }} {{ report.engineer.last_name }}</li>
-        <li>Urządzenie: <a href="{% url 'device-detail' report.job.device.id %}">{{ report.job.device }}</a></li>
-        <li>Szpital: <a href="{% url 'hospital-detail' report.job.device.hospital.id %}">{{ report.job.device.hospital }}</a></li>
-        <li>Typ zlecenia: <a href="{% url 'jobtype-detail' report.job.jobType.id %}">{{ report.job.jobType }}</a></li>
-        <li>Rejestracja zlecenia: {{ report.job.registeredDate }}</li>
-        <li>Rozpoczęcie: {{ report.startedDate }}</li>
-        <li>Zakończenie: {{ report.finishedDate }}</li>
-        <li>Roboczogodziny: {{ report.workHours }}</li>
-        <li>Opis: {{ report.description }}</li>
-    </ul>
+    <h1>Raport nr {{ report.pk }}</h1>
+        <div class="row">
+            <a href="{% url 'report-list' %}">
+            <button class="btn btn-outline-primary btn-lg">Powrót do raportów</button>
+        </a>
+        </div>
+       <div class="row">
+        <table class="table table-bordered">
+            <tr>
+                <th>Inżynier</th><td>{{ report.engineer.first_name }} {{ report.engineer.last_name }}</td>
+            </tr>
+            <tr>
+                <th>Urządzenie</th><td><a href="{% url 'device-detail' report.job.device.id %}">{{ report.job.device.manufacturer }} {{ report.job.device.modelName }}</a></td>
+            </tr>
+            <tr>
+                <th>Szpital</th><td><a href="{% url 'hospital-detail' report.job.device.hospital.id %}">{{ report.job.device.hospital }}</a></td>
+            </tr>
+            <tr>
+                <th>Typ zlecenia</th><td><a href="{% url 'jobtype-detail' report.job.jobType.id %}">{{ report.job.jobType }}</a></td>
+            </tr>
+            <tr>
+                <th>Rejestracja zlecenia</th><td>{{ report.job.registeredDate }}</td>
+            </tr>
+            <tr>
+                <th>Rozpoczęcie wizyty</th><td>{{ report.startedDate }}</td>
+            </tr>
+            <tr>
+                <th>Zakończenie wizyty</th><td>{{ report.finishedDate }}</td>
+            </tr>
+            <tr>
+                <th>Roboczogodziny</th><td>{{ report.workHours }}</td>
+            </tr>
+            <tr>
+                <th>Opis</th><td>{{ report.description }}</td>
+            </tr>
+        </table>
+        </div>
     </div>
 {% endblock %}

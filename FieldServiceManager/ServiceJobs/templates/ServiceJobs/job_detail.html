@@ -3,22 +3,52 @@
 {% load my_filters %}
 {% block content %}
     <div class="jumbotron">
-    <h2>Zlecenie na {{ job.device }}</h2>
-    <ul>
-        <li>Urządzenie: <a href="{% url 'device-detail' job.device.id %}">{{ job.device }}</a></li>
-        <li>Szpital: <a href="{% url 'hospital-detail' job.device.hospital.id %}">{{ job.device.hospital }}</a></li>
-        <li>Rodzaj zlecenia: <a href="{% url 'jobtype-detail' job.jobType.id %}">{{ job.jobType }}</a></li>
-        <li>Rejestracja zlecenia: {{ job.registeredDate }}</li>
-        <li>Dodane przez: {{ job.addedBy }}</li>
-        <li>Ukończone: {{ job.isCompleted|taknie }}</li>
-        {% if job.isCompleted %}
-            <li>Data ukończenia: {{ job.report.finishedDate }}</li>
-            <li>Inżynier: {{ job.report.engineer }}</li>
-            <a href="{% url 'report-detail' job.id %}"><button class="btn btn-outline-info">Wyświetl raport</button></a>
+        <h1>Szczegóły zlecenia nr {{ job.pk }}</h1>
+        <div class="row">
+            <a href="{% url 'job-list' %}">
+                <button class="btn btn-outline-primary btn-lg">Powrót do zleceń</button>
+            </a>
+        </div>
+        <div class="row">
+        <table class="table table-bordered">
+            <tr>
+                <th>Urządzenie</th><td><a href="{% url 'device-detail' job.device.id %}"><button class="btn btn-outline-info">{{ job.device.manufacturer }} {{ job.device.modelName }}</button></a></td>
+            </tr>
+            <tr>
+                <th>Szpital</th><td><a href="{% url 'hospital-detail' job.device.hospital.id %}">{{ job.device.hospital }}</a></td>
+            </tr>
+            <tr>
+                <th>Rodzaj zlecenia</th><td><a href="{% url 'jobtype-detail' job.jobType.id %}">{{ job.jobType }}</a></td>
+            </tr>
+            <tr>
+                <th>Data rejestracji</th><td>{{ job.registeredDate }}</td>
+            </tr>
+            <tr>
+                <th>Dodane przez</th><td>{{ job.addedBy.first_name }} {{ job.addedBy.last_name }}</td>
+            </tr>
+            <tr>
+                <th>Ukończone</th><td>{{ job.isCompleted|taknie }}</td>
+            </tr>
+            {% if job.isCompleted %}
+            <tr>
+                <th>Data ukończenia</th><td>{{ job.report.finishedDate }}</td>
+            </tr>
+            <tr>
+                <th>Inżynier</th><td>{{ job.report.engineer.first_name }} {{ job.report.engineer.last_name }}</td>
+            </tr>
+            <tr>
+                <th>Raport</th><td><a href="{% url 'report-detail' job.id %}"><button class="btn btn-outline-info">Wyświetl raport</button></a></td>
+            </tr>
+            {% endif %}
+
+        </table>
+        {% if not job.isCompleted %}
+            {% if not job.event %}
+            <p><a href="{% url 'event-create-id' job.id %}"><button class="btn btn-outline-danger btn-lg">Umów wizytę</button></a></p>
+            {% else %}
+            <p><a href="{% url 'event-detail' job.id %}"><button class="btn btn-outline-info btn-lg">Szczegóły wizyty</button></a></p>
+            {% endif %}
         {% endif %}
-    </ul>
-    {% if not job.isCompleted %}
-        <p><a href="{% url 'event-create-id' job.id %}"><button class="btn btn-outline-info">Zaplanuj</button></a></p>
-    {% endif %}
+        </div>
     </div>
 {% endblock %}

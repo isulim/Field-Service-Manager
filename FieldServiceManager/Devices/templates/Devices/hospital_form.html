@@ -2,11 +2,16 @@
 {% load bootstrap4 %}
 {% block content %}
     <div class="jumbotron">
-    <h2>Fomularz szpitala</h2>
-    <form method="post">
-        {% csrf_token %}
-        {% bootstrap_form form %}
-        <input class="btn btn-outline-success" type="submit" value="Zapisz">
-    </form>
+    <h1 style="margin-bottom: 20px">Fomularz szpitala</h1>
+    <div class="row">
+        <a href="{% url 'hospital-list' %}"><button class="btn btn-outline-primary btn-lg">Powrót do szpitali</button></a>
+    </div>
+    <div class="row" style="margin-top: 20px">
+        <form method="post">
+            {% csrf_token %}
+            {% bootstrap_form form %}
+            <input class="btn btn-outline-success btn-lg" type="submit" value="Zapisz">
+        </form>
+    </div>
     </div>
 {% endblock %}

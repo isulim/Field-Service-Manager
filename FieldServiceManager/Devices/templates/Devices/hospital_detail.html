@@ -4,20 +4,35 @@
     <div class="jumbotron">
     <h1>Szpital: {{ hospital.name }}</h1>
     <div class="row" style="margin-bottom: 20px">
+        <div class="col">
+            <a href="{% url 'hospital-list' %}"><button class="btn btn-outline-primary btn-lg">Powrót do szpitali</button></a>
+        </div>
         {% if perms.Devices.change_hospital %}
-            <a href="{% url 'hospital-update' hospital.pk %}"><button class="btn btn-outline-success btn-lg">Edytuj szpital</button></a>
+            <div class="col">
+                <a href="{% url 'hospital-update' hospital.pk %}"><button class="btn btn-outline-success btn-lg">Edytuj szpital</button></a>
+            </div>
         {% endif %}
     </div>
     <div class="row">
         <div class="col-xl">
-            <ul>
-                <li>Nazwa: {{ hospital.name }}</li>
-                <li>Miasto: {{ hospital.city }}</li>
-                <li>Adres: {{ hospital.address }}</li>
-                <li>Telefon: {{ hospital.phone }}</li>
-                <li>E-mail: {{ hospital.email }}</li>
-            </ul>
-            Urządzenia:
+            <table class="table table-bordered">
+                <tr>
+                    <th>Nazwa</th><td>{{ hospital.name }}</td>
+                </tr>
+                <tr>
+                    <th>Miasto</th><td>{{ hospital.city }}</td>
+                </tr>
+                <tr>
+                    <th>Adres</th><td>{{ hospital.address }}</td>
+                </tr>
+                <tr>
+                    <th>Telefon</th><td>{{ hospital.phone }}</td>
+                </tr>
+                <tr>
+                    <th>Email</th><td>{{ hospital.email }}</td>
+                </tr>
+            </table>
+            <h3>Urządzenia w szpitalu:</h3>
             <table class="table table-bordered">
                 <tbody>
                 <tr>

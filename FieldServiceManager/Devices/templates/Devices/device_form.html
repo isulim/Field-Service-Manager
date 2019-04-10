@@ -2,12 +2,19 @@
 {% load bootstrap4 %}
 {% block content %}
     <div class="jumbotron">
-    <h3>Formularz urządzenia</h3>
-    {{ form.media }}
-    <form method="post">
-        {% csrf_token %}
-        {% bootstrap_form form %}
-        <input class="btn btn-outline-success" type="submit" value="Zapisz">
-    </form>
+    <h1 style="margin-bottom: 20px">Formularz urządzenia</h1>
+     <div class="row">
+                <a href="{% url 'device-list' %}"><button class="btn btn-outline-primary btn-lg">Powrót do urządzeń</button></a>
+    </div>
+    <div class="row" style="margin-top: 20px">
+
+        {{ form.media }}
+        <form method="post">
+            {% csrf_token %}
+            {% bootstrap_form form %}
+            <input class="btn btn-outline-success" type="submit" value="Zapisz">
+        </form>
+
+    </div>
     </div>
 {% endblock %}

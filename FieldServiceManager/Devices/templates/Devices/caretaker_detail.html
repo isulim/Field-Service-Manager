@@ -3,29 +3,58 @@
 {% block content %}
     <div class="jumbotron">
     <h1>Opiekun: {{ caretaker.firstName }} {{ caretaker.lastName }}</h1>
-    <div class="row" style="margin-bottom: 20px">
-         {% if perms.Devices.change_caretaker %}
-                <a href="{% url 'caretaker-update' caretaker.pk %}"><button class="btn btn-outline-success btn-lg">Edytuj opiekuna</button></a>
-            {% endif %}
-    </div>
-    <div class="row">
-        <div class="col-xl">
-            <ul>
-                <li>Szpital:  <a href="{% url 'hospital-detail' caretaker.hospital.id %}">{{ caretaker.hospital }}</a></li>
-                <li>Telefon: {{ caretaker.phone }}</li>
-                <li>Email: {{ caretaker.email }}</li>
-            </ul>
-            <ol>Urządzenia pod opieką:
-            {% if devices %}
-                {% for device in devices %}
-                    <li><a href="{% url 'device-detail' device.id %}">{{ device.manufacturer }} {{ device.modelName }}</a></li>
-                {% endfor %}
-            {% else %}
-                <li>Obecnie brak.</li>
-            {% endif %}
-            </ol>
+        <div class="row" style="margin-bottom: 20px">
+        <div class="col">
+            <a href="{% url 'caretaker-list' %}">
+                <button class="btn btn-outline-primary btn-lg">Powrót do opiekunów</button>
+            </a>
         </div>
-    </div>
+        <div class="col">
+             {% if perms.Devices.change_caretaker %}
+                    <a href="{% url 'caretaker-update' caretaker.pk %}"><button class="btn btn-outline-success btn-lg">Edytuj opiekuna</button></a>
+                {% endif %}
+        </div>
+        </div>
+        <div class="row">
+            <div class="col-xl">
+                <table class="table table-bordered">
+                    <tr>
+                        <th>Szpital</th>
+                        <td><a href="{% url 'hospital-detail' caretaker.hospital.id %}">{{ caretaker.hospital }}</a></td>
+                    </tr>
+                    <tr>
+                        <th>Telefon</th><td>{{ caretaker.phone }}</td>
+                    </tr>
+                    <tr>
+                        <th>Email</th> <td>{{ caretaker.email }}</td>
+                    </tr>
+                </table>
+                <h3>Urządzenia pod opieką:</h3>
+                <table class="table table-bordered">
+                <tr>
+                    <th>Producent</th>
+                    <th>Model</th>
+                    <th>Szczegóły</th>
+                </tr>
+
+                {% if devices %}
+                    {% for device in devices %}
+                        <tr>
+                            <td>{{ device.manufacturer }}</td>
+                            <td>{{ device.modelName }}</td>
+                            <td><a href="{% url 'device-detail' device.id %}"><button class="btn btn-outline-info">Szczegóły</button></a></td>
+                        <tr>
+                    {% endfor %}
+                {% else %}
+                    <tr>
+                    <td>Brak urządzeń pod opieką.</td>
+                    <td>Brak urządzeń pod opieką.</td>
+                    <td>Brak urządzeń pod opieką.</td>
+                    </tr>
+                {% endif %}
+                </table>
+            </div>
+        </div>
     </div>
 
 {% endblock %}

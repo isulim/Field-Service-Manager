@@ -5,12 +5,19 @@
 
 {{ form.media }}
     <div class="jumbotron">
-    <h3>Formularz raportu</h3>
-    <form method="post">
-        {% csrf_token %}
-        {% bootstrap_form form %}
-        <input type="submit" class="btn btn-outline-success" value="Dodaj">
-    </form>
+    <h1>Formularz raportu</h1>
+    <div class="row">
+        <a href="{% url 'job-list' %}">
+            <button class="btn btn-outline-primary btn-lg">Powrót do zleceń</button>
+        </a>
+    </div>
+    <div class="row">
+        <form method="post">
+            {% csrf_token %}
+            {% bootstrap_form form %}
+            <input type="submit" class="btn btn-outline-success" value="Dodaj">
+        </form>
+    </div>
     </div>
 
 {% endblock %}
