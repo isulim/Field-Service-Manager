@@ -3,10 +3,36 @@
 {% block content %}
     <div class="jumbotron">
     <h2>Lista raportów</h2>
-    <ol>
-        {% for report in reports %}
-            <li><a href="{% url 'report-detail' report.job_id %}">{{ report }}</a></li>
-        {% endfor %}
-    </ol>
+        <div class="row">
+            <div class="col-xl">
+            <table class="table table-bordered">
+                <tbody>
+                <tr>
+                    <th>Data raportu</th>
+                    <th>Szpital</th>
+                    <th>Typ zlecenia</th>
+                    <th>Aparat</th>
+                    <th>Inżynier</th>
+                    <th>Szczegóły</th>
+                </tr>
+                {% for report in reports %}
+                <tr>
+                    <td>{{ report.finishedDate }}</td>
+                    <td><a href="{% url 'hospital-detail' report.job.device.hospital_id %}">
+                        {{ report.job.device.hospital.city }}: {{ report.job.device.hospital.name }}</a>
+                    </td>
+                    <td><a href="{% url 'jobtype-detail' report.job.jobType_id %}">{{ report.job.jobType }}</a></td>
+                    <td><a href="{% url 'device-detail' report.job.device_id %}">
+                        <button class="btn btn-outline-info">
+                        {{ report.job.device.manufacturer }} {{ report.job.device.modelName }}</button></a>
+                    </td>
+                    <td>{{ report.engineer.first_name }} {{ report.engineer.last_name }}</td>
+                    <td><a href="{% url 'report-detail' report.job_id %}"><button class="btn btn-outline-info">Szczegóły</button></a></td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+            </div>
+        </div>
     </div>
 {% endblock %}

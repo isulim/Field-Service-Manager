@@ -27,7 +27,7 @@
                 <li>Opiekun:
                     {% if device.caretaker.id %}
                     <a href="{% url 'caretaker-detail' device.caretaker.id %}">
-                        {{ device.caretaker.firstName }} {{ device.caretaker.lastName }}Szpital
+                        {{ device.caretaker.firstName }} {{ device.caretaker.lastName }}
                     </a>
                     {% else %}
                         Brak wybranego opiekuna

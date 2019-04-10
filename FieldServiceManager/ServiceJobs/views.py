@@ -48,6 +48,7 @@ class JobCreateView(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
 class ReportListView(ListView):
     model = Report
     context_object_name = 'reports'
+    queryset = Report.objects.all().order_by('finishedDate')
     # permission_required = 'ServiceJobs.view_report'
     # permission_denied_message = 'Nie masz uprawnień do wyświetlania tej strony.'
 
