@@ -1,3 +1,5 @@
+from datetime import timedelta
+
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.shortcuts import render
 from django.urls import reverse_lazy
@@ -106,8 +108,15 @@ class ReportCreateView(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
     def form_valid(self, form):
         self.object = form.save(commit=False)
         job = Job.objects.get(pk=self.object.job.id)
+        device = Device.objects.get(pk=self.object.job.device.id)
         job.isCompleted = True
+        if job.jobType_id == 1:
+            print('**********************\nPRZEGLĄD\n*************************')
+            device.lastMaintenance = self.object.finishedDate
+            print(self.object.finishedDate)
+            device.nextMaintenance = self.object.finishedDate + timedelta(days=182)
         job.save()
+        device.save()
         return super().form_valid(form)
 
 
