@@ -163,11 +163,12 @@ class EventListView(ListView):
     # permission_denied_message = 'Nie masz uprawnień do wyświetlania tej strony.'
 
 
-class EventDetailView(LoginRequiredMixin, PermissionRequiredMixin, DetailView):
+# class EventDetailView(LoginRequiredMixin, PermissionRequiredMixin, DetailView):
+class EventDetailView(DetailView):
     model = Event
     context_object_name = 'event'
-    permission_required = 'ServiceJobs.view_event'
-    permission_denied_message = 'Nie masz uprawnień do wyświetlania tej strony.'
+    # permission_required = 'ServiceJobs.view_event'
+    # permission_denied_message = 'Nie masz uprawnień do wyświetlania tej strony.'
 
 
 class EventCreateView(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
