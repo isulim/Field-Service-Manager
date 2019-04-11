@@ -111,9 +111,7 @@ class ReportCreateView(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
         device = Device.objects.get(pk=self.object.job.device.id)
         job.isCompleted = True
         if job.jobType_id == 1:
-            print('**********************\nPRZEGLĄD\n*************************')
             device.lastMaintenance = self.object.finishedDate
-            print(self.object.finishedDate)
             device.nextMaintenance = self.object.finishedDate + timedelta(days=182)
         job.save()
         device.save()
