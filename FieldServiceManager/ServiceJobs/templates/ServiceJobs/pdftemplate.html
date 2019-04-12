@@ -7,35 +7,100 @@
 <head>
     <meta charset="UTF-8">
     <title>Field Service Manager</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            }
+        th {
+            text-align: inherit;
+        }
+        .table {
+          width: 100%;
+          margin-bottom: 1rem;
+          color: #212529;
+        }
+
+        .table th,
+        .table td {
+          padding: 0.75rem;
+          vertical-align: top;
+          border-top: 1px solid #dee2e6;
+        }
+
+        .table thead th {
+          vertical-align: bottom;
+          border-bottom: 2px solid #dee2e6;
+        }
+
+        .table tbody + tbody {
+          border-top: 2px solid #dee2e6;
+        }
+
+        .table-bordered {
+          border: 1px solid #dee2e6;
+        }
+
+        .table-bordered th,
+        .table-bordered td {
+          border: 1px solid #dee2e6;
+        }
+
+        .table-bordered thead th,
+        .table-bordered thead td {
+          border-bottom-width: 2px;
+        }
+        .table-borderless th,
+        .table-borderless td,
+        .table-borderless thead th,
+        .table-borderless tbody + tbody {
+          border: 0;
+        }
+
+
+
+
+    </style>
 </head>
 <body>
     <h1>Firma Sp. z o.o.</h1>
     <h2>Raport nr {{ report.pk }}</h2>
     <div>
-    <table>
+    <table class="table table-bordered">
         <tr>
-            <th>Szpital</th><td>{{ report.job.device.hospital }}</td>
+            <th>Nazwa i adres użytkownika</th><td colspan="2">{{ report.job.device.hospital.name }}<br>{{ report.job.device.hospital.city }} {{ report.job.device.hospital.address }}</td>
         </tr>
         <tr>
-            <th>Urządzenie</th><td>{{ report.job.device.manufacturer }} {{ report.job.device.modelName }}</td>
+            <th>Urządzenie</th><td colspan="2">{{ report.job.device.manufacturer }} {{ report.job.device.modelName }}<br>S/N: {{ report.job.device.sn }}</td>
         </tr>
         <tr>
-            <th>Typ zlecenia</th><td>{{ report.job.jobType }}</td>
+            <th>Typ zlecenia</th><td colspan="2">{{ report.job.jobType }}</td>
         </tr>
         <tr>
-            <th>Inżynier</th><td>{{ report.engineer.first_name }} {{ report.engineer.last_name }}</td>
+            <th>Inżynier</th><td colspan="2">{{ report.engineer.first_name }} {{ report.engineer.last_name }}</td>
         </tr>
         <tr>
-            <th>Rozpoczęcie wizyty</th><td>{{ report.startedDate }}</td>
+            <th>Rozpoczęcie wizyty</th><td colspan="2">{{ report.startedDate }}</td>
         </tr>
         <tr>
-            <th>Zakończenie wizyty</th><td>{{ report.finishedDate }}</td>
+            <th>Zakończenie wizyty</th><td colspan="2">{{ report.finishedDate }}</td>
         </tr>
         <tr>
-            <th>Roboczogodziny</th><td>{{ report.workHours }}</td>
+            <th>Roboczogodziny</th><td colspan="2">{{ report.workHours }}</td>
         </tr>
         <tr>
-            <th>Opis</th><td>{{ report.description }}</td>
+            <th>Opis</th><td colspan="2">{{ report.description }}</td>
+        </tr>
+    </table>
+    <table class="table table-bordered" style="table-layout: fixed">
+        <tr>
+            <th>Data i podpis odbierającego</th>
+            <th>Pieczęć zleceniodawcy</th>
+            <th>Pieczęć zleceniobiorcy</th>
+        </tr>
+        <tr>
+            <td height="100"></td>
+            <td height="100"></td>
+            <td height="100"></td>
         </tr>
     </table>
     </div>
