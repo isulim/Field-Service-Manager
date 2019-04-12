@@ -11,7 +11,10 @@ from ServiceJobs.forms import ReportCreateForm, EventCreateForm, JobCreateForm
 from ServiceJobs.models import Job, JobType, Report, Event
 
 
-# class JobListView(LoginRequiredMixin, PermissionRequiredMixin, ListView):
+from wkhtmltopdf.views import PDFTemplateResponse
+
+
+# class JobListView(LoginRequiredMixin, PermissionRequiredMixin, ListView
 class JobListView(ListView):
     model = Job
     context_object_name = 'jobs'
@@ -192,3 +195,27 @@ class EventCreateView(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
         initial_data = super(EventCreateView, self).get_initial()
         initial_data['job'] = Job.objects.get(pk=self.kwargs['pk'])
         return initial_data
+
+
+class MyPDFView(View):
+    template = 'ServiceJobs/pdftemplate.html'  # the template
+
+    def get(self, request, pk):
+        report = Report.objects.get(pk=pk)
+        data = {
+            'report': report
+        }  # data that has to be rendered to pdf template
+
+        response = PDFTemplateResponse(request=request,
+                                       template=self.template,
+                                       filename="raport_nr_{}.pdf".format(report.pk),
+                                       context=data,
+                                       show_content_in_browser=True,
+                                       cmd_options={'margin-top': 10,
+                                                    "zoom": 1,
+                                                    "viewport-size": "1366 x 513",
+                                                    'javascript-delay': 1000,
+                                                    'footer-center': '[page]/[topage]',
+                                                    "no-stop-slow-scripts": True},
+                                       )
+        return response

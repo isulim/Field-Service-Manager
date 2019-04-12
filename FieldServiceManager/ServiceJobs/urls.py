@@ -2,7 +2,8 @@ from django.urls import path
 from ServiceJobs.views import JobListView, JobDetailView, \
     JobTypeListView, JobTypeDetailView, \
     ReportListView, ReportDetailView, JobCreateView, ReportCreateView, CalendarView, EventListView, \
-    EventDetailView, EventCreateView, JobIdCreateView
+    EventDetailView, EventCreateView, JobIdCreateView, MyPDFView
+
 
 urlpatterns = [
     path('', CalendarView.as_view(), name='main'),
@@ -18,4 +19,5 @@ urlpatterns = [
     path('event/', EventListView.as_view(), name='event-list'),
     path('event/<int:pk>/', EventDetailView.as_view(), name='event-detail'),
     path('event/create/<int:pk>', EventCreateView.as_view(), name='event-create-id'),
+    path('pdf/<int:pk>/', MyPDFView.as_view(), name='pdf'),
 ]

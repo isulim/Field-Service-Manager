@@ -1,0 +1,45 @@
+{% load static %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Field Service Manager</title>
+</head>
+<body>
+    <h1>Firma Sp. z o.o.</h1>
+    <h2>Raport nr {{ report.pk }}</h2>
+    <div>
+    <table>
+        <tr>
+            <th>Szpital</th><td>{{ report.job.device.hospital }}</td>
+        </tr>
+        <tr>
+            <th>Urządzenie</th><td>{{ report.job.device.manufacturer }} {{ report.job.device.modelName }}</td>
+        </tr>
+        <tr>
+            <th>Typ zlecenia</th><td>{{ report.job.jobType }}</td>
+        </tr>
+        <tr>
+            <th>Inżynier</th><td>{{ report.engineer.first_name }} {{ report.engineer.last_name }}</td>
+        </tr>
+        <tr>
+            <th>Rozpoczęcie wizyty</th><td>{{ report.startedDate }}</td>
+        </tr>
+        <tr>
+            <th>Zakończenie wizyty</th><td>{{ report.finishedDate }}</td>
+        </tr>
+        <tr>
+            <th>Roboczogodziny</th><td>{{ report.workHours }}</td>
+        </tr>
+        <tr>
+            <th>Opis</th><td>{{ report.description }}</td>
+        </tr>
+    </table>
+    </div>
+
+</body>
+
+</html>

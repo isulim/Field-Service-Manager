@@ -4,9 +4,16 @@
     <div class="jumbotron">
     <h1>Raport nr {{ report.pk }}</h1>
         <div class="row">
-            <a href="{% url 'report-list' %}">
-            <button class="btn btn-outline-primary btn-lg">Powrót do raportów</button>
-        </a>
+            <div class="col">
+                <a href="{% url 'report-list' %}">
+                    <button class="btn btn-outline-primary btn-lg">Powrót do raportów</button>
+                </a>
+            </div>
+            <div class="col">
+                <a href="{% url 'pdf' report.pk %}">
+                    <button class="btn btn-outline-primary btn-lg">Wygeneruj PDF</button>
+                </a>
+            </div>
         </div>
        <div class="row">
         <table class="table table-bordered">
