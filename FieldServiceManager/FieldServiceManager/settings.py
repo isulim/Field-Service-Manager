@@ -132,9 +132,9 @@ LOGIN_REDIRECT_URL = '/'
 LOGIN_URL = 'login'
 LOGOUT_REDIRECT_URL = '/'
 LOGOUT_URL = 'logout'
-
-WKHTMLTOPDF_CMD = '/usr/local/bin/wkhtmltopdf'
-
-WKHTMLTOPDF_CMD_OPTIONS = {
-    'quiet': False,
-    }
+#
+# WKHTMLTOPDF_CMD = '/usr/local/bin/wkhtmltopdf'
+#
+# WKHTMLTOPDF_CMD_OPTIONS = {
+#     'quiet': False,
+#     }
