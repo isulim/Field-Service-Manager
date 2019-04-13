@@ -21,3 +21,8 @@ class JobAdmin(admin.ModelAdmin):
 @admin.register(Report)
 class ReportAdmin(admin.ModelAdmin):
     list_display = ['job', 'startedDate', 'finishedDate', 'engineer', 'workHours']
+
+
+admin.site.site_header = 'Field Service Manager'
+admin.site.site_title = 'Field Service Manager - panel administracyjny'
+admin.site.index_title = 'Zarządzanie aplikacją'

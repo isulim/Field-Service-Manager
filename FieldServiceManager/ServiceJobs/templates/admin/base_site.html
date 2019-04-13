@@ -1,0 +1,29 @@
+{% extends "admin/base.html" %}
+{% load i18n %}
+
+
+{% block title %}{{ title }} | {% trans 'FSE Administracyjny' %}{% endblock %}
+
+{% block extrastyle %}
+  <style>
+    #header{ background-color: #2c3e50; border-bottom: solid 3px #999; }
+
+    #branding h1{ color: #fff; }
+    .module h2, .module caption, .inline-group h2 { background:#2c3e50 bottom left repeat-x; color: #333940; }
+        a.section:link, a.section:visited { color: #ffffff; }
+
+  </style>
+{% endblock %}
+
+{% block branding %}
+  <h1 id="site-name" > {% trans 'Field Service Manager' %}</h1>
+{% endblock %}
+
+{% block nav-global %}
+{% endblock %}
+
+/*
+http://blog.montylounge.com/2009/07/05/customizing-the-django-admin-branding/
+http://toastdriven.com/blog/2008/nov/16/customizing-admin-part-1/
+https://www.webforefront.com/django/admincustomlayout.html
+*/
