@@ -17,7 +17,6 @@ class FakeHospital:
         hospital.phone = self.faker.phone_number()
         hospital.email = self.faker.email()
         hospital.save()
-        print(hospital)
 
 
 class FakeCaretaker:
@@ -35,7 +34,6 @@ class FakeCaretaker:
         caretaker.email = self.faker.email()
         caretaker.hospital = Hospital.objects.get(pk=randint(1, hospital_count))
         caretaker.save()
-        print(caretaker)
 
 
 class FakeDevice:
@@ -75,5 +73,4 @@ class FakeDevice:
         device.caretaker = caretaker
         device.hospital = caretaker.hospital
         device.save()
-        print(device)
 

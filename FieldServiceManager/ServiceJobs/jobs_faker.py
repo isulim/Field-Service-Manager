@@ -19,7 +19,6 @@ class FakeJob:
         job.addedBy = User.objects.get(username='hanna')
         job.isCompleted = bool(getrandbits(1))
         job.save()
-        print(job)
 
 
 class FakeReport:
@@ -40,4 +39,3 @@ class FakeReport:
         report.workHours = (delta.days + 1) * 8
         report.description = self.faker.paragraphs(nb=6)
         report.save()
-        print(report)

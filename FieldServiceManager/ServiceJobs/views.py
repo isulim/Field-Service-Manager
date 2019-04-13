@@ -91,11 +91,12 @@ class ReportDetailView(DetailView):
     # Generating PDF of report
 
 
-class ReportCreateView(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
+# class ReportCreateView(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
+class ReportCreateView(CreateView):
     model = Report
     form_class = ReportCreateForm
-    permission_required = 'ServiceJobs.add_report'
-    permission_denied_message = 'Nie masz uprawnień do wyświetlania tej strony.'
+    # permission_required = 'ServiceJobs.add_report'
+    # permission_denied_message = 'Nie masz uprawnień do wyświetlania tej strony.'
 
     def handle_no_permission(self):
         return render(self.request, 'ServiceJobs/403.html')
