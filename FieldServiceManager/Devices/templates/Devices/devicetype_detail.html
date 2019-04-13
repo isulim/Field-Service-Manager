@@ -19,7 +19,7 @@
                     {% for device in devices %}
                         <tr>
                             <td><a href="{% url 'manufacturer-detail' device.manufacturer_id %}"><button class="btn btn-outline-info">{{ device.manufacturer }}</button></a></td>
-                            <td>{{ device.modelName }}</td>
+                            <td><a href="{% url 'device-detail' device.id %}"><button class="btn btn-outline-info">{{ device.modelName }}</button></a></td>
                             <td><a href="{% url 'hospital-detail' device.hospital_id%}">{{ device.hospital.name }}</a></td>
                         </tr>
                     {% endfor %}
