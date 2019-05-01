@@ -6,6 +6,7 @@ from Devices.models import Device
 from ServiceJobs.models import Job, Report, Event
 from django.contrib.auth.models import User
 from django.utils.timezone import now
+from datetime import datetime
 from bootstrap_datepicker_plus import DatePickerInput, DateTimePickerInput
 
 
@@ -25,15 +26,15 @@ class ReportCreateForm(forms.ModelForm):
             'startedDate': DatePickerInput(
                 options={
                     'format': 'YYYY-MM-DD',
-                    'maxDate': now().strftime("%Y-%m-%d"),
+                    'maxDate': datetime.today().strftime("%Y-%m-%d"),
                     'locale': 'pl',
                 }
             ),
             'finishedDate': DatePickerInput(
                 options={
                     'format': 'YYYY-MM-DD',
-                    'minDate': (now()-timedelta(days=2)).strftime("%Y-%m-%d"),
-                    'maxDate': (now()).strftime("%Y-%m-%d"),
+                    'minDate': (datetime.today()-timedelta(days=2)).strftime("%Y-%m-%d"),
+                    'maxDate': (datetime.today()).strftime("%Y-%m-%d"),
                     'locale': 'pl',
                 }
             ),
@@ -51,7 +52,7 @@ class EventCreateForm(forms.ModelForm):
             'startDateTime': DateTimePickerInput(
                 options={
                     'format': 'YYYY-MM-DD HH:mm',
-                    'minDate': now().strftime("%Y-%m-%d %H:%M"),
+                    'minDate': datetime.today().strftime("%Y-%m-%d %H:%M"),
                     'enabledHours': [8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18],
                     'showTodayButton': True,
                     'locale': 'pl',
@@ -60,7 +61,7 @@ class EventCreateForm(forms.ModelForm):
             'endDateTime': DateTimePickerInput(
                 options={
                     'format': 'YYYY-MM-DD HH:mm',
-                    'minDate': now().strftime("%Y-%m-%d %H:%M"),
+                    'minDate': datetime.today().strftime("%Y-%m-%d %H:%M"),
                     'enabledHours': [8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18],
                     'showTodayButton': True,
                     'locale': 'pl',
