@@ -26,15 +26,15 @@ class ReportCreateForm(forms.ModelForm):
             'startedDate': DatePickerInput(
                 options={
                     'format': 'YYYY-MM-DD',
-                    'maxDate': datetime.today().strftime("%Y-%m-%d"),
+                    'maxDate': datetime.today().strftime("%Y-%m-%d 23:59:59"),
                     'locale': 'pl',
                 }
             ),
             'finishedDate': DatePickerInput(
                 options={
                     'format': 'YYYY-MM-DD',
-                    'minDate': (datetime.today()-timedelta(days=2)).strftime("%Y-%m-%d"),
-                    'maxDate': (datetime.today()).strftime("%Y-%m-%d"),
+                    'minDate': (datetime.today()-timedelta(days=2)).strftime("%Y-%m-%d 00:00:00"),
+                    'maxDate': (datetime.today()).strftime("%Y-%m-%d 23:59:59"),
                     'locale': 'pl',
                 }
             ),
@@ -52,7 +52,7 @@ class EventCreateForm(forms.ModelForm):
             'startDateTime': DateTimePickerInput(
                 options={
                     'format': 'YYYY-MM-DD HH:mm',
-                    'minDate': datetime.today().strftime("%Y-%m-%d %H:%M"),
+                    'minDate': datetime.today().strftime("%Y-%m-%d 00:00:00"),
                     'enabledHours': [8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18],
                     'showTodayButton': True,
                     'locale': 'pl',
@@ -61,7 +61,7 @@ class EventCreateForm(forms.ModelForm):
             'endDateTime': DateTimePickerInput(
                 options={
                     'format': 'YYYY-MM-DD HH:mm',
-                    'minDate': datetime.today().strftime("%Y-%m-%d %H:%M"),
+                    'minDate': datetime.today().strftime("%Y-%m-%d 00:00:00"),
                     'enabledHours': [8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18],
                     'showTodayButton': True,
                     'locale': 'pl',
