@@ -14,11 +14,10 @@ class UserModelChoiceField(forms.ModelChoiceField):
     def label_from_instance(self, obj):
         return obj.get_full_name()
 
-
 class ReportCreateForm(forms.ModelForm):
     job = forms.ModelChoiceField(queryset=Job.objects.filter(isCompleted=False), label='Zlecenie')
     engineer = UserModelChoiceField(queryset=User.objects.filter(groups__name='Engineers'), label='Inżynier')
-
+    
     class Meta:
         model = Report
         fields = '__all__'
@@ -26,15 +25,15 @@ class ReportCreateForm(forms.ModelForm):
             'startedDate': DatePickerInput(
                 options={
                     'format': 'YYYY-MM-DD',
-                    'maxDate': datetime.today().strftime("%Y-%m-%d 23:59:59"),
+                    'maxDate': 'now',
                     'locale': 'pl',
                 }
             ),
             'finishedDate': DatePickerInput(
                 options={
                     'format': 'YYYY-MM-DD',
-                    'minDate': (datetime.today()-timedelta(days=2)).strftime("%Y-%m-%d 00:00:00"),
-                    'maxDate': (datetime.today()).strftime("%Y-%m-%d 23:59:59"),
+                    'minDate': 'now',
+                    'maxDate': 'now',
                     'locale': 'pl',
                 }
             ),
@@ -52,7 +51,7 @@ class EventCreateForm(forms.ModelForm):
             'startDateTime': DateTimePickerInput(
                 options={
                     'format': 'YYYY-MM-DD HH:mm',
-                    'minDate': datetime.today().strftime("%Y-%m-%d 00:00:00"),
+                    'minDate': 'now',
                     'enabledHours': [8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18],
                     'showTodayButton': True,
                     'locale': 'pl',
@@ -61,7 +60,7 @@ class EventCreateForm(forms.ModelForm):
             'endDateTime': DateTimePickerInput(
                 options={
                     'format': 'YYYY-MM-DD HH:mm',
-                    'minDate': datetime.today().strftime("%Y-%m-%d 00:00:00"),
+                    'minDate': 'now',
                     'enabledHours': [8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18],
                     'showTodayButton': True,
                     'locale': 'pl',
