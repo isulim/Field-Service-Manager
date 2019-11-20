@@ -1,6 +1,6 @@
 # Field Service Manager
 Aplikacja do zarządzania pracą serwisu aparatury medycznej (Django, SQLite3, jQuery, Bootstrap). <br>
-Demo: http://isulim.clevertool.pl/
+Demo: http://fsm.otaman.pl/
 
 Aplikacja zawiera bazę danych złożoną z tabel szpitali, urządzeń (w tym opiekunów urządzeń), zleceń oraz raportów serwisowych.<br>
 Można przeglądać listę urządzeń, ich historię. Urządzenia są skategoryzowane według producentów oraz typu.<br>
